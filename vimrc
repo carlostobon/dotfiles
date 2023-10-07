@@ -228,10 +228,11 @@ autocmd FileType typescript nnoremap <space>mm :!clear; pnpm run index.ts
 "======= RUST
 autocmd FileType rust inoremap kp println!("{}", );<esc>hi
 autocmd FileType rust inoremap kq assert_eq!(, );<esc>T(i
+autocmd FileType rust inoremap ks assert!();<esc>T(i
 autocmd FileType rust inoremap kf fn () {}<esc>F(i
 autocmd FileType rust inoremap ka async fn () {}<esc>F(i
 autocmd FileType rust inoremap kd #[derive()]<esc>F(a
-autocmd FileType rust inoremap km #[cfg(test)]<esc>
+autocmd FileType rust inoremap kc #[cfg(test)]<esc>
 autocmd FileType rust inoremap kt #[test]<esc>
 autocmd FileType rust nnoremap k# <esc>ggO<esc>O#![allow(dead_code, unused_variables, unused_imports)]<esc>``
 autocmd FileType rust inoremap " '
