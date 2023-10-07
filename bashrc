@@ -1,0 +1,52 @@
+# _               _
+#| |__   __ _ ___| |__  _ __ ___
+#| '_ \ / _` / __| '_ \| '__/ __|
+#| |_) | (_| \__ \ | | | | | (__
+#|_.__/ \__,_|___/_| |_|_|  \___|
+#
+#
+
+# Allows you to cd into directory merely by typing the directory name
+shopt -s autocd
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+# Infinity
+HISTSIZE= HISTFILESIZE=
+
+# Avoid duplicates
+HISTCONTROL=ignoredups:erasedups
+
+# When the shell exits, append to the history file instead of overwriting it
+shopt -s histappend
+
+# After each command, append to the history file and reread it
+PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
+
+# Makes kitty use vim maps
+set -o vi
+
+# Loads the keyboard remaps and all aliases
+source $HOME/.aliasrc
+source $HOME/.keyboard
+
+# Bash prompt name
+PS1='🦀🚀🛸\w\[$(tput sgr0)\]> '
+
+# duer path binary setter
+export PATH="$PATH:$HOME/.duer"
+export PATH="$PATH:$HOME/.cargo/bin"
+
+# pnpm
+export PNPM_HOME="/home/carlos/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH=$BUN_INSTALL/bin:$PATH
+. "$HOME/.cargo/env"

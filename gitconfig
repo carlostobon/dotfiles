@@ -1,0 +1,13 @@
+[user]
+	email = carlostobon@tutanota.de
+	name = xeon
+[init]
+	defaultBranch = trunk
+[core]
+	editor = vim
+[diff]
+	tool = vimdiff
+[alias]
+	st = status
+	lg = log --stat
+	br = branch

@@ -1,0 +1,5 @@
+set selection-clipboard clipboard
+map n feedkeys j
+map e feedkeys k
+map m feedkeys h
+map i feedkeys l

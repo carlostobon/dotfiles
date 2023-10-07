@@ -1,0 +1,147 @@
+#!/bin/sh
+
+alias \
+	dev="pnpm dev" \
+	build="pnpm build" \
+	preview="pnpm preview" \
+	start="pnpm start" \
+
+co(){
+	base=$(pwd | cut -d'/' -f1-4)
+	cd "$base/app/components">/dev/null 2>&1
+	if [ $? -ne 0 ]; then
+		cd "$base/src/components"
+	fi
+}
+
+b(){
+	cd $(pwd | cut -d'/' -f1-4)
+}
+
+ro(){
+	base=$(pwd | cut -d'/' -f1-4)
+	cd "$base/src/routes"
+}
+
+li(){
+	base=$(pwd | cut -d'/' -f1-4)
+	cd "$base/app/lib">/dev/null 2>&1
+	if [ $? -ne 0 ]; then
+		cd "$base/src/lib"
+	fi
+}
+
+s(){
+	base=$(pwd | cut -d'/' -f1-4)
+	cd "$base/app">/dev/null 2>&1
+	if [ $? -ne 0 ]; then
+		cd "$base/src"
+	fi
+}
+
+
+alias \
+	cp="cp -iv" \
+  z="zathura" \
+	mv="mv -iv" \
+	rm="sudo rm -vI" \
+	rmd="sudo rm -r" \
+	ls="exa" \
+  kt="v ~/.config/kitty/theme.conf" \
+  xm="v ~/.xmonad/xmonad.hs" \
+	bh="v ~/.bash_history" \
+  doc="cd ~/Documents" \
+  dow="cd ~/Downloads" \
+  nf="neofetch" \
+	rdcc="dcc up --build -d" \
+	xeon="ssh carlos@192.168.58.118 -p 22" \
+	ts="ts-node" \
+	empty="sudo rm ~/.cache/vim/swap/*" \
+	clean="p -Qtdp; p -Scc; sudo rm -rf .cache" \
+	p="sudo pacman" \
+	sdn="sudo shutdown now" \
+	ka="killall" \
+	update="sudo pacman -Syu --noconfirm" \
+	server="ssh root@104.156.231.83" \
+	r="ranger" \
+	see="ncdu"\
+	cl="clear" \
+	v="vim" \
+	tree="lsd --tree"\
+	docker="sudo docker" \
+	d="docker" \
+	dc="docker ps -a" \
+	di="docker images" \
+	dcc="docker-compose" \
+	dre="docker system prune -a" \
+	dvp="docker volume prune" \
+	a="cd .." \
+	vm="vim main.rs" \
+	vl="vim lib.rs" \
+	vi="vim index.tsx" \
+	t="touch" \
+	cr="cargo build --release && ta" \
+	ca="cargo add" \
+	pye="source ~/Documents/mathematics/bin/activate" \
+
+
+dri(){
+	instance=$(docker image ls -q)
+	docker rmi $instance
+}
+
+drc(){
+	instance=$(docker ps -a -q &)
+	docker stop $instance
+	docker rm $instance
+}
+
+mkd(){
+	directory=$1
+	mkdir -p $directory
+	cd $directory
+}
+
+getter(){
+	file=$1
+	$(rsync -avz root@104.156.231.83:/var/www/server/server/$file .)
+}
+
+sender(){
+	file=$1
+	name=$2
+	$(rsync -urvP $file root@104.156.231.83:/var/www/server/server/$name)
+}
+
+convert(){
+	target=$1
+	output=$2
+	$(ffmpeg -i $target -vf yadif -codec:v libx264 -crf 1 -bf 2 -flags +cgop -pix_fmt yuv420p -codec:a aac -strict -2 -b:a 384k -r:a 48000 $output.mp4)
+}
+
+mixer(){
+	video=$1
+	sound=$2
+	name=$3
+	$(ffmpeg -i $video -i $sound -c:v copy -c:a copy $name.mkv)
+}
+
+# Used for fzf in vim
+#
+base(){
+	base=$(pwd | cut -d'/' -f1-4)
+	export FOLDER=$base
+}
+
+c(){
+  path=$1
+  cd $path
+  base
+}
+
+# Used in rust
+# to move directly after compiled
+ta(){
+	base=$(pwd | cut -d'/' -f1-4)
+	cd "$base/target/release"
+}
