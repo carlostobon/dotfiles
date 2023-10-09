@@ -43,6 +43,7 @@ s(){
 alias \
 	cp="cp -iv" \
   z="zathura" \
+	gt="git" \
 	mv="mv -iv" \
 	rm="sudo rm -vI" \
 	rmd="sudo rm -r" \

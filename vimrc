@@ -172,9 +172,6 @@ let NERDTreeMenuDown='n'
 let NERDTreeMenuUp='e'
 let NERDTreeMapOpenExpl='B'
 
-xmap k <Plug>SlimeRegionSend
-nmap kk <Plug>SlimeParagraphSend
-
 
 "======= Qwik && NextJs =======
 autocmd FileType typescriptreact,html inoremap ,d <div></div><Esc>F>a
@@ -226,7 +223,7 @@ autocmd FileType typescript nnoremap <space>mm :!clear; pnpm run index.ts
 
 
 "======= RUST
-autocmd FileType rust inoremap kp println!("{}", );<esc>hi
+autocmd FileType rust inoremap kl println!("{}", );<esc>hi
 autocmd FileType rust inoremap kq assert_eq!(, );<esc>T(i
 autocmd FileType rust inoremap kb assert!();<esc>T(i
 autocmd FileType rust inoremap kf fn () {}<esc>F(i
@@ -234,6 +231,8 @@ autocmd FileType rust inoremap ka async fn () {}<esc>F(i
 autocmd FileType rust inoremap kd #[derive()]<esc>F(a
 autocmd FileType rust inoremap kc #[cfg(test)]
 autocmd FileType rust inoremap kt #[test]
+autocmd FileType rust inoremap kk k
+autocmd FileType rust nnoremap kp ^ipub <esc>
 autocmd FileType rust nnoremap k# <esc>ggO<esc>O#![allow(dead_code, unused_variables, unused_imports)]<esc>``
 autocmd FileType rust inoremap " '
 autocmd FileType rust inoremap ' "
@@ -243,6 +242,9 @@ autocmd FileType rust nnoremap <space>hh :!clear; cargo-fmt; cargo test -- --noc
 
 "====== PYTHON
 autocmd FileType python nnoremap <space>mm :!python main.py
+autocmd FileType python xmap <Plug>SlimeRegionSend
+autocmd FileType python nmap <Plug>SlimeParagraphSend
+
 
 "======= CSS
 autocmd FileType css inoremap gcs grid-column-start:<space>
