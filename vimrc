@@ -242,8 +242,8 @@ autocmd FileType rust nnoremap <space>hh :!clear; cargo-fmt; cargo test -- --noc
 
 "====== PYTHON
 autocmd FileType python nnoremap <space>mm :!python main.py
-autocmd FileType python xmap <Plug>SlimeRegionSend
-autocmd FileType python nmap <Plug>SlimeParagraphSend
+"autocmd FileType python xmap <Plug>SlimeRegionSend
+"autocmd FileType python nmap <Plug>SlimeParagraphSend
 
 
 "======= CSS
