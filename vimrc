@@ -220,16 +220,15 @@ autocmd FileType typescriptreact inoremap ,q import { component$ } from "@builde
 autocmd FileType typescriptreact inoremap ,c import { } from "@builder.io/qwik-city";<esc>F}i
 autocmd FileType typescriptreact inoremap ,x export default component$(() => {<cr>return <></><cr>})<esc>kf/hi
 
-autocmd FileType html inoremap ,sc <script></script><esc>F>li<cr><esc>O
-autocmd FileType html inoremap ,st <style></style><esc>F>li<cr><esc>O
 autocmd FileType html inoremap ,an <a href=""></a><Esc>Fhf"a
 autocmd FileType html inoremap ,im <img src="" alt=""/><esc>fsf"a
 autocmd FileType html inoremap cn class=""<esc>i
 autocmd FileType html inoremap ,b <button></button><esc>F{a
 
 autocmd FileType svelte inoremap ,b <button on:click={}></button><esc>F/hi
-autocmd FileType svelte inoremap ,sc <script></script><esc>FsT>i
-autocmd FileType svelte inoremap ,st <style></style><esc>FsT>i
+autocmd FileType svelte inoremap ,sc <script></script><esc>F><right>i<cr><esc>O
+autocmd FileType svelte inoremap ,st <style></style><esc>F><right>i<cr><esc>O
+
 
 "======= TYPESCRIPT
 autocmd FileType typescript inoremap ,v import {  } from "~/components/index";<esc>F{lli
