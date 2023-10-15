@@ -230,7 +230,7 @@ autocmd FileType html inoremap cn class=""<esc>i
 autocmd FileType html inoremap ,b <button></button><esc>F{a
 
 autocmd FileType svelte inoremap ,b <button on:click={}></button><esc>F/hi
-autocmd FileType svelte inoremap ,sc <script></script><esc>F><right>i<cr><esc>O
+autocmd FileType svelte inoremap ,sc <script lang="ts"></script><esc>F><right>i<cr><esc>O
 autocmd FileType svelte inoremap ,st <style></style><esc>F><right>i<cr><esc>O
 
 
