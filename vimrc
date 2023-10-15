@@ -142,9 +142,9 @@ Plug 'itchyny/vim-gitbranch',
 call plug#end()
 
 "" ALE configurations
-let g:ale_linters = {'rust': ['analyzer'], 'python': ['ruff'], 'javascript': ['eslint'], 'typescript': ['eslint'], 'typescriptreact': ['eslint']}
+let g:ale_linters = {'rust': ['analyzer'], 'python': ['ruff'], 'javascript': ['eslint'], 'typescript': ['eslint'], 'typescriptreact': ['eslint'], "svelte": ["eslint"]}
 
-let g:ale_fixers = { '*': ['remove_trailing_lines', 'trim_whitespace'], 'javascript': [ 'prettier' ], 'rust': ['rustfmt'], 'python': ['black'], 'typescript': ['prettier'], 'typescriptreact': ['prettier'] }
+let g:ale_fixers = { '*': ['remove_trailing_lines', 'trim_whitespace'], 'javascript': [ 'prettier' ], 'rust': ['rustfmt'], 'python': ['black'], 'typescript': ['prettier'], 'typescriptreact': ['prettier'], "svelte": ["prettier"] }
 
 
 let g:lightline = {
@@ -158,6 +158,15 @@ let g:lightline = {
       \ },
       \ }
 
+function! SvelteSintaxOn()
+      w
+      syntax on
+endfunction
+
+autocmd FileType svelte syntax on
+autocmd FileType svelte nmap vv :call SvelteSintaxOn()<cr>
+
+let g:rainbow_active = 1
 
 let g:ale_fix_on_save = 1
 let g:ale_completion_enabled = 1
@@ -166,45 +175,44 @@ let g:ale_completion_autoimport = 1
 let g:slime_target = "tmux"
 let g:livepreview_previewer = 'zathura'
 
- let g:rainbow_active = 1
 
 let NERDTreeMenuDown='n'
 let NERDTreeMenuUp='e'
 let NERDTreeMapOpenExpl='B'
 
 
-"======= Qwik && NextJs =======
-autocmd FileType typescriptreact,html inoremap ,d <div></div><Esc>F>a
-autocmd FileType typescriptreact,html inoremap ,in <input type=""/><Esc>F"i
-autocmd FileType typescriptreact,html inoremap ,1 <h1></h1><Esc>FhT>i
-autocmd FileType typescriptreact,html inoremap ,2 <h2></h2><Esc>FhT>i
-autocmd FileType typescriptreact,html inoremap ,3 <h3></h3><Esc>FhT>i
-autocmd FileType typescriptreact,html inoremap ,4 <h4></h4><Esc>FhT>i
-autocmd FileType typescriptreact,html inoremap ,m <main></main><Esc>FmT>i
-autocmd FileType typescriptreact,html inoremap ,sp <span></span><esc>FsT>i
-autocmd FileType typescriptreact,html inoremap ,se <section></section><esc>FsT>i
-autocmd FileType typescriptreact,html inoremap ,p <p></p><Esc>FpT>i
-autocmd FileType typescriptreact,html inoremap ,u <ul><CR></ul><Esc>O
-autocmd FileType typescriptreact,html inoremap ,li <li></li><Esc>FlT>i
-autocmd FileType typescriptreact,html inoremap ,fo <form></form><esc>FfT>i
-autocmd FileType typescriptreact,html inoremap ,la <label></label><esc>FlT>i
-autocmd FileType typescriptreact,html inoremap ,na <nav></nav><esc>FnT>i
-autocmd FileType typescriptreact,html nnoremap tg I{/*<esc>A*/}<esc>
-autocmd FileType typescriptreact,html nnoremap tk I<esc>f*l<esc>c^<esc>f*<esc>C<esc>I<esc>
-autocmd FileType typescriptreact,html nnoremap c. F>cf<><<left>
-autocmd FileType typescriptreact,html inoremap ' ""<Esc>i
-autocmd FileType typescriptreact,html inoremap " ''<Esc>i
-autocmd FileType typescriptreact,html nnoremap <space>p :Prettier<cr>
+"======= Qwik && Svelte =======
+autocmd FileType typescriptreact,html,svelte inoremap ,d <div></div><Esc>F>a
+autocmd FileType typescriptreact,html,svelte inoremap ,in <input type=""/><Esc>F"i
+autocmd FileType typescriptreact,html,svelte inoremap ,1 <h1></h1><Esc>FhT>i
+autocmd FileType typescriptreact,html,svelte inoremap ,2 <h2></h2><Esc>FhT>i
+autocmd FileType typescriptreact,html,svelte inoremap ,3 <h3></h3><Esc>FhT>i
+autocmd FileType typescriptreact,html,svelte inoremap ,4 <h4></h4><Esc>FhT>i
+autocmd FileType typescriptreact,html,svelte inoremap ,m <main></main><Esc>FmT>i
+autocmd FileType typescriptreact,html,svelte inoremap ,sp <span></span><esc>FsT>i
+autocmd FileType typescriptreact,html,svelte inoremap ,se <section></section><esc>FsT>i
+autocmd FileType typescriptreact,html,svelte inoremap ,p <p></p><Esc>FpT>i
+autocmd FileType typescriptreact,html,svelte inoremap ,u <ul><CR></ul><Esc>O
+autocmd FileType typescriptreact,html,svelte inoremap ,li <li></li><Esc>FlT>i
+autocmd FileType typescriptreact,html,svelte inoremap ,fo <form></form><esc>FfT>i
+autocmd FileType typescriptreact,html,svelte inoremap ,la <label></label><esc>FlT>i
+autocmd FileType typescriptreact,html,svelte inoremap ,na <nav></nav><esc>FnT>i
+autocmd FileType typescriptreact,html,svelte nnoremap tg I{/*<esc>A*/}<esc>
+autocmd FileType typescriptreact,html,svelte nnoremap tk I<esc>f*l<esc>c^<esc>f*<esc>C<esc>I<esc>
+autocmd FileType typescriptreact,html,svelte nnoremap c. F>cf<><<left>
+autocmd FileType typescriptreact,html,svelte inoremap ' ""<Esc>i
+autocmd FileType typescriptreact,html,svelte inoremap " ''<Esc>i
+autocmd FileType typescriptreact,html,svelte nnoremap <space>p :Prettier<cr>
 
-autocmd FileType typescriptreact inoremap ,lo console.log()<esc>i
+autocmd FileType typescriptreact,svelte inoremap ,cl console.log()<esc>i
+autocmd FileType typescriptreact,svelte inoremap ,, ,
 
-autocmd FileType typescriptreact inoremap ,im <img src={} alt=""} /><esc>Frf}i
-autocmd FileType typescriptreact inoremap cn class=""<esc>i
+autocmd FileType typescriptreact,svelte inoremap ,im <img src={} alt=""} /><esc>Frf}i
+autocmd FileType typescriptreact,svelte inoremap cn class=""<esc>i
+autocmd FileType typescriptreact,svelve inoremap ,an <a href=""></a><Esc>Fhf"a
+autocmd FileType typescriptreact,svelte nnoremap <space>mm :!pnpm dev
+
 autocmd FileType typescriptreact inoremap ,b <button onClick$={() => {}}></button><esc>F/hi
-autocmd FileType typescriptreact inoremap ,an <a href=""></a><Esc>Fhf"a
-autocmd FileType typescriptreact nnoremap <space>mm :!pnpm dev
-autocmd FileType typescriptreact nnoremap <space>hh :!pnpm preview
-
 autocmd FileType typescriptreact inoremap ,q import { component$ } from "@builder.io/qwik";<esc>F}hi
 autocmd FileType typescriptreact inoremap ,c import { } from "@builder.io/qwik-city";<esc>F}i
 autocmd FileType typescriptreact inoremap ,x export default component$(() => {<cr>return <></><cr>})<esc>kf/hi
@@ -215,6 +223,10 @@ autocmd FileType html inoremap ,an <a href=""></a><Esc>Fhf"a
 autocmd FileType html inoremap ,im <img src="" alt=""/><esc>fsf"a
 autocmd FileType html inoremap cn class=""<esc>i
 autocmd FileType html inoremap ,b <button></button><esc>F{a
+
+autocmd FileType svelte inoremap ,b <button on:click={}></button><esc>F/hi
+autocmd FileType svelte inoremap ,sc <script></script><esc>FsT>i
+autocmd FileType svelte inoremap ,st <style></style><esc>FsT>i
 
 "======= TYPESCRIPT
 autocmd FileType typescript inoremap ,v import {  } from "~/components/index";<esc>F{lli
@@ -227,7 +239,7 @@ autocmd FileType rust inoremap kl println!("{}", );<esc>hi
 autocmd FileType rust inoremap kq assert_eq!(, );<esc>T(i
 autocmd FileType rust inoremap kb assert!();<esc>T(i
 autocmd FileType rust inoremap kf fn () {}<esc>F(i
-autocmd FileType rust inoremap ka async fn () {}<esc>F(i
+autocmd FileType rust inoremap ks async fn () {}<esc>F(i
 autocmd FileType rust inoremap kd #[derive()]<esc>F(a
 autocmd FileType rust inoremap kc #[cfg(test)]
 autocmd FileType rust inoremap kt #[test]
@@ -258,4 +270,4 @@ autocmd FileType css inoremap fw font-weight:<space>
 autocmd FileType css inoremap cc color:<space>
 autocmd FileType css inoremap mg margin:<space>
 autocmd FileType css inoremap pd padding:<space>
-autocmd FileType css inoremap ,mq @media only screen and (max-width: xx) {}<esc>Fxciw
+autocmd FileType css inoremap ,mq @media only screen and (max-width: 640px) {}<cr> @media only screen and (max-width: 768px) {}<cr> @media only screen and (max-width: 1024p) {}<cr> @media only screen and (max-width: 1280px) {}
