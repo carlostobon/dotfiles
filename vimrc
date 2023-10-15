@@ -159,12 +159,13 @@ let g:lightline = {
       \ }
 
 function! SvelteSintaxOn()
-      w
+      tabprevious
       syntax on
 endfunction
 
 autocmd FileType svelte syntax on
-autocmd FileType svelte nmap vv :call SvelteSintaxOn()<cr>
+autocmd FileType svelte nnoremap fw :call SvelteSintaxOn()<cr>
+
 
 let g:rainbow_active = 1
 
