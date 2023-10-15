@@ -139,6 +139,9 @@ Plug 'w0rp/ale',
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'sheerun/vim-polyglot',
 Plug 'itchyny/vim-gitbranch',
+Plug 'othree/html5.vim',
+Plug 'pangloss/vim-javascript',
+Plug 'evanleck/vim-svelte', {'branch': 'main'},
 call plug#end()
 
 "" ALE configurations
@@ -183,6 +186,7 @@ let NERDTreeMenuDown='n'
 let NERDTreeMenuUp='e'
 let NERDTreeMapOpenExpl='B'
 
+let g:svelte_preprocessors = ['typescript']
 
 "======= Qwik && Svelte =======
 autocmd FileType typescriptreact,html,svelte inoremap ,d <div></div><Esc>F>a
