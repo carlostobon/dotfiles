@@ -166,11 +166,18 @@ function! SintaxOn()
       syntax on
 endfunction
 
+function! SintaxOnSave()
+      w
+      syntax on
+endfunction
+
 autocmd FileType svelte syntax on
 autocmd FileType svelte nnoremap fw :call SintaxOn()<cr>
+autocmd FileType svelte nnoremap vv :call SintaxOnSave()<cr>
 
 autocmd FileType css syntax on
 autocmd FileType css nnoremap fw :call SintaxOn()<cr>
+autocmd FileType css nnoremap vv :call SintaxOnSave()<cr>
 
 let g:rainbow_active = 1
 
