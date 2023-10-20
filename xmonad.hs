@@ -88,7 +88,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm, xK_a     ), spawn "ffmpeg -f pulse -i default -map '0' audio-$(date +%H_%M_%S).mp3")
 
     -- kill recording
-    --, ((modm, xK_l), spawn "killall ffmpeg")
+    , ((modm, xK_l), spawn "killall ffmpeg")
 
     -- screen capture
     , ((modm .|. shiftMask, xK_p), spawn "maim -f png /home/carlos/picture-$(date +%H_%M_%S).png")

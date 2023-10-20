@@ -37,7 +37,7 @@ s(){
 	fi
 }
 
-bs(){
+bk(){
 	base=$(pwd | cut -d'/' -f1-4)
 	cd "$base/backend/src"
 }

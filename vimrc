@@ -84,7 +84,7 @@ nnoremap ff :FZF $FOLDER<cr>
 nnoremap XX ZZ
 nnoremap XQ ZQ
 nnoremap Q <esc>
-nnoremap ,h :Goyo 70%+70%x100%<cr>
+nnoremap ,h :Goyo 75%+70%x100%<cr>
 
 
 " ====> other keys <====
