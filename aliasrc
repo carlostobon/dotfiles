@@ -1,8 +1,5 @@
 #!/bin/sh
 
-alias \
-	dev="pnpm run dev" \
-	build="pnpm run build" \
 
 co(){
 	base=$(pwd | cut -d'/' -f1-4)
@@ -57,7 +54,6 @@ alias \
   doc="cd ~/Documents" \
   dow="cd ~/Downloads" \
   nf="neofetch" \
-	rdcc="dcc up --build -d" \
 	xeon="ssh carlos@192.168.58.118 -p 22" \
 	ts="ts-node" \
 	empty="sudo rm ~/.cache/vim/swap/*" \
@@ -77,6 +73,7 @@ alias \
 	dc="docker ps -a" \
 	di="docker images" \
 	dcc="docker-compose" \
+	rdcc="dcc up --build -d" \
 	dre="docker system prune -a" \
 	dvp="docker volume prune" \
 	a="cd .." \
@@ -88,6 +85,12 @@ alias \
 	cr="cargo build --release" \
 	ca="cargo add" \
 	pye="source ~/Documents/mathematics/bin/activate" \
+
+
+alias \
+	dev="pnpm run dev --host" \
+	build="pnpm run build" \
+	qwik="pnpm run qwik" \
 
 
 dri(){
