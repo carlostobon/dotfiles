@@ -62,7 +62,6 @@ nnoremap l i
 nnoremap vm v^
 nnoremap vf v$
 
-nnoremap F $
 nnoremap M ^
 
 
@@ -103,7 +102,7 @@ nnoremap ff :FZF $FOLDER<cr>
 nnoremap XX ZZ
 nnoremap XQ ZQ
 nnoremap Q <esc>
-nnoremap ,h :Goyo 75%+70%x100%<cr>
+nnoremap ,h :Goyo 67%+70%x100%<cr>
 
 
 " ====> switch tabs and buffers <====
@@ -164,6 +163,7 @@ Plug 'itchyny/vim-gitbranch',
 Plug 'othree/html5.vim',
 Plug 'pangloss/vim-javascript',
 Plug 'evanleck/vim-svelte', {'branch': 'main'},
+Plug 'NoahTheDuke/vim-just',
 call plug#end()
 
 
@@ -252,7 +252,7 @@ autocmd FileType typescriptreact,html,svelte inoremap ' ""<Esc>i
 autocmd FileType typescriptreact,html,svelte inoremap " ''<Esc>i
 autocmd FileType typescriptreact,html,svelte nnoremap <space>p :Prettier<cr>
 
-autocmd FileType typescriptreact,svelte inoremap kkcl console.log()<esc>i
+autocmd FileType typescriptreact,svelte inoremap kklo console.log()<esc>i
 
 autocmd FileType typescriptreact,svelte inoremap kkim <img src={} alt="" /><esc>Frf}i
 autocmd FileType typescriptreact,svelte inoremap kkcn class=""<esc>i
