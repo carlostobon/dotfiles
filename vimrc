@@ -56,6 +56,11 @@ nnoremap h m
 nnoremap k e
 nnoremap l i
 
+nmap gn gj
+nmap ge gk
+
+nmap gU gU
+nmap gu gu
 
 " ====> custom selectors <==== "
 "
