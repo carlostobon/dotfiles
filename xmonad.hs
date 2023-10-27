@@ -281,7 +281,7 @@ myStartupHook = do
  spawnOnce "picom --experimental-backends --config /home/carlos/.config/picom/picom.conf"
  spawnOnce "xset r rate 500 60"
  spawnOnce "unclutter &"
- spawnOnce "xwallpaper --stretch /home/carlos/.config/wallpaper/wallpaper.jpg"
+ spawnOnce "xwallpaper --stretch /home/carlos/.config/wallpaper/wallpaper.png"
  spawnOnce "setxkbmap -option 'caps:super'"
 
 
