@@ -277,7 +277,7 @@ myLogHook = return ()
 -- By default, do nothing.
 myStartupHook = do
  --spawnOnce "xrandr --output DP-1 --off"
- --spawnOnce "xrandr --output HDMI-1 --off"
+ spawnOnce "xrandr --output HDMI-A-0 --off"
  spawnOnce "picom --experimental-backends --config /home/carlos/.config/picom/picom.conf"
  spawnOnce "xset r rate 500 60"
  spawnOnce "unclutter &"

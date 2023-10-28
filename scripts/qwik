@@ -1,0 +1,114 @@
+#!/bin/sh
+
+initqwik(){
+  target=$1
+  pnpm create qwik@latest empty $target
+  cd $target
+  pnpm install
+
+  cd "src/"
+  # This lines insert font to root.tsx
+  echo "--- Editing root.tsx..."
+
+  echo 'import { component$ } from "@builder.io/qwik";
+import {
+  QwikCityProvider,
+  RouterOutlet,
+  ServiceWorkerRegister,
+} from "@builder.io/qwik-city";
+import { RouterHead } from "./components/router-head/router-head";
+
+import "./global.css";
+
+export default component$(() => {
+  return (
+    <QwikCityProvider>
+      <head>
+        <meta charSet="utf-8" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300;400;700&display=swap" rel="stylesheet" />
+        <link rel="manifest" href="/manifest.json" />
+        <RouterHead />
+      </head>
+      <body lang="en">
+        <RouterOutlet />
+        <ServiceWorkerRegister />
+      </body>
+    </QwikCityProvider>
+  );
+});
+' > "root.tsx" &
+
+
+  echo "--- Editing global.css..."
+
+  echo "
+:root {
+  --main-font-family: 'Comic Neue', cursive;
+  --main-font-size: 2rem;
+  --container: 1220px;
+}
+
+html {
+    font-size: 62.5%;
+    scroll-behavior: smooth;
+}
+
+body {
+  font-size: var(--main-font-size);
+  font-family: var(--main-font-family);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+}
+
+a {
+    text-decoration: none;
+    display: inline-block;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+button {
+  border: none;
+  background: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  outline: none;
+}
+
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 5rem;
+}
+  " > "global.css" &
+
+  cd "routes"
+
+  echo 'import { component$ } from "@builder.io/qwik";
+
+export default component$(() => {
+  return (
+    <div class="container">
+      <h1 style={{ "text-align": "center", "margin-top": "5rem" }}>
+        ... Qwik Running 🚀
+      </h1>
+    </div>
+    )
+  }
+)
+' > "index.tsx" &
+
+  wait
+  vim "./index.tsx"
+}
