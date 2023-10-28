@@ -36,4 +36,4 @@ create_link "rifle.conf" ".config/ranger/rifle.conf"
 
 create_dir ".config/qutebrowser"
 create_link "config.py" ".config/qutebrowser/config.py"
-create_link "autoconfig.yaml" ".config/qutebrowser/autoconfig.yaml"
+create_link "autoconfig.yml" ".config/qutebrowser/autoconfig.yml"
