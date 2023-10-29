@@ -63,6 +63,8 @@ nmap ge gk
 nmap gU gU
 nmap gu gu
 
+nmap r <C-r>
+
 " ====> custom selectors <==== "
 "
 nnoremap vm v^
@@ -229,8 +231,8 @@ autocmd FileType html syntax on
 autocmd FileType html nnoremap fw :call SintaxOn()<cr>
 autocmd FileType html nnoremap vv :call SintaxOnSave()<cr>
 
-autocmd FileType typescriptreact nnoremap mc :call CreateQwikComponent('
-autocmd FileType typescriptreact nnoremap mr :call CreateQwikRoute('
+autocmd FileType typescriptreact nnoremap kkmc :call CreateQwikComponent('
+autocmd FileType typescriptreact nnoremap kkmr :call CreateQwikRoute('
 
 let g:rainbow_active = 1
 
@@ -282,8 +284,13 @@ autocmd FileType typescriptreact,svelte nnoremap <space>mm :!pnpm dev
 
 autocmd FileType typescriptreact inoremap kkb <button onClick$={() => {}}></button><esc>F/hi
 autocmd FileType typescriptreact inoremap kkq import { component$ } from "@builder.io/qwik";<esc>F}hi
-autocmd FileType typescriptreact inoremap kkc import { } from "@builder.io/qwik-city";<esc>F}i
+autocmd FileType typescriptreact inoremap kkci import { } from "@builder.io/qwik-city";<esc>F}i
+autocmd FileType typescriptreact inoremap kkco import { } from "~/components";<esc>F}i
 autocmd FileType typescriptreact inoremap kkx export default component$(() => {<cr>return <></><cr>})<esc>kf/hi
+
+autocmd FileType typescriptreact inoremap kksi <esc>ddggf}hi, useSignal<esc>``O
+autocmd FileType typescriptreact inoremap kkst <esc>ddggf}hi, useStore<esc>``O
+
 
 autocmd FileType html inoremap kkan <a href=""></a><Esc>Fhf"a
 autocmd FileType html inoremap kkim <img src="" alt=""/><esc>fsf"a
