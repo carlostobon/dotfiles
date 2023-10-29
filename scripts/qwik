@@ -1,12 +1,18 @@
 #!/bin/sh
-
-initqwik(){
+#
+# =============================
+# Shortcuts for QwikJS
+# =============================
+#
+#
+qwikinit(){
   target=$1
   pnpm create qwik@latest empty $target
   cd $target
-  pnpm install
+  pnpm install &
 
   cd "src/"
+  touch "components/index.ts"
   # This lines insert font to root.tsx
   echo "--- Editing root.tsx..."
 
@@ -26,7 +32,7 @@ export default component$(() => {
       <head>
         <meta charSet="utf-8" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300;400;700&display=swap" rel="stylesheet" />
         <link rel="manifest" href="/manifest.json" />
         <RouterHead />
@@ -104,11 +110,70 @@ export default component$(() => {
         ... Qwik Running 🚀
       </h1>
     </div>
-    )
-  }
-)
-' > "index.tsx" &
+  );
+});
+  ' > "index.tsx" &
 
   wait
+  clear
   vim "./index.tsx"
+}
+
+
+qwikmc(){
+	directory=$1
+	mkdir $directory
+  capitalized=$(remove_hyphen_and_capitalize $directory)
+  echo "export { default as $capitalized } from './$directory/$directory';" >> "index.ts"
+
+	cd $directory
+	touch "${directory}.tsx"
+	touch "${directory}.css"
+	echo "import { component$, useStylesScoped$ } from '@builder.io/qwik';
+import styles from './${directory}.css?inline';
+
+export default component\$(() => {
+	useStylesScoped\$(styles);
+
+	return (
+		<div>
+		</div>
+		)
+	}
+) " > "${directory}.tsx"
+	vim "${directory}.tsx"
+}
+
+qwikmr(){
+	directory=$1
+	mkdir $directory
+	cd $directory
+	touch "index.tsx"
+	touch "index.css"
+	echo "import { component$, useStylesScoped$ } from '@builder.io/qwik';
+import styles from './index.css?inline';
+
+export default component\$(() => {
+	useStylesScoped\$(styles);
+
+	return (
+		<>
+		</>
+		)
+	}
+) " > "index.tsx"
+	vim "index.tsx"
+}
+
+
+remove_hyphen_and_capitalize() {
+  input=$1
+  IFS="-" read -ra words <<< "$input"
+
+  output=()
+  for word in "${words[@]}"; do
+    output+="${word^}"
+  done
+
+  echo $output
 }
