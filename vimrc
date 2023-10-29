@@ -14,6 +14,7 @@ filetype plugin on
 filetype indent on
 
 
+
 " ====> set tab for ale menu <====
 "
 inoremap <silent><expr> <Tab>
@@ -204,6 +205,18 @@ function! SintaxOnSave()
       syntax on
 endfunction
 
+function! CreateQwikComponent(name)
+  let home = getenv("HOME")
+  let result = system("source " . home . "/.aliasrc; co; qwikmc " . a:name)
+  echomsg "component " . a:name . " has been created."
+endfunction
+
+function! CreateQwikRoute(name)
+  let home = getenv("HOME")
+  let result = system("source " . home . "/.aliasrc; ro; qwikmr " . a:name)
+  echomsg "route " . a:name . " has been created."
+endfunction
+
 autocmd FileType svelte syntax on
 autocmd FileType svelte nnoremap fw :call SintaxOn()<cr>
 autocmd FileType svelte nnoremap vv :call SintaxOnSave()<cr>
@@ -215,6 +228,9 @@ autocmd FileType css nnoremap vv :call SintaxOnSave()<cr>
 autocmd FileType html syntax on
 autocmd FileType html nnoremap fw :call SintaxOn()<cr>
 autocmd FileType html nnoremap vv :call SintaxOnSave()<cr>
+
+autocmd FileType typescriptreact nnoremap mc :call CreateQwikComponent('
+autocmd FileType typescriptreact nnoremap mr :call CreateQwikRoute('
 
 let g:rainbow_active = 1
 
