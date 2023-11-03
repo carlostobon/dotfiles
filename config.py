@@ -170,7 +170,7 @@ yellow_color = '#f6c177'
 
 
 # main_font = 'Fira Code'
-main_font = 'Dejavu Sans'
+main_font = 'Roboto'
 
 
 # Keep the space at the end of the font size
