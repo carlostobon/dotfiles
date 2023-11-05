@@ -110,7 +110,7 @@ nnoremap ff :FZF $FOLDER<cr>
 nnoremap XX ZZ
 nnoremap XQ ZQ
 nnoremap Q <esc>
-nnoremap ,h :Goyo 67%+70%x100%<cr>
+nnoremap ,h :Goyo 80%+70%x100%<cr>
 
 
 " ====> switch tabs and buffers <====
@@ -177,9 +177,24 @@ call plug#end()
 
 " ====> Ale configurations <====
 "
-let g:ale_linters = {'rust': ['analyzer'], 'python': ['ruff'], 'javascript': ['eslint'], 'typescript': ['eslint'], 'typescriptreact': ['eslint'], "svelte": ["eslint"]}
+let g:ale_linters = {
+      \ 'rust': ['analyzer'],
+      \ 'python': ['pyright'],
+      \ 'javascript': ['eslint'],
+      \ 'typescript': ['eslint'],
+      \ 'typescriptreact': ['eslint'],
+      \ 'svelte': ['eslint']
+      \ }
 
-let g:ale_fixers = { '*': ['remove_trailing_lines', 'trim_whitespace'], 'javascript': [ 'prettier' ], 'rust': ['rustfmt'], 'python': ['black'], 'typescript': ['prettier'], 'typescriptreact': ['prettier'], "svelte": ["prettier"] }
+let g:ale_fixers = {
+      \ '*': ['remove_trailing_lines', 'trim_whitespace'],
+      \ 'rust': ['rustfmt'],
+      \ 'python': ['black'],
+      \ 'javascript': ['prettier'],
+      \ 'typescript': ['prettier'],
+      \ 'typescriptreact': ['prettier'],
+      \ 'svelte': ['prettier']
+      \ }
 
 
 let g:lightline = {
@@ -239,6 +254,7 @@ let g:rainbow_active = 1
 let g:ale_fix_on_save = 1
 let g:ale_completion_enabled = 1
 let g:ale_completion_autoimport = 1
+let g:ale_set_balloons = 1
 
 let g:slime_target = "tmux"
 let g:livepreview_previewer = 'zathura'
