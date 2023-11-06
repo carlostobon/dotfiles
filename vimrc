@@ -82,8 +82,8 @@ inoremap aa <esc>
 
 " ====> capitalize and de-capitalize <====
 "
-nnoremap fu bvU
-nnoremap fl bvu
+nnoremap fu <right>bvU
+nnoremap fl <right>bvu
 
 
 " ====> comment keys <====
