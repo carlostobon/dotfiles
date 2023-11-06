@@ -67,8 +67,8 @@ nmap r <C-r>
 
 " ====> custom selectors <==== "
 "
-nnoremap vm v^
-nnoremap vf v$
+nnoremap vf v^
+nnoremap vu v$
 
 nnoremap M ^
 
