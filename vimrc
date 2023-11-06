@@ -105,7 +105,7 @@ nnoremap b B
 vmap <S-y> "+y
 nmap <S-p> "+p
 nmap vv :w<cr>
-nnoremap rr :NERDTree<cr>
+nnoremap kkr :NERDTree<cr>
 nnoremap ff :FZF $FOLDER<cr>
 nnoremap XX ZZ
 nnoremap XQ ZQ
