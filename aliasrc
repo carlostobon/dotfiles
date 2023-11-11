@@ -72,6 +72,7 @@ alias \
 	docker="sudo docker" \
 	d="docker" \
 	dc="docker ps -a" \
+	dei="docker exec -it" \
 	di="docker images" \
 	dcc="docker-compose" \
 	rdcc="dcc up --build -d" \
