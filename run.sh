@@ -38,4 +38,7 @@ create_dir ".config/qutebrowser"
 create_link "config.py" ".config/qutebrowser/config.py"
 create_link "autoconfig.yml" ".config/qutebrowser/autoconfig.yml"
 
+create_dir ".config/kitty"
+create_link "kitty.conf" ".config/kitty/kitty.conf"
+
 create_link "scripts" ".scripts"
