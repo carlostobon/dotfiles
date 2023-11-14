@@ -34,9 +34,11 @@ source $HOME/.keyboard
 # Bash prompt name
 PS1='🦀🚀🛸\w\[$(tput sgr0)\]> '
 
-# duer path binary setter
-export PATH="$PATH:$HOME/.duer"
+# Cargo binaries
 export PATH="$PATH:$HOME/.cargo/bin"
+
+# binaries from the env
+export PATH="$PATH:$HOME/.binaries"
 
 # pnpm
 export PNPM_HOME="/home/carlos/.local/share/pnpm"
@@ -45,8 +47,3 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH=$BUN_INSTALL/bin:$PATH
-. "$HOME/.cargo/env"

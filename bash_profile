@@ -9,7 +9,6 @@
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
 # Initiate graphical server if not running yet
- if [ "$(tty)" = "/dev/tty1" ]; then
+if [ "$(tty)" = "/dev/tty1" ]; then
   pgrep -x xmonad || exec startx
- fi
- . "$HOME/.cargo/env"
+fi

@@ -73,89 +73,82 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_p     ), spawn "dmenu_run")
 
     -- launch qutebrowser
-    , ((modm,               xK_f   ), spawn "qutebrowser")
+    , ((modm,               xK_f     ), spawn "qutebrowser")
 
-    -- launch firefox
-    , ((modm,               xK_u   ), spawn "brave")
+    -- launch brave
+    , ((modm,               xK_u     ), spawn "brave")
 
     -- close focused window
-    , ((modm,               xK_s    ), kill)
+    , ((modm,               xK_s     ), kill)
 
-    -- start recording
-    , ((modm,               xK_y     ), spawn "ffmpeg -y -f x11grab -i :0.0 -f alsa -i default -vf yadif -codec:v libx264 -crf 0 -bf 2 -flags +cgop -pix_fmt yuv420p10 -codec:a aac -strict -2 -b:a 384k -r:a 48000 video-$(date +%H_%M_%S).mp4")
+    -- start recording video
+    , ((modm .|. shiftMask, xK_y     ), spawn "ffmpeg -y -f x11grab -i :0.0 -f alsa -i default -vf yadif -codec:v libx264 -crf 0 -bf 2 -flags +cgop -pix_fmt yuv420p10 -codec:a aac -strict -2 -b:a 384k -r:a 48000 video-$(date +%H_%M_%S).mp4")
 
-    -- recording audio
-    , ((modm, xK_a     ), spawn "ffmpeg -f pulse -i default -map '0' audio-$(date +%H_%M_%S).mp3")
+    -- start recording audio
+    , ((modm .|. shiftMask, xK_a     ), spawn "ffmpeg -f pulse -i default -map '0' audio-$(date +%H_%M_%S).mp3")
 
-    -- kill recording
-    , ((modm, xK_l), spawn "killall ffmpeg")
+    -- kill all recordings
+    , ((modm,               xK_l     ), spawn "killall ffmpeg")
 
     -- screen capture
-    , ((modm .|. shiftMask, xK_p), spawn "maim -f png /home/carlos/picture-$(date +%H_%M_%S).png")
+    , ((modm .|. shiftMask, xK_p     ), spawn "maim -f png /home/carlos/picture-$(date +%H_%M_%S).png")
 
      -- Rotate through the available layout algorithms
     , ((modm,               xK_space ), sendMessage NextLayout)
 
-    --  Reset the layouts on the current workspace to default
+    -- Reset the layouts on the current workspace to default
     , ((modm .|. shiftMask, xK_space ), setLayout $ XMonad.layoutHook conf)
 
     -- Resize viewed windows to the correct size
-    --, ((modm,               xK_n     ), refresh)
+    --, ((modm,             xK_n     ), refresh)
 
     -- Move focus to the next window
-    --, ((modm,               xK_Tab   ), windows W.focusDown)
-
-    -- Move focus to the next window
-    , ((modm,               xK_n    ), windows W.focusDown)
-
-    -- Kill All ffmpeg proccessess
-    , ((modm,               xK_k     ), spawn "killall ffmpeg"  )
+    , ((modm,               xK_n     ), windows W.focusDown)
 
     -- Move focus to the master window
-    --, ((modm,               xK_m     ), windows W.focusMaster  )
+    --, ((modm,             xK_m     ), windows W.focusMaster  )
 
     -- Swap the focused window and the master window
-    , ((modm,  xK_comma), windows W.swapMaster)
+    , ((modm,               xK_comma ), windows W.swapMaster)
 
     -- Swap the focused window with the next window
     , ((modm .|. shiftMask, xK_j     ), windows W.swapDown  )
 
-
     -- Shrink the master area
-    , ((modm,               xK_m   ), sendMessage Shrink)
+    , ((modm,               xK_m     ), sendMessage Shrink)
 
     -- Expand the master area
-    , ((modm,               xK_i    ), sendMessage Expand)
+    , ((modm,               xK_i     ), sendMessage Expand)
 
     -- Push window back into tiling
-    --, ((modm,               xK_t     ), withFocused $ windows . W.sink)
+    --, ((modm,             xK_t     ), withFocused $ windows . W.sink)
 
     -- Increment the number of windows in the master area
-    --, ((modm              , xK_comma ), sendMessage (IncMasterN 1))
+    --, ((modm,             xK_comma ), sendMessage (IncMasterN 1))
 
     -- Deincrement the number of windows in the master area
-    , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
+    , ((modm,               xK_period), sendMessage (IncMasterN (-1)))
 
     -- Toggle the status bar gap
     -- Use this binding with avoidStruts from Hooks.ManageDocks.
     -- See also the statusBar function from Hooks.DynamicLog.
     --
-    -- , ((modm              , xK_b     ), sendMessage ToggleStruts)
+    --, ((modm,               xK_b     ), sendMessage ToggleStruts)
 
     -- Quit xmonad
-    , ((modm .|. shiftMask, xK_slash     ), io (exitWith ExitSuccess))
+    , ((modm .|. shiftMask, xK_slash ), io (exitWith ExitSuccess))
 
     -- Restart xmonad
-    , ((modm              , xK_slash     ), spawn "xmonad --recompile; xmonad --restart")
+    , ((modm,               xK_slash ), spawn "xmonad --recompile; xmonad --restart")
 
     -- Move to prev workspace
-    , ((modm,               xK_e),  moveTo Prev (Not emptyWS))
+    , ((modm,               xK_e     ),  moveTo Prev (Not emptyWS))
 
     -- Move to next workspace
-    , ((modm,               xK_o),  moveTo Next (Not emptyWS))
+    , ((modm,               xK_o     ),  moveTo Next (Not emptyWS))
 
     -- Find an empty workspace
-    , ((modm,               xK_t), moveTo Next emptyWS)
+    , ((modm,               xK_t     ), moveTo Next emptyWS)
 
 
     -- Run xmessage with a summary of the default keybindings (useful for beginners)
