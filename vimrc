@@ -209,6 +209,7 @@ let g:lightline = {
       \ }
 
 
+let g:ale_rust_rustfmt_options = '--edition 2021'
 
 " ====> Some required functions <====
 "
