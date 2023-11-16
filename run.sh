@@ -42,3 +42,4 @@ create_dir ".config/kitty"
 create_link "kitty.conf" ".config/kitty/kitty.conf"
 
 create_link "scripts" ".scripts"
+create_link "binaries" ".binaries"

@@ -40,14 +40,12 @@ bk(){
 	cd "$base/backend/src"
 }
 
-#rm="sudo rm -vI"
-#rmd="sudo rm -r"
-
 alias \
 	cp="cp -iv" \
   z="zathura" \
 	g="git" \
 	mv="mv -iv" \
+	rmd="sudo rm -r" \
 	ls="exa" \
   kt="v ~/.config/kitty/theme.conf" \
   xm="v ~/.xmonad/xmonad.hs" \
@@ -113,14 +111,19 @@ mkd(){
 }
 
 getter(){
-	file=$1
-	$(rsync -avz root@104.156.231.83:/var/www/server/server/$file .)
+	rsync -avz root@104.156.231.83:/var/www/server/static/files/"$1" .
 }
 
 sender(){
 	file=$1
 	name=$2
-	$(rsync -urvP $file root@104.156.231.83:/var/www/server/server/$name)
+	$(rsync -urvP $file root@104.156.231.83:/var/www/server/static/files/$name)
+}
+
+sender_binary(){
+	file=$1
+	name=$2
+	$(rsync -urvP $file root@104.156.231.83:/var/www/server/static/bins/$name)
 }
 
 convert(){
