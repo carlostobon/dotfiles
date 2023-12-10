@@ -69,6 +69,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- launch a terminal
     [ ((modm, xK_Return), spawn $ XMonad.terminal conf)
 
+    -- Invoke tmux
+    , ((modm,               xK_t), spawn "xdotool key Ctrl+Shift+Return")
+
     -- launch dmenu
     , ((modm,               xK_p     ), spawn "dmenu_run")
 

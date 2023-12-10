@@ -110,7 +110,7 @@ nnoremap ff :FZF $FOLDER<cr>
 nnoremap XX ZZ
 nnoremap XQ ZQ
 nnoremap Q <esc>
-nnoremap ,h :Goyo 65%+70%x100%<cr>
+nnoremap ,h :Goyo 70%+70%x100%<cr>
 
 
 " ====> switch tabs and buffers <====
@@ -285,8 +285,8 @@ autocmd FileType typescriptreact,html,svelte inoremap kkli <li></li><Esc>FlT>i
 autocmd FileType typescriptreact,html,svelte inoremap kkfo <form></form><esc>FfT>i
 autocmd FileType typescriptreact,html,svelte inoremap kkla <label></label><esc>FlT>i
 autocmd FileType typescriptreact,html,svelte inoremap kkna <nav></nav><esc>FnT>i
-autocmd FileType typescriptreact,html,svelte nnoremap tg I/*<esc>A*/<esc>
-autocmd FileType typescriptreact,html,svelte nnoremap tk ^xx<esc>$xx<esc>^
+autocmd FileType typescriptreact,html,svelte nnoremap tg I{/*<esc>A*/}<esc>^
+autocmd FileType typescriptreact,html,svelte nnoremap tk ^xxx<esc>$xxx<esc>^
 autocmd FileType typescriptreact,html,svelte nnoremap c. f<cT>
 autocmd FileType typescriptreact,html,svelte inoremap ' ""<Esc>i
 autocmd FileType typescriptreact,html,svelte inoremap " ''<Esc>i
@@ -339,8 +339,8 @@ autocmd FileType rust inoremap kktt #[test]<cr>fn xx() {<cr>}<up><esc>fxcw
 autocmd FileType rust nnoremap kk# <esc>ggO<esc>O#![allow(dead_code, unused_variables, unused_imports)]<esc>``
 autocmd FileType rust inoremap " '
 autocmd FileType rust inoremap ' "
-autocmd FileType rust nnoremap <space>mm :!clear; cargo-fmt; cargo run
-autocmd FileType rust nnoremap <space>hh :!clear; cargo-fmt; cargo test -- --nocapture
+autocmd FileType rust nnoremap <space>mm :!clear; cargo run --
+autocmd FileType rust nnoremap <space>hh :!clear; cargo test -- --nocapture
 autocmd FileType rust nnoremap kkc lbi_<esc> " used for rust compiler complain
 
 
