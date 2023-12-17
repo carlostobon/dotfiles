@@ -8,10 +8,10 @@
 qwikinit(){
   target=$1
   pnpm create qwik@latest empty $target
-  cd $target
+  c $target
   pnpm install &
 
-  #cd "src/"
+  #c "src/"
   touch "src/components/index.ts"
   # This lines insert font to root.tsx
   echo "--- Editing root.tsx..."
@@ -114,6 +114,7 @@ export default component$(() => {
 
   wait
   clear
+  vim "src/routes/index.tsx"
 }
 
 
@@ -123,7 +124,7 @@ qwikmc(){
   capitalized=$(remove_hyphen_and_capitalize $directory)
   echo "export { default as $capitalized } from './$directory/$directory';" >> "index.ts"
 
-	cd $directory
+	c $directory
 	touch "${directory}.tsx"
 	touch "${directory}.css"
 	echo "import { component$, useStylesScoped$ } from '@builder.io/qwik';
@@ -144,7 +145,7 @@ export default component\$(() => {
 qwikmr(){
 	directory=$1
 	mkdir -p $directory
-	cd $directory
+	c $directory
 	touch "index.tsx"
 	touch "index.css"
 	echo "import { component$, useStylesScoped$ } from '@builder.io/qwik';

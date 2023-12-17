@@ -15,31 +15,40 @@ function create_link() {
     error "error creating link $target"
 }
 
-targets=("vimrc" "bashrc" "bash_profile" "aliasrc" "keyboard" "gitconfig")
-
-for target in "${targets[@]}"; do
-  create_link $target .$target
+# Hidden files in shell
+shells=("bashrc" "bash_profile" "aliasrc" "keyboard")
+for target in "${shells[@]}"; do
+  create_link "shell/$target" .$target
 done
 
+create_link "vim/vimrc" ".vimrc"
+create_link "git/gitconfig" ".gitconfig"
+
 create_dir ".xmonad"
-create_link "xmonad.hs" ".xmonad/xmonad.hs"
+create_link "xmonad/xmonad.hs" ".xmonad/xmonad.hs"
 
-create_dir ".config/picom"
-create_link "picom.conf" ".config/picom/picom.conf"
 
-create_dir ".config/zathura"
-create_link "zathurarc" ".config/zathura/zathurarc"
+# Iterate over targets (.config)
+targets=("picom" "zathura" "ranger" "qutebrowser" "kitty")
+for target in "${targets[@]}"; do
+  ## create dir
+  create_dir ".config/$target"
 
-create_dir ".config/ranger"
-create_link "rc.conf" ".config/ranger/rc.conf"
-create_link "rifle.conf" ".config/ranger/rifle.conf"
+  ## get all files
+  files=$(find $target -type f)
 
-create_dir ".config/qutebrowser"
-create_link "config.py" ".config/qutebrowser/config.py"
-create_link "autoconfig.yml" ".config/qutebrowser/autoconfig.yml"
+  ## generate links
+  for file in $files; do
+    create_link $file ".config/$file"
+  done
+done
 
-create_dir ".config/kitty"
-create_link "kitty.conf" ".config/kitty/kitty.conf"
 
-create_link "scripts" ".scripts"
-create_link "binaries" ".binaries"
+targets=("scripts" "binaries")
+for target in "${targets[@]}"; do
+  create_dir ".$target"
+  files=$(find $target -type f)
+  for file in $files; do
+    create_link $file ".$file"
+  done
+done
