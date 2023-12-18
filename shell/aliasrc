@@ -6,6 +6,7 @@ alias \
 	mv="mv -iv" \
 	rmd="sudo rm -r" \
 	ls="exa" \
+	l="exa" \
 	cl="clear" \
 	t="touch" \
 	a="c .." \
