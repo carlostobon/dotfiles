@@ -55,10 +55,7 @@ mkd(){
 }
 
 s(){
-	c "$(base)/app">/dev/null 2>&1
-	if [ $? -ne 0 ]; then
-		c "$(base)/src"
-	fi
+	c "$(base)/src"
 }
 
 # Python shortcuts
@@ -109,10 +106,7 @@ alias \
 	qwik="pnpm run qwik" \
 
 co(){
-	c "$(base)/app/components">/dev/null 2>&1
-	if [ $? -ne 0 ]; then
-		c "$(base)/src/components"
-	fi
+	c "$(base)/src/components"
 }
 
 ro(){
@@ -120,10 +114,7 @@ ro(){
 }
 
 li(){
-	c "$(base)/app/lib">/dev/null 2>&1
-	if [ $? -ne 0 ]; then
-		c "$(base)/src/lib"
-	fi
+	c "$(base)/src/lib"
 }
 
 bk(){
