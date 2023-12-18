@@ -44,6 +44,34 @@ for target in "${targets[@]}"; do
 done
 
 
+# Dowload and place binaries
+# Prompt here
+echo "Do you want to download \& install binaries? (yes/no)"
+read answer
+
+if [ "$answer" == "y" ]; then
+  mkdir binaries
+  cd binaries
+
+  bins=("duer" "ww")
+
+  echo "installing binaries..."
+  for item in "${bins[@]}"; do
+    curl -O "https://server.numericaltools.com/bins/$item" &
+  done
+  wait
+
+  for item in "${bins[@]}"; do
+    chmod +x "$item"
+  done
+  cd ../
+  echo "binaries installed successfully..."
+else
+  echo "Ok no binaries will be installed!"
+fi
+
+# Set links for scripts and binaries
+echo "setting links for scripts and binaries..."
 targets=("scripts" "binaries")
 for target in "${targets[@]}"; do
   create_dir ".$target"
