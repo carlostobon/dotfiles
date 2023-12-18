@@ -1,115 +1,141 @@
 #!/bin/sh
 
-source "$HOME/.scripts/qwik"
-
-co(){
-	base=$(pwd | cut -d'/' -f1-4)
-	cd "$base/app/components">/dev/null 2>&1
-	if [ $? -ne 0 ]; then
-		cd "$base/src/components"
-	fi
-}
-
-b(){
-	cd $(pwd | cut -d'/' -f1-4)
-}
-
-ro(){
-	base=$(pwd | cut -d'/' -f1-4)
-	cd "$base/src/routes"
-}
-
-li(){
-	base=$(pwd | cut -d'/' -f1-4)
-	cd "$base/app/lib">/dev/null 2>&1
-	if [ $? -ne 0 ]; then
-		cd "$base/src/lib"
-	fi
-}
-
-s(){
-	base=$(pwd | cut -d'/' -f1-4)
-	cd "$base/app">/dev/null 2>&1
-	if [ $? -ne 0 ]; then
-		cd "$base/src"
-	fi
-}
-
-bk(){
-	base=$(pwd | cut -d'/' -f1-4)
-	cd "$base/backend/src"
-}
-
+# General shortcuts
 alias \
 	cp="cp -iv" \
-  z="zathura" \
-	g="git" \
 	mv="mv -iv" \
 	rmd="sudo rm -r" \
 	ls="exa" \
+	cl="clear" \
+	t="touch" \
+	a="c .." \
+  z="zathura" \
+	g="git" \
   kt="v ~/.config/kitty/theme.conf" \
   xm="v ~/.xmonad/xmonad.hs" \
 	bh="v ~/.bash_history" \
-  doc="cd ~/Documents" \
-  dow="cd ~/Downloads" \
+  dc="c ~/Documents" \
+  dw="c ~/Downloads" \
   nf="neofetch" \
-	xeon="ssh carlos@192.168.58.118 -p 22" \
 	ts="ts-node" \
-	empty="sudo rm ~/.cache/vim/swap/*" \
-	clean="p -Qtdp; p -Scc; sudo rm -rf .cache" \
 	p="sudo pacman" \
+	update="sudo pacman -Syu --noconfirm" \
+	clean="p -Qtdp; p -Scc; sudo rm -rf .cache" \
+	empty="sudo rm ~/.cache/vim/swap/*" \
 	sdn="sudo shutdown now" \
 	ka="killall" \
-	update="sudo pacman -Syu --noconfirm" \
-	server="ssh root@104.156.231.83" \
 	r="ranger" \
-	see="ncdu"\
-	cl="clear" \
+	see="ncu"\
 	v="vim" \
 	tree="lsd --tree"\
-	docker="sudo docker" \
-	d="docker" \
-	dc="docker ps -a" \
-	dei="docker exec -it" \
-	di="docker images" \
-	dcc="docker-compose" \
-	rdcc="dcc up --build -d" \
-	dre="docker system prune -a" \
-	dvp="docker volume prune" \
-	a="cd .." \
-	vm="vim main.rs" \
-	vl="vim lib.rs" \
+	vm="vim src/main.rs" \
+	vl="vim src/lib.rs" \
 	vi="vim index.tsx" \
 	vp="vim ./+page.svelte" \
-	t="touch" \
-	cr="cargo build --release" \
-	ca="cargo add" \
+
+
+# takes /foo/bar/baz/../../
+# returns /foo/bar/baz
+base(){
+	pwd | cut -d'/' -f1-4
+}
+
+b(){
+	c $(base)
+}
+
+c(){
+  cd $1
+	export FOLDER=$(base)
+}
+
+mkd(){
+	mkdir -p $1
+	c $1
+}
+
+s(){
+	c "$(base)/app">/dev/null 2>&1
+	if [ $? -ne 0 ]; then
+		c "$(base)/src"
+	fi
+}
+
+# Python shortcuts
+alias \
 	pye="source ~/Documents/mathematics/bin/activate" \
 
+# server shortcut
+alias \
+	server="ssh root@104.156.231.83" \
 
+# rust shortcuts
+alias \
+	cr="cargo build --release" \
+	ca="cargo add" \
+
+ta(){
+	c "$(base)/target/release"
+}
+
+# docker shortcuts
+alias \
+	dk="sudo docker" \
+	dkc="sudo docker ps -a" \
+	dkei="sudo docker exec -it" \
+	dki="sudo docker images" \
+	dcc="sudo docker-compose" \
+	rdcc="sudo dcc up --build -d" \
+	dre="sudo docker system prune -a" \
+	dvp="sudo docker volume prune" \
+
+
+dri(){
+	instances=$(docker image ls -q)
+	dk rmi $instances
+}
+
+drc(){
+	instance=$(docker ps -a -q &)
+	dk stop $instances
+	dk rm $instances
+}
+
+
+# pnpm shortcuts && qwik && svelte
 alias \
 	dev="pnpm run dev --host" \
 	build="pnpm run build" \
 	qwik="pnpm run qwik" \
 
-
-dri(){
-	instance=$(docker image ls -q)
-	docker rmi $instance
+co(){
+	c "$(base)/app/components">/dev/null 2>&1
+	if [ $? -ne 0 ]; then
+		c "$(base)/src/components"
+	fi
 }
 
-drc(){
-	instance=$(docker ps -a -q &)
-	docker stop $instance
-	docker rm $instance
+ro(){
+	c "$(base)/src/routes"
 }
 
-mkd(){
-	directory=$1
-	mkdir -p $directory
-	cd $directory
+li(){
+	c "$(base)/app/lib">/dev/null 2>&1
+	if [ $? -ne 0 ]; then
+		c "$(base)/src/lib"
+	fi
 }
 
+bk(){
+	c "$(base)/backend"
+}
+
+
+# load scripts
+source "$HOME/.scripts/qwik"
+
+
+# ssh with vps
 getter(){
 	rsync -avz root@104.156.231.83:/var/www/server/static/files/"$1" .
 }
@@ -126,6 +152,8 @@ sender_binary(){
 	$(rsync -urvP $file root@104.156.231.83:/var/www/server/static/bins/$name)
 }
 
+
+# video editing shortcuts
 convert(){
 	target=$1
 	output=$2
@@ -137,24 +165,4 @@ mixer(){
 	sound=$2
 	name=$3
 	$(ffmpeg -i $video -i $sound -c:v copy -c:a copy $name.mkv)
-}
-
-# Used for fzf in vim
-#
-base(){
-	base=$(pwd | cut -d'/' -f1-4)
-	export FOLDER=$base
-}
-
-c(){
-  path=$1
-  cd $path
-  base
-}
-
-# Used in rust
-# to move directly after compiled
-ta(){
-	base=$(pwd | cut -d'/' -f1-4)
-	cd "$base/target/release"
 }
