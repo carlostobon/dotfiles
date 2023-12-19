@@ -46,7 +46,7 @@ done
 
 # Dowload and place binaries
 # Prompt here
-echo "Do you want to download \& install binaries? (yes/no)"
+echo "Do you want to download \& install binaries? (y/N)"
 read answer
 
 if [ "$answer" == "y" ]; then
