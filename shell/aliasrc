@@ -7,6 +7,7 @@ alias \
 	rmd="sudo rm -r" \
 	ls="exa" \
 	l="exa" \
+	lb="lsblk" \
 	cl="clear" \
 	t="touch" \
 	a="c .." \
