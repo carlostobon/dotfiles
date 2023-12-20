@@ -130,19 +130,15 @@ source "$HOME/.scripts/qwik"
 
 # ssh with vps
 getter(){
-	rsync -avz root@104.156.231.83:/var/www/server/static/files/"$1" .
+	rsync -avz root@104.156.231.83:/var/www/server/static/files/$1 .
 }
 
 sender(){
-	file=$1
-	name=$2
-	$(rsync -urvP $file root@104.156.231.83:/var/www/server/static/files/$name)
+	rsync -urvP $1 root@104.156.231.83:/var/www/server/static/files/$2
 }
 
 sender_binary(){
-	file=$1
-	name=$2
-	$(rsync -urvP $file root@104.156.231.83:/var/www/server/static/bins/$name)
+	rsync -urvP $1 root@104.156.231.83:/var/www/server/static/bins/$2
 }
 
 
