@@ -94,7 +94,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_l     ), spawn "killall ffmpeg")
 
     -- screen capture
-    , ((modm .|. shiftMask, xK_p     ), spawn "maim -f png /home/carlos/picture-$(date +%H_%M_%S).png")
+    , ((modm .|. shiftMask, xK_p     ), spawn "maim -f png picture-$(date +%H_%M_%S).png")
 
      -- Rotate through the available layout algorithms
     , ((modm,               xK_space ), sendMessage NextLayout)
@@ -274,10 +274,10 @@ myLogHook = return ()
 myStartupHook = do
  --spawnOnce "xrandr --output DP-1 --off"
  --spawnOnce "xrandr --output HDMI-A-0 --off"
- spawnOnce "picom --experimental-backends --config /home/carlos/.config/picom/picom.conf"
+ spawnOnce "picom --experimental-backends --config .config/picom/picom.conf"
  spawnOnce "xset r rate 500 60"
  spawnOnce "unclutter &"
- spawnOnce "xwallpaper --stretch /home/carlos/.config/wallpaper/wallpaper.png"
+ spawnOnce "xwallpaper --stretch .config/wallpaper/wallpaper.png"
  spawnOnce "setxkbmap -option 'caps:super'"
 
 
