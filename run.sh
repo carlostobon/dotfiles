@@ -27,6 +27,8 @@ create_link "git/gitconfig" ".gitconfig"
 create_dir ".xmonad"
 create_link "xmonad/xmonad.hs" ".xmonad/xmonad.hs"
 
+create_dir ".config/mpv"
+create_link "mpv/input.conf" ".config/mpv/input.conf"
 
 # Iterate over targets (.config)
 targets=("picom" "zathura" "ranger" "qutebrowser" "kitty")
