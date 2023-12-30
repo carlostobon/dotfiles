@@ -7,6 +7,15 @@ set noshowmode
 set autoindent expandtab tabstop=2 shiftwidth=2
 set hidden
 set autoread
+
+set nobackup
+set nowritebackup
+set noswapfile
+set viminfo=
+if has('persistent_undo')
+      set noundofile
+endif
+
 syntax enable
 syntax on
 filetype on
