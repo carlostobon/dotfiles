@@ -18,6 +18,9 @@ HISTSIZE= HISTFILESIZE=
 # Avoid duplicates
 HISTCONTROL=ignoredups:erasedups
 
+# Set vim as default editor
+export EDITOR=vim
+
 # When the shell exits, append to the history file instead of overwriting it
 shopt -s histappend
 

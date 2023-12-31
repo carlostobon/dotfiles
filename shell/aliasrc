@@ -25,6 +25,7 @@ alias \
 	clean="p -Qtdp; p -Scc; sudo rm -rf .cache" \
 	empty="sudo rm ~/.cache/vim/swap/*" \
 	sdn="sudo shutdown now" \
+	rb="sudo reboot" \
 	ka="killall" \
 	r="ranger" \
 	see="ncu"\
@@ -154,4 +155,13 @@ mixer(){
 	sound=$2
 	name=$3
 	$(ffmpeg -i $video -i $sound -c:v copy -c:a copy $name.mkv)
+}
+
+mt(){
+	target=$1
+	sudo mount "/dev/$target" /mnt
+}
+
+um(){
+	sudo umount /mnt
 }
