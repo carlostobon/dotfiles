@@ -85,7 +85,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_s     ), kill)
 
     -- start recording video
-    , ((modm .|. shiftMask, xK_y     ), spawn "ffmpeg -y -f x11grab -i :0.0 -f alsa -i default -vf yadif -codec:v libx264 -crf 0 -bf 2 -flags +cgop -pix_fmt yuv420p10 -codec:a aac -strict -2 -b:a 384k -r:a 48000 video-$(date +%H_%M_%S).mp4")
+    , ((modm .|. shiftMask, xK_y     ), spawn "ffmpeg -y -f x11grab -i :0.0 -f alsa -i default -vf yadif -codec:v libx264 -crf 12 -bf 2 -flags +cgop -pix_fmt yuv420p -codec:a aac -strict -2 -b:a 384k -r:a 48000 video-$(date +%H_%M_%S).mp4")
 
     -- start recording audio
     , ((modm .|. shiftMask, xK_a     ), spawn "ffmpeg -f pulse -i default -map '0' audio-$(date +%H_%M_%S).mp3")
@@ -276,8 +276,9 @@ myStartupHook = do
  --spawnOnce "xrandr --output HDMI-A-0 --off"
  spawnOnce "picom --experimental-backends --config .config/picom/picom.conf"
  spawnOnce "xset r rate 500 60"
+ spawnOnce "xset s 18000"
  spawnOnce "unclutter &"
- spawnOnce "xwallpaper --stretch .config/wallpaper/wallpaper.png"
+ spawnOnce "xwallpaper --stretch .config/wallpaper/wallpaper.jpg"
  spawnOnce "setxkbmap -option 'caps:super'"
 
 
