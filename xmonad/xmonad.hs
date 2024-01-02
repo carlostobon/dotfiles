@@ -142,7 +142,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_slash ), io (exitWith ExitSuccess))
 
     -- Restart xmonad
-    , ((modm,               xK_slash ), spawn "xmonad --recompile; xmonad --restart; setxkbmap -option 'caps:super'; xset r rate 500 60; unclutter &")
+    , ((modm,               xK_slash ), spawn "xmonad --recompile; xmonad --restart; setxkbmap -option 'caps:super'; xset r rate 500 60; xset s 18000; unclutter &")
 
     -- Move to prev workspace
     , ((modm,               xK_e     ),  moveTo Prev (Not emptyWS))
