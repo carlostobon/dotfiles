@@ -37,8 +37,6 @@ alias \
 	vp="vim ./+page.svelte" \
 
 
-# takes /foo/bar/baz/../../
-# returns /foo/bar/baz
 base(){
 	pwd | cut -d'/' -f1-4
 }
@@ -127,6 +125,7 @@ bk(){
 
 # load scripts
 source "$HOME/.scripts/qwik"
+source "$HOME/.scripts/videos"
 
 
 # ssh with vps

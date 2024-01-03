@@ -1,0 +1,30 @@
+#!/bin/sh
+
+video(){
+    target=$1
+    file_name=$2
+
+    if [ $# -eq 0 ]; then
+        echo "address and name for video required!"
+        exit 1
+    fi
+
+    echo "proceeding to get video..."
+    video="video_place_holder.webm"
+    yt-dlp -f 248 $target -o $video > /dev/null 2>&1 &
+
+
+    echo "proceeding to get audio..."
+    audio="audio_place_holder.webm"
+    yt-dlp -f 251 $target -o $audio > /dev/null 2>&1 &
+
+    wait > /dev/null 2>&1
+
+    echo "video and audio done, proceeding to mix..."
+
+    ffmpeg -i $video -i $audio -c:v copy -c:a copy "$file_name.mkv" > /dev/null 2>&1
+
+    echo "removing extra files..."
+    rm $video
+    rm $audio
+}
