@@ -28,7 +28,7 @@ alias \
 	rb="sudo reboot" \
 	ka="killall" \
 	r="ranger" \
-	see="ncu"\
+	see="ncdu"\
 	v="vim" \
 	tree="lsd --tree"\
 	vm="vim src/main.rs" \
