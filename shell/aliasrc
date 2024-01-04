@@ -13,6 +13,7 @@ alias \
 	a="c .." \
   z="zathura" \
 	g="git" \
+	gk="gpg --list-keys --keyid-format long" \
   kt="v ~/.config/kitty/theme.conf" \
   xm="v ~/.xmonad/xmonad.hs" \
 	bh="v ~/.bash_history" \
@@ -22,6 +23,8 @@ alias \
 	ts="ts-node" \
 	p="sudo pacman" \
 	update="sudo pacman -Syu --noconfirm" \
+	uppass="sender .password-store/ .password-store/" \
+	brpass="getter .password-store/" \
 	clean="p -Qtdp; p -Scc; sudo rm -rf .cache" \
 	empty="sudo rm ~/.cache/vim/swap/*" \
 	sdn="sudo shutdown now" \
