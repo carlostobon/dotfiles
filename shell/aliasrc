@@ -24,7 +24,7 @@ alias \
 	p="sudo pacman" \
 	update="sudo pacman -Syu --noconfirm" \
 	uppass="sender .password-store/ .password-store/" \
-	brpass="getter .password-store/" \
+	brpass="getter .password-store" \
 	clean="p -Qtdp; p -Scc; sudo rm -rf .cache" \
 	empty="sudo rm ~/.cache/vim/swap/*" \
 	sdn="sudo shutdown now" \
