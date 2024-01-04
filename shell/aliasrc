@@ -161,9 +161,9 @@ mixer(){
 
 mt(){
 	target=$1
-	sudo mount "/dev/$target" /mnt
+	sudo mount "/dev/$target" /mnt/simple
 }
 
 um(){
-	sudo umount /mnt
+	sudo umount /mnt/simple
 }
