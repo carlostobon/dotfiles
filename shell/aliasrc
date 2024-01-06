@@ -64,7 +64,7 @@ s(){
 
 # Python shortcuts
 alias \
-	pye="source ~/Documents/mathematics/bin/activate" \
+	pye="source ~/Documents/venvs/maths/bin/activate" \
 
 # server shortcut
 alias \

@@ -357,8 +357,8 @@ autocmd FileType rust nnoremap kkc lbi_<esc> " used for rust compiler complain
 "====== PYTHON
 "
 autocmd FileType python nnoremap <space>mm :!python main.py
-"autocmd FileType python xmap <Plug>SlimeRegionSend
-"autocmd FileType python nmap <Plug>SlimeParagraphSend
+autocmd FileType python xmap kk <Plug>SlimeRegionSend
+autocmd FileType python nmap kk <Plug>SlimeParagraphSend
 
 
 "======= CSS
