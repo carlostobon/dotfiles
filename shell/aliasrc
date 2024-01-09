@@ -129,6 +129,7 @@ bk(){
 # load scripts
 source "$HOME/.scripts/qwik"
 source "$HOME/.scripts/videos"
+source "$HOME/.scripts/sec"
 
 
 # ssh with vps
