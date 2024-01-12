@@ -73,12 +73,13 @@ else
 fi
 
 # Set links for scripts and binaries
+#
 echo "setting links for scripts and binaries..."
-targets=("scripts" "binaries")
-for target in "${targets[@]}"; do
-  create_dir ".$target"
-  files=$(find $target -type f)
-  for file in $files; do
-    create_link $file ".$file"
-  done
-done
+
+# make dirs and set links
+find scripts -type d -exec mkdir -p ~/.{} \;
+find scripts -type f -exec ln -srf {} ~/.{} \;
+
+# make dirs and set binaries
+find binaries -type d -exec mkdir -p ~/.{} \;
+find binaries -type f -exec ln -srf {} ~/.{} \;

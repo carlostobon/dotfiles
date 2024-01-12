@@ -22,7 +22,7 @@ alias \
   nf="neofetch" \
 	ts="ts-node" \
 	p="sudo pacman" \
-	update="sudo pacman -Syu --noconfirm" \
+	update="sudo pacman -Syu --noconfirm; xmonad --recompile" \
 	uppass="sender .password-store/ .password-store/" \
 	brpass="getter .password-store" \
 	clean="p -Qtdp; p -Scc; sudo rm -rf .cache" \
@@ -124,12 +124,6 @@ li(){
 bk(){
 	c "$(base)/backend"
 }
-
-
-# load scripts
-source "$HOME/.scripts/qwik"
-source "$HOME/.scripts/videos"
-source "$HOME/.scripts/sec"
 
 
 # ssh with vps

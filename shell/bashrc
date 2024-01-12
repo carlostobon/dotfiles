@@ -34,8 +34,21 @@ xset dpms 0 0 0
 set -o vi
 
 # Loads the keyboard remaps and all aliases
-source $HOME/.aliasrc
-source $HOME/.keyboard
+source ~/.aliasrc
+source ~/.keyboard
+
+# Loads scripts
+scripts=($(find ~/.scripts -type l))
+for script in "${scripts[@]}"; do
+  source "$script"
+done
+
+# Loads binaries
+binaries=($(find ~/.scripts -type l))
+for binary in "${binaries[@]}"; do
+  source "$binary"
+done
+
 
 # Bash prompt name
 PS1='🦀🚀🛸\w\[$(tput sgr0)\]> '
