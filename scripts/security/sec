@@ -4,13 +4,13 @@ uppass-disk(){
   address=$1
 
   if [ $# -eq 0 ]; then
-      echo "address required!"
-      exit 1
+      echo "Target disk required!"
+      return 1
   fi
 
   sudo cryptsetup open "/dev/$address" corge
-  sudo mount "/dev/mapper/corge" "/mnt/encrypted"
-  sudo rsync -urvP "$HOME/.password-store/" "/mnt/encrypted/passwords/password-store/"
-  sudo umount "/mnt/encrypted"
+  sudo mount /dev/mapper/corge /mnt/encrypted
+  sudo rsync -urvP ~/.password-store/ /mnt/encrypted/passwords/password-store/
+  sudo umount /mnt/encrypted
   sudo cryptsetup close corge
 }

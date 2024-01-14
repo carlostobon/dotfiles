@@ -4,10 +4,12 @@ video(){
     target=$1
     file_name=$2
 
-    if [ $# -eq 0 ]; then
-        echo "address and name for video required!"
-        exit 1
+    if [ $# -lt 2 ]; then
+        echo "Address and name for video required!"
+        echo "i.e video address name"
+        return 1
     fi
+
 
     echo "proceeding to get video..."
     video="video_place_holder.webm"
