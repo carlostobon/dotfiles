@@ -160,5 +160,6 @@ mt(){
 }
 
 um(){
+	sync
 	sudo umount /mnt/simple
 }

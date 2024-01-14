@@ -6,7 +6,7 @@ video(){
 
     if [ $# -lt 2 ]; then
         echo "Address and name for video required!"
-        echo "i.e video address name"
+        echo "e.g. video address name"
         return 1
     fi
 
