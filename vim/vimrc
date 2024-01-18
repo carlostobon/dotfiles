@@ -223,15 +223,6 @@ let g:ale_rust_rustfmt_options = '--edition 2021'
 
 " ====> Some required functions <====
 "
-function! SintaxOn()
-      tabprevious
-      syntax on
-endfunction
-
-function! SintaxOnSave()
-      w
-      syntax on
-endfunction
 
 function! CreateQwikComponent(name)
   let home = getenv("HOME")
@@ -244,6 +235,30 @@ function! CreateQwikRoute(name)
   let result = system("source " . home . "/.aliasrc; ro; qwikmr " . a:name)
   echomsg "route " . a:name . " has been created."
 endfunction
+
+function! SvelteComponent(name)
+  let home = getenv("HOME")
+  let result = system("source " . home . "/.aliasrc; source " . home . "/.scripts/svelte/svelte; co; sveltec " . a:name)
+  echomsg "component " . a:name . " has been created."
+endfunction
+
+function! SvelteRoute(name)
+  let home = getenv("HOME")
+  let result = system("source " . home . "/.aliasrc; source " . home . "/.scripts/svelte/svelte; ro; svelter " . a:name)
+  echomsg "route " . a:name . " has been created."
+endfunction
+
+
+function! SintaxOn()
+      tabprevious
+      syntax on
+endfunction
+
+function! SintaxOnSave()
+      w
+      syntax on
+endfunction
+
 
 autocmd FileType svelte syntax on
 autocmd FileType svelte nnoremap fw :call SintaxOn()<cr>
@@ -259,6 +274,10 @@ autocmd FileType html nnoremap vv :call SintaxOnSave()<cr>
 
 autocmd FileType typescriptreact nnoremap kkmc :call CreateQwikComponent('
 autocmd FileType typescriptreact nnoremap kkmr :call CreateQwikRoute('
+
+autocmd FileType svelte nnoremap kkmc :call SvelteComponent('
+autocmd FileType svelte nnoremap kkmr :call SvelteRoute('
+
 
 let g:rainbow_active = 1
 

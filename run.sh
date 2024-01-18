@@ -59,7 +59,7 @@ if [ "$answer" == "y" ]; then
 
   echo "installing binaries..."
   for item in "${bins[@]}"; do
-    curl -O "https://server.numericaltools.com/bins/$item" &
+    curl -O "https://server.carlostobon.xyz/bins/$item" &
   done
   wait
 
