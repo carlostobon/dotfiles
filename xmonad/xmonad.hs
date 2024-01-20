@@ -88,7 +88,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_y     ), spawn "ffmpeg -y -f x11grab -i :0.0 -f alsa -i default -vf yadif -codec:v libx264 -crf 20 -bf 2 -flags +cgop -pix_fmt yuv420p -codec:a aac -strict -2 -b:a 384k -r:a 48000 video-$(date +%H_%M_%S).mov")
 
     -- start recording audio
-    , ((modm .|. shiftMask, xK_a     ), spawn "ffmpeg -f pulse -i default -map '0' audio-$(date +%H_%M_%S).mp3")
+    , ((modm .|. shiftMask, xK_a     ), spawn "ffmpeg -f alsa -i default -ac 1 audio-$(date +%H_%H_%S).wav")
 
     -- kill all recordings
     , ((modm,               xK_l     ), spawn "killall ffmpeg")
