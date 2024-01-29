@@ -103,11 +103,10 @@ drc(){
 }
 
 
-# pnpm shortcuts && qwik && svelte
+# pnpm shortcuts svelte
 alias \
 	dev="pnpm run dev --host" \
 	build="pnpm run build" \
-	qwik="pnpm run qwik" \
 
 co(){
 	c "$(base)/src/components"
