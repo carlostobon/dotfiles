@@ -8,6 +8,7 @@ set autoindent expandtab tabstop=2 shiftwidth=2
 set hidden
 set autoread
 
+" never keeps buffers (safety)
 set nobackup
 set nowritebackup
 set noswapfile
@@ -23,16 +24,37 @@ filetype plugin on
 filetype indent on
 
 
+" ====> set cursor color <====
 
-" ====> set tab for ale menu <====
-"
+if &term =~ "xterm\\|kitty"
+  let &t_EI = "\<Esc>]12;magenta\x7"
+  silent !echo -ne "\033]12;magenta\007"
+endif
+
+
+" ====> set tab for ALE menu <====
+
+" makes tab step down in menu
 inoremap <silent><expr> <Tab>
       \ pumvisible() ? "\<C-n>" : "\<TAB>"
 
 
 " ====> background type <====
-"
-set background="dark"
+
+set background=light
+
+function! s:tweak_colors()
+    " ALE menu selection colors
+    hi Pmenu          ctermfg=white ctermbg=black
+    " ALE menu colors
+    hi PmenuSel       ctermfg=white ctermbg=cyan
+    " selection color
+    hi Visual         ctermfg=white ctermbg=blue
+endfunction
+
+" required to make Goyo keep colors
+autocmd! ColorScheme default call s:tweak_colors()
+colorscheme default
 
 
 " ====> set cursor <====
@@ -42,6 +64,7 @@ let &t_SR = "\e[4 q"
 let &t_EI = "\e[3 q"
 let &t_Cs = "\e[4:3m"
 let &t_Ce = "\e[4:0m"
+
 
 
 " ====> arrow keys <====
@@ -119,7 +142,7 @@ nnoremap ff :FZF $FOLDER<cr>
 nnoremap XX ZZ
 nnoremap XQ ZQ
 nnoremap Q <esc>
-nnoremap ,h :Goyo 70%+70%x100%<cr>
+nnoremap ,h :Goyo 80%+90%x100%<cr>
 nnoremap vy mw{jV}ky'w
 
 
@@ -171,7 +194,6 @@ Plug 'scrooloose/nerdcommenter',
 Plug 'itchyny/lightline.vim',
 Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' },
 Plug 'scrooloose/nerdtree',
-Plug 'prettier/vim-prettier', { 'do': 'npm install' }
 Plug 'vim-scripts/loremipsum',
 Plug 'junegunn/goyo.vim',
 Plug 'w0rp/ale',
@@ -179,7 +201,6 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'sheerun/vim-polyglot',
 Plug 'itchyny/vim-gitbranch',
 Plug 'othree/html5.vim',
-Plug 'pangloss/vim-javascript',
 Plug 'evanleck/vim-svelte', {'branch': 'main'},
 Plug 'NoahTheDuke/vim-just',
 call plug#end()
@@ -190,9 +211,6 @@ call plug#end()
 let g:ale_linters = {
       \ 'rust': ['analyzer'],
       \ 'python': ['pyright'],
-      \ 'javascript': ['eslint'],
-      \ 'typescript': ['eslint'],
-      \ 'typescriptreact': ['eslint'],
       \ 'svelte': ['eslint']
       \ }
 
@@ -200,9 +218,6 @@ let g:ale_fixers = {
       \ '*': ['remove_trailing_lines', 'trim_whitespace'],
       \ 'rust': ['rustfmt'],
       \ 'python': ['black'],
-      \ 'javascript': ['prettier'],
-      \ 'typescript': ['prettier'],
-      \ 'typescriptreact': ['prettier'],
       \ 'svelte': ['prettier']
       \ }
 
@@ -223,18 +238,6 @@ let g:ale_rust_rustfmt_options = '--edition 2021'
 
 " ====> Some required functions <====
 "
-
-function! CreateQwikComponent(name)
-  let home = getenv("HOME")
-  let result = system("source " . home . "/.aliasrc; co; qwikmc " . a:name)
-  echomsg "component " . a:name . " has been created."
-endfunction
-
-function! CreateQwikRoute(name)
-  let home = getenv("HOME")
-  let result = system("source " . home . "/.aliasrc; ro; qwikmr " . a:name)
-  echomsg "route " . a:name . " has been created."
-endfunction
 
 function! SvelteComponent(name)
   let home = getenv("HOME")
@@ -272,9 +275,6 @@ autocmd FileType html syntax on
 autocmd FileType html nnoremap fw :call SintaxOn()<cr>
 autocmd FileType html nnoremap vv :call SintaxOnSave()<cr>
 
-autocmd FileType typescriptreact nnoremap kkmc :call CreateQwikComponent('
-autocmd FileType typescriptreact nnoremap kkmr :call CreateQwikRoute('
-
 autocmd FileType svelte nnoremap kkmc :call SvelteComponent('
 autocmd FileType svelte nnoremap kkmr :call SvelteRoute('
 
@@ -299,44 +299,34 @@ let g:svelte_preprocessors = ['typescript']
 
 " ====> Svelve & Qwik <====
 "
-autocmd FileType typescriptreact,html,svelte inoremap kkd <div></div><Esc>F>a
-autocmd FileType typescriptreact,html,svelte inoremap kkin <input type=""/><Esc>F"i
-autocmd FileType typescriptreact,html,svelte inoremap kk1 <h1></h1><Esc>FhT>i
-autocmd FileType typescriptreact,html,svelte inoremap kk2 <h2></h2><Esc>FhT>i
-autocmd FileType typescriptreact,html,svelte inoremap kk3 <h3></h3><Esc>FhT>i
-autocmd FileType typescriptreact,html,svelte inoremap kk4 <h4></h4><Esc>FhT>i
-autocmd FileType typescriptreact,html,svelte inoremap kkm <main></main><Esc>FmT>i
-autocmd FileType typescriptreact,html,svelte inoremap kksp <span></span><esc>FsT>i
-autocmd FileType typescriptreact,html,svelte inoremap kkse <section></section><esc>FsT>i
-autocmd FileType typescriptreact,html,svelte inoremap kkp <p></p><Esc>FpT>i
-autocmd FileType typescriptreact,html,svelte inoremap kku <ul><CR></ul><Esc>O
-autocmd FileType typescriptreact,html,svelte inoremap kkli <li></li><Esc>FlT>i
-autocmd FileType typescriptreact,html,svelte inoremap kkfo <form></form><esc>FfT>i
-autocmd FileType typescriptreact,html,svelte inoremap kkla <label></label><esc>FlT>i
-autocmd FileType typescriptreact,html,svelte inoremap kkna <nav></nav><esc>FnT>i
-autocmd FileType typescriptreact,html,svelte nnoremap tg I{/*<esc>A*/}<esc>^
-autocmd FileType typescriptreact,html,svelte nnoremap tk ^xxx<esc>$xxx<esc>^
-autocmd FileType typescriptreact,html,svelte nnoremap c. f<cT>
-autocmd FileType typescriptreact,html,svelte inoremap ' ""<Esc>i
-autocmd FileType typescriptreact,html,svelte inoremap " ''<Esc>i
-autocmd FileType typescriptreact,html,svelte nnoremap <space>p :Prettier<cr>
+autocmd FileType html,svelte inoremap kkd <div></div><Esc>F>a
+autocmd FileType html,svelte inoremap kkin <input type=""/><Esc>F"i
+autocmd FileType html,svelte inoremap kk1 <h1></h1><Esc>FhT>i
+autocmd FileType html,svelte inoremap kk2 <h2></h2><Esc>FhT>i
+autocmd FileType html,svelte inoremap kk3 <h3></h3><Esc>FhT>i
+autocmd FileType html,svelte inoremap kk4 <h4></h4><Esc>FhT>i
+autocmd FileType html,svelte inoremap kkm <main></main><Esc>FmT>i
+autocmd FileType html,svelte inoremap kksp <span></span><esc>FsT>i
+autocmd FileType html,svelte inoremap kkse <section></section><esc>FsT>i
+autocmd FileType html,svelte inoremap kkp <p></p><Esc>FpT>i
+autocmd FileType html,svelte inoremap kku <ul><CR></ul><Esc>O
+autocmd FileType html,svelte inoremap kkli <li></li><Esc>FlT>i
+autocmd FileType html,svelte inoremap kkfo <form></form><esc>FfT>i
+autocmd FileType html,svelte inoremap kkla <label></label><esc>FlT>i
+autocmd FileType html,svelte inoremap kkna <nav></nav><esc>FnT>i
+autocmd FileType html,svelte nnoremap tg I{/*<esc>A*/}<esc>^
+autocmd FileType html,svelte nnoremap tk ^xxx<esc>$xxx<esc>^
+autocmd FileType html,svelte nnoremap c. f<cT>
+autocmd FileType html,svelte inoremap ' ""<Esc>i
+autocmd FileType html,svelte inoremap " ''<Esc>i
+autocmd FileType html,svelte nnoremap <space>p :Prettier<cr>
 
-autocmd FileType typescriptreact,svelte inoremap kklo console.log()<esc>i
+autocmd FileType svelte inoremap kklo console.log()<esc>i
 
-autocmd FileType typescriptreact,svelte inoremap kkim <img src={} alt="" /><esc>Frf}i
-autocmd FileType typescriptreact,svelte inoremap kkcn class=""<esc>i
-autocmd FileType typescriptreact,svelve inoremap kkan <a href=""></a><Esc>Fhf"a
-autocmd FileType typescriptreact,svelte nnoremap <space>mm :!pnpm dev
-
-autocmd FileType typescriptreact inoremap kkb <button onClick$={() => {}}></button><esc>F/hi
-autocmd FileType typescriptreact inoremap kkq import { component$ } from "@builder.io/qwik";<esc>F}hi
-autocmd FileType typescriptreact inoremap kkci import { } from "@builder.io/qwik-city";<esc>F}i
-autocmd FileType typescriptreact inoremap kkco import { } from "~/components";<esc>F}i
-autocmd FileType typescriptreact inoremap kkx export default component$(() => {<cr>return <></><cr>})<esc>kf/hi
-
-autocmd FileType typescriptreact inoremap kksi <esc>ddggf}hi, useSignal<esc>``O
-autocmd FileType typescriptreact inoremap kkst <esc>ddggf}hi, useStore<esc>``O
-
+autocmd FileType svelte inoremap kkim <img src={} alt="" /><esc>Frf}i
+autocmd FileType svelte inoremap kkcn class=""<esc>i
+autocmd FileType svelve inoremap kkan <a href=""></a><Esc>Fhf"a
+autocmd FileType svelte nnoremap <space>mm :!pnpm dev
 
 autocmd FileType html inoremap kkan <a href=""></a><Esc>Fhf"a
 autocmd FileType html inoremap kkim <img src="" alt=""/><esc>fsf"a
@@ -346,13 +336,6 @@ autocmd FileType html inoremap kkb <button></button><esc>F{a
 autocmd FileType svelte inoremap kkb <button on:click={}></button><esc>F/hi
 autocmd FileType svelte inoremap kksc <script lang="ts"></script><esc>F><right>i<cr><esc>O
 autocmd FileType svelte inoremap kkst <style></style><esc>F><right>i<cr><esc>O
-
-
-" ====> TS <====
-"
-autocmd FileType typescript inoremap kkv import {  } from "~/components/index";<esc>F{lli
-autocmd FileType typescript inoremap kkz export { default as  } from "./";<esc>F}hi
-autocmd FileType typescript nnoremap <space>mm :!clear; pnpm run index.ts
 
 
 " ====> RUST <====
