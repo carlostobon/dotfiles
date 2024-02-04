@@ -86,7 +86,7 @@ alias \
 	dkei="sudo docker exec -it" \
 	dki="sudo docker images" \
 	dcc="sudo docker-compose" \
-	rdcc="sudo dcc up --build -d" \
+	rdcc="sudo docker-compose up --build -d" \
 	dre="sudo docker system prune -a" \
 	dvp="sudo docker volume prune" \
 
