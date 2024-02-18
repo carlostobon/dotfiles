@@ -286,6 +286,8 @@ let g:ale_completion_enabled = 1
 let g:ale_completion_autoimport = 1
 let g:ale_set_balloons = 1
 
+let g:ale_cache_executable_check_failures = 1
+
 let g:slime_target = "tmux"
 let g:livepreview_previewer = 'zathura'
 
