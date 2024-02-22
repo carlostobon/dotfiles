@@ -55,7 +55,7 @@ if [ "$answer" == "y" ]; then
   mkdir binaries
   cd binaries
 
-  bins=("duer" "ww")
+  bins=("duer" "ww" "httpcli")
 
   echo "installing binaries..."
   for item in "${bins[@]}"; do
