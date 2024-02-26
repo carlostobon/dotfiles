@@ -143,7 +143,7 @@ sender_binary(){
 convert(){
 	target=$1
 	output=$2
-	$(ffmpeg -i $target -vf yadif -codec:v libx264 -crf 1 -bf 2 -flags +cgop -pix_fmt yuv420p -codec:a aac -strict -2 -b:a 384k -r:a 48000 $output.mp4)
+	$(ffmpeg -i $target -vf yadif -codec:v libx264 -crf 30 -bf 2 -flags +cgop -pix_fmt yuv420p -codec:a aac -strict -2 -b:a 384k -r:a 48000 $output.mp4)
 }
 
 mixer(){
@@ -161,4 +161,19 @@ mt(){
 um(){
 	sync
 	sudo umount /mnt/simple
+}
+
+tarit(){
+	name=$1
+	optional=$2
+	if [ -z "$optional" ]; then
+		tar -cf - "$name" | pigz > "$name.tar.gz"
+	else
+		tar -cf - "$name" | pigz > "$optional.tar.gz"
+	fi
+}
+
+untarit(){
+	target=$1
+	tar -I pigz -xf "$target"
 }
