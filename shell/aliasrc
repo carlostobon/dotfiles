@@ -143,14 +143,14 @@ sender_binary(){
 convert(){
 	target=$1
 	output=$2
-	$(ffmpeg -i $target -vf yadif -codec:v libx264 -crf 30 -bf 2 -flags +cgop -pix_fmt yuv420p -codec:a aac -strict -2 -b:a 384k -r:a 48000 $output.mp4)
+	ffmpeg -i $target -c:v copy -c:a aac ${output}.mp4
 }
 
 mixer(){
 	video=$1
 	sound=$2
 	name=$3
-	$(ffmpeg -i $video -i $sound -c:v copy -c:a copy $name.mkv)
+	ffmpeg -i ${video} -i ${sound} -c:v copy -c:a copy ${name}.mp4
 }
 
 mt(){
