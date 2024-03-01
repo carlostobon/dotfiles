@@ -81,5 +81,6 @@ settings:
       p8: http://localhost:8080/{}
       rs: https://docs.rs/{}
       yt: https://www.youtube.com/results?search_query={}
+      mx: https://chat.mistral.ai/chat/{}
   zoom.default:
     global: 90%
