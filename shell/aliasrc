@@ -177,3 +177,24 @@ untarit(){
 	target=$1
 	tar -I pigz -xf "$target"
 }
+
+move(){
+	origin=$1
+	destination=$2
+
+	if [ $# -lt 2 ]; then
+			echo "origin and destination required!"
+			echo "move <origin> <destination> <optional>"
+			return 1
+	fi
+
+	sudo rsync -urvP "$origin" "$destination"
+
+	if [ "$3" == "true" ]; then
+		echo "file shipped, proceeding to remove original file!"
+		sudo rm -r "$origin"
+	else
+		echo "file shipped!"
+	fi
+
+}
