@@ -323,11 +323,11 @@ autocmd FileType html,svelte inoremap ' ""<Esc>i
 autocmd FileType html,svelte inoremap " ''<Esc>i
 autocmd FileType html,svelte nnoremap <space>p :Prettier<cr>
 
-autocmd FileType svelte inoremap kklo console.log()<esc>i
 
+autocmd FileType svelte inoremap kkan <a href=""></a><esc>Fhf"a
+autocmd FileType svelte inoremap kklo console.log()<esc>i
 autocmd FileType svelte inoremap kkim <img src={} alt="" /><esc>Frf}i
-autocmd FileType svelte inoremap kkcn class=""<esc>i
-autocmd FileType svelve inoremap kkan <a href=""></a><Esc>Fhf"a
+autocmd FileType svelte inoremap kkcl class=""<esc>i
 autocmd FileType svelte nnoremap <space>mm :!pnpm dev
 
 autocmd FileType html inoremap kkan <a href=""></a><Esc>Fhf"a
@@ -346,6 +346,7 @@ autocmd FileType rust inoremap kkp println!("{}", );<esc>hi
 autocmd FileType rust inoremap kkq assert_eq!(, );<esc>T(i
 autocmd FileType rust inoremap kkb assert!();<esc>T(i
 autocmd FileType rust inoremap kkf fn () {}<esc>F(i
+autocmd FileType rust inoremap kks pub fn () {}<esc>F(i
 autocmd FileType rust inoremap kka async fn () {}<esc>F(i
 autocmd FileType rust inoremap kkd #[derive()]<esc>F(a
 autocmd FileType rust inoremap kktc #[cfg(test)]<cr>mod tests {<cr>use super::*;<cr><cr><left><space>#[test]<cr><left><space>fn xx() {<cr>}<cr>}<up><up><esc>fxcw
