@@ -33,42 +33,34 @@ alias \
 	r="ranger" \
 	see="ncdu"\
 	v="vim" \
-	tree="lsd --tree"\
+	tree="lsd --tree" \
 	vm="vim src/main.rs" \
 	vl="vim src/lib.rs" \
 	vi="vim index.tsx" \
-	vp="vim ./+page.svelte" \
+	vp="vim ./+page.svelte"
 
 
 base(){
 	pwd | cut -d'/' -f1-4
 }
 
+c(){
+	cd "$1" && export FOLDER=$(base)
+}
+
 b(){
 	c $(base)
 }
 
-c(){
-  cd $1
-	export FOLDER=$(base)
-}
-
 mkd(){
-	mkdir -p $1
-	c $1
+	mkdir -p "$1"
+	c "$1"
 }
 
-s(){
-	c "$(base)/src"
-}
 
 # Python shortcuts
 alias \
 	pye="source ~/Documents/venvs/maths/bin/activate" \
-
-# server shortcut
-alias \
-	server="ssh root@104.156.231.83" \
 
 # rust shortcuts
 alias \
@@ -93,13 +85,13 @@ alias \
 
 dri(){
 	instances=$(docker image ls -q)
-	dk rmi $instances
+	dk rmi ${instances}
 }
 
 drc(){
 	instance=$(docker ps -a -q &)
-	dk stop $instances
-	dk rm $instances
+	dk stop ${instance}
+	dk rm ${instance}
 }
 
 
@@ -124,18 +116,8 @@ bk(){
 	c "$(base)/backend"
 }
 
-
-# ssh with vps
-getter(){
-	rsync -avz root@104.156.231.83:/var/www/server/static/files/$1 .
-}
-
-sender(){
-	rsync -urvP $1 root@104.156.231.83:/var/www/server/static/files/$2
-}
-
-sender_binary(){
-	rsync -urvP $1 root@104.156.231.83:/var/www/server/static/bins/$2
+s(){
+	c "$(base)/src"
 }
 
 
@@ -143,7 +125,7 @@ sender_binary(){
 convert(){
 	target=$1
 	output=$2
-	ffmpeg -i $target -c:v copy -c:a aac ${output}.mp4
+	ffmpeg -i ${target} -c:v copy -c:a aac ${output}.mp4
 }
 
 mixer(){
@@ -155,7 +137,8 @@ mixer(){
 
 mt(){
 	target=$1
-	sudo mount "/dev/$target" /mnt/simple
+	sudo mount /dev/${target} /mnt/simple
+	c /mnt/simple
 }
 
 um(){
@@ -178,23 +161,23 @@ untarit(){
 	tar -I pigz -xf "$target"
 }
 
-move(){
+ship(){
 	origin=$1
 	destination=$2
+	delete=$3
 
 	if [ $# -lt 2 ]; then
-			echo "origin and destination required!"
-			echo "move <origin> <destination> <optional>"
+			echo "ship <origin> <destination> delete<bool>"
 			return 1
 	fi
 
-	sudo rsync -urvP "$origin" "$destination"
+	sudo rsync -urvP ${origin} ${destination}
 
-	if [ "$3" == "true" ]; then
-		echo "file shipped, proceeding to remove original file!"
-		sudo rm -r "$origin"
+	if [ ${delete} == "true" ]; then
+		echo "File shipped, proceeding to remove original file!"
+		sudo rm -r ${origin}
 	else
-		echo "file shipped!"
+		echo "File shipped!"
 	fi
 
 }
