@@ -22,9 +22,7 @@ alias \
   nf="neofetch" \
 	ts="ts-node" \
 	p="sudo pacman" \
-	update="sudo pacman -Syu --noconfirm; setxkbmap -option 'caps:super'; xmonad --restart; xset r rate 500 60; xset s 18000; unclutter &" \
-	uppass="sender .password-store" \
-	brpass="getter .password-store" \
+	update="sudo pacman -Syu --noconfirm; source ~/.aliasrc; source ~/.keyboard"
 	clean="p -Qtdp; p -Scc; sudo rm -rf .cache" \
 	empty="sudo rm ~/.cache/vim/swap/*" \
 	sdn="sudo shutdown now" \
