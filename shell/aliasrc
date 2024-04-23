@@ -22,7 +22,7 @@ alias \
   nf="neofetch" \
 	ts="ts-node" \
 	p="sudo pacman" \
-	update="sudo pacman -Syu --noconfirm; source ~/.aliasrc; source ~/.keyboard" \
+	update="sudo pacman -Syu --noconfirm; source ~/.aliasrc ~/.keyboard; xmonad --restart" \
 	clean="p -Qtdp; p -Scc; sudo rm -rf .cache" \
 	empty="sudo rm ~/.cache" \
 	sdn="sudo shutdown now" \
@@ -32,6 +32,7 @@ alias \
 	see="ncdu"\
 	v="vim" \
 	tree="lsd --tree --depth 2" \
+	vc="vim ~/.vimrc" \
 	vm="vim src/main.rs" \
 	vl="vim src/lib.rs" \
 	vi="vim index.tsx" \
