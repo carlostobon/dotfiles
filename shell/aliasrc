@@ -11,6 +11,7 @@ alias \
 	cl="clear" \
 	t="touch" \
 	a="c .." \
+	k="c -" \
   z="zathura" \
 	g="git" \
 	gk="gpg --list-keys --keyid-format long" \
