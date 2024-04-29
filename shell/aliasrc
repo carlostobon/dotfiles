@@ -171,11 +171,11 @@ ship(){
 			return 1
 	fi
 
-	sudo rsync -urvP ${origin} ${destination}
+	sudo rsync -urvP "$origin" "$destination"
 
-	if [ ${delete} == "true" ]; then
+	if [[ "$delete" == "true" ]]; then
 		echo "File shipped, proceeding to remove original file!"
-		sudo rm -r ${origin}
+		sudo rm -r "$origin"
 	else
 		echo "File shipped!"
 	fi
