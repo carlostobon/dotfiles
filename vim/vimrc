@@ -203,6 +203,7 @@ Plug 'itchyny/vim-gitbranch',
 Plug 'othree/html5.vim',
 Plug 'evanleck/vim-svelte', {'branch': 'main'},
 Plug 'NoahTheDuke/vim-just',
+Plug 'jpalardy/vim-slime',
 call plug#end()
 
 
