@@ -2,12 +2,14 @@
 
 username=$(whoami)
 
+echo "Making folders..."
 mkdir -p "/home/$username/.config/mpv" \
          "/home/$username/.config/picom" \
          "/home/$username/.config/zathura" \
          "/home/$username/.config/ranger" \
          "/home/$username/.config/qutebrowser" \
          "/home/$username/.config/kitty" \
+         "/home/$username/.config/wallpaper" \
          "/home/$username/.xmonad" \
 
 
@@ -18,6 +20,7 @@ linker(){
   ln -srf "/home/$username/.dotfiles/$from" "/home/$username/$to"
 }
 
+echo "Setting links..."
 
 linker "git/gitconfig" ".gitconfig"
 linker "shell/aliasrc" ".aliasrc"
@@ -37,6 +40,8 @@ linker "ranger/rc.conf" ".config/ranger/rc.conf"
 linker "ranger/rifle.conf" ".config/ranger/rifle.py"
 
 linker "zathura/zathura.rc" ".config/zathura/zathura.rc"
+
+linker "wallpaper/wallpaper.png" ".config/wallpaper/wallpaper.png"
 
 linker "xmonad/xmonad.sh" ".xmonad/xmonad.hs"
 
