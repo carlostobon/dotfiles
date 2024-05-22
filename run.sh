@@ -1,85 +1,46 @@
 #!/bin/bash
 
-function create_dir() {
-  folder_name="$1"
-  echo "creating folder $folder_name"
-  mkdir -p $HOME/$folder_name ||
-    error "error creating folder $folder_name"
+username=$(whoami)
+
+mkdir -p "/home/$username/.config/mpv" \
+         "/home/$username/.config/picom" \
+         "/home/$username/.config/zathura" \
+         "/home/$username/.config/ranger" \
+         "/home/$username/.config/qutebrowser" \
+         "/home/$username/.config/kitty" \
+         "/home/$username/.xmonad" \
+
+
+linker(){
+  local from=$1
+  local to=$2
+
+  ln -srf "/home/$username/.dotfiles/$from" "/home/$username/$to"
 }
 
-function create_link() {
-  target="$1"
-  path="$2"
-  echo "creating link $target -> $path"
-  ln -srf $target $HOME/$path ||
-    error "error creating link $target"
-}
 
-# Hidden files in shell
-shells=("bashrc" "bash_profile" "aliasrc" "keyboard")
-for target in "${shells[@]}"; do
-  create_link "shell/$target" .$target
-done
+linker "git/gitconfig" ".gitconfig"
+linker "shell/aliasrc" ".aliasrc"
+linker "shell/bash_profile" ".bash_profile"
+linker "shell/bashrc" ".bashrc"
+linker "shell/keyboard" ".keyboard"
+linker "vim/vimrc" ".vimrc"
 
-create_link "vim/vimrc" ".vimrc"
-create_link "git/gitconfig" ".gitconfig"
+linker "kitty/kitty.conf" ".config/kitty/kitty.conf"
+linker "mpv/input.conf" ".config/mpv/input.conf"
+linker "picom/picom.conf" ".config/picom/picom.conf"
 
-create_dir ".xmonad"
-create_link "xmonad/xmonad.hs" ".xmonad/xmonad.hs"
+linker "qutebrowser/autoconfig.yml" ".config/picom/picom.conf"
+linker "qutebrowser/config.py" ".config/picom/config.py"
 
-create_dir ".config/mpv"
-create_link "mpv/input.conf" ".config/mpv/input.conf"
+linker "ranger/rc.conf" ".config/ranger/rc.conf"
+linker "ranger/rifle.conf" ".config/ranger/rifle.py"
 
-# Iterate over targets (.config)
-targets=("picom" "zathura" "ranger" "qutebrowser" "kitty")
-for target in "${targets[@]}"; do
-  ## create dir
-  create_dir ".config/$target"
+linker "zathura/zathura.rc" ".config/zathura/zathura.rc"
 
-  ## get all files
-  files=$(find $target -type f)
-
-  ## generate links
-  for file in $files; do
-    create_link $file ".config/$file"
-  done
-done
+linker "xmonad/xmonad.sh" ".xmonad/xmonad.hs"
 
 
-# Dowload and place binaries
-# Prompt here
-echo "Do you want to download \& install binaries? (y/N)"
-read answer
-
-if [ "$answer" == "y" ]; then
-  mkdir binaries
-  cd binaries
-
-  bins=("duer" "ww" "httpcli")
-
-  echo "installing binaries..."
-  for item in "${bins[@]}"; do
-    curl -O "https://server.carlostobon.xyz/bins/$item" &
-  done
-  wait
-
-  for item in "${bins[@]}"; do
-    chmod +x "$item"
-  done
-  cd ../
-  echo "binaries installed successfully..."
-else
-  echo "Ok no binaries will be installed!"
-fi
-
-# Set links for scripts and binaries
-#
-echo "setting links for scripts and binaries..."
-
-# make dirs and set links
-find scripts -type d -exec mkdir -p ~/.{} \;
-find scripts -type f -exec ln -srf {} ~/.{} \;
-
-# make dirs and set binaries
-find binaries -type d -exec mkdir -p ~/.{} \;
-find binaries -type f -exec ln -srf {} ~/.{} \;
+# Make dirs and set links
+find scripts -type d -exec mkdir -p "/home/$username/."{} \;
+find scripts -type f -exec ln -srf {} "/home/$username/."{} \;
