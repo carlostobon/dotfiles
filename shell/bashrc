@@ -43,13 +43,6 @@ for script in "${scripts[@]}"; do
   source "$script"
 done
 
-# Loads binaries
-binaries=($(find ~/.scripts -type l))
-for binary in "${binaries[@]}"; do
-  source "$binary"
-done
-
-
 # Bash prompt name
 PS1='🦀🚀🛸\w\[$(tput sgr0)\]> '
 
