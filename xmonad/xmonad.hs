@@ -200,7 +200,7 @@ myStartupHook = do
  --spawnOnce "xrandr --output DP-1 --off"
  --spawnOnce "xrandr --output HDMI-A-0 --off"
  --spawnOnce "xrandr --output HDMI-A-0 --mode 1920x1080"
- spawnOnce "picom --config .config/picom/picom.conf"
+ --spawnOnce "picom --config .config/picom/picom.conf"
  spawnOnce "xset r rate 500 60"
  spawnOnce "xset s 18000"
  spawnOnce "unclutter &"

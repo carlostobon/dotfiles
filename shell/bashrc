@@ -56,3 +56,4 @@ PS1='🦀🚀🛸\w\[$(tput sgr0)\]> '
 # binaries from the env
 export PATH="$PATH:$HOME/.binaries"
 export PATH="$PATH:$HOME/.cargo/bin"
+export PATH="$PATH:$HOME/.local/bin"

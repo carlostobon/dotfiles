@@ -142,7 +142,7 @@ nnoremap ff :FZF $FOLDER<cr>
 nnoremap XX ZZ
 nnoremap XQ ZQ
 nnoremap Q <esc>
-nnoremap ,h :Goyo 80%+90%x100%<cr>
+nnoremap ,h :Goyo 68%+90%x100%<cr>
 nnoremap vy mw{jV}ky'w
 
 
