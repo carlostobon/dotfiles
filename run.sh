@@ -43,7 +43,7 @@ linker "zathura/zathura.rc" ".config/zathura/zathura.rc"
 
 linker "wallpaper/wallpaper.png" ".config/wallpaper/wallpaper.png"
 
-linker "xmonad/xmonad.sh" ".xmonad/xmonad.hs"
+linker "xmonad/xmonad.hs" ".xmonad/xmonad.hs"
 
 
 # Make dirs and set links
