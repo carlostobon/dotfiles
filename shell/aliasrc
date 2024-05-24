@@ -23,7 +23,6 @@ alias \
   nf="neofetch" \
 	ts="ts-node" \
 	p="sudo pacman" \
-	update="sudo pacman -Syu --noconfirm; source ~/.aliasrc ~/.keyboard; xmonad --restart" \
 	clean="p -Qtdp; p -Scc; sudo rm -rf .cache" \
 	empty="sudo rm ~/.cache" \
 	sdn="sudo shutdown now" \
