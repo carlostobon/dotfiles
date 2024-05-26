@@ -5,7 +5,7 @@ import System.Exit
 import XMonad.Hooks.WindowSwallowing
 
 import XMonad.Actions.CycleWS
-import XMonad.Util.SpawnOnce
+--import XMonad.Util.SpawnOnce
 import XMonad.Layout.Spacing
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
@@ -201,11 +201,11 @@ myStartupHook = do
  --spawnOnce "xrandr --output HDMI-A-0 --off"
  --spawnOnce "xrandr --output HDMI-A-0 --mode 1920x1080"
  --spawnOnce "picom --config .config/picom/picom.conf"
- spawnOnce "xset r rate 500 60"
- spawnOnce "xset s 18000"
- spawnOnce "unclutter &"
- spawnOnce "xwallpaper --stretch .config/wallpaper/wallpaper.png"
- spawnOnce "setxkbmap -option 'caps:super'"
+ spawn "xset r rate 500 60 &"
+ spawn "xset s 18000 &"
+ spawn "unclutter &"
+ spawn "xwallpaper --stretch .config/wallpaper/wallpaper.png &"
+ spawn "setxkbmap -option 'caps:super'"
 
 ------------------------------------------------------------------------
 

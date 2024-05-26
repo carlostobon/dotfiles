@@ -22,7 +22,6 @@ alias \
   dw="c ~/Downloads" \
   nf="neofetch" \
 	ts="ts-node" \
-	p="sudo pacman" \
 	clean="p -Qtdp; p -Scc; sudo rm -rf .cache" \
 	empty="sudo rm ~/.cache" \
 	sdn="sudo shutdown now" \
@@ -191,4 +190,10 @@ record_audio(){
 
 capture_screen(){
 	maim -f png picture-$(date +%H_%M_%S).png
+}
+
+p(){
+	paru "$@"
+	setxkbmap -option 'caps:super'
+	xdotool key Super_L+u
 }
