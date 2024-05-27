@@ -5,7 +5,7 @@ import System.Exit
 import XMonad.Hooks.WindowSwallowing
 
 import XMonad.Actions.CycleWS
---import XMonad.Util.SpawnOnce
+import XMonad.Util.SpawnOnce
 import XMonad.Layout.Spacing
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
@@ -67,14 +67,16 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_m ), sendMessage Shrink)
 
     -- Expand the master area
-    , ((modm,               xK_i ), sendMessage Expand)
+    , ((modm,               xK_o ), sendMessage Expand)
+
 
 
     -- Move to prev workspace
-    , ((modm,               xK_e ),  moveTo Prev (Not emptyWS))
+    , ((modm,               xK_n ),  moveTo Prev (Not emptyWS))
 
-    -- Move to next workspace
-    , ((modm,               xK_o ),  moveTo Next (Not emptyWS))
+    -- Move to prev workspace
+    , ((modm,               xK_i ),  moveTo Prev (Not emptyWS))
+
 
     -- Rotate through the available layout algorithms
     , ((modm,               xK_space ), sendMessage NextLayout)
@@ -86,7 +88,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_s ), kill)
 
     -- Move focus to the next window
-    , ((modm,               xK_n     ), windows W.focusDown)
+    , ((modm,               xK_e     ), windows W.focusDown)
 
 
     -- Start recording video
@@ -200,7 +202,7 @@ myStartupHook = do
  --spawnOnce "xrandr --output DP-1 --off"
  --spawnOnce "xrandr --output HDMI-A-0 --off"
  --spawnOnce "xrandr --output HDMI-A-0 --mode 1920x1080"
- --spawnOnce "picom --config .config/picom/picom.conf"
+ spawnOnce "picom --config .config/picom/picom.conf"
  spawn "xset r rate 500 60 &"
  spawn "xset s 18000 &"
  spawn "unclutter &"
