@@ -180,18 +180,6 @@ ship(){
 
 }
 
-record_screen(){
-	ffmpeg -y -f x11grab -i :0.0 -f alsa -i default -ac 1 -vf yadif -codec:v libx264 -crf 1 -bf 2 -flags +cgop -pix_fmt yuv420p -codec:a aac -strict -2 -b:a 384k -r:a 48000 video-$(date +%H_%M_%S).mov
-}
-
-record_audio(){
-	ffmpeg -f alsa -i default -ac 1 audio-$(date +%H_%H_%S).wav
-}
-
-capture_screen(){
-	maim -f png picture-$(date +%H_%M_%S).png
-}
-
 p(){
 	paru "$@"
 	setxkbmap -option 'caps:super'

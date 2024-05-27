@@ -45,7 +45,4 @@ linker "wallpaper/wallpaper.png" ".config/wallpaper/wallpaper.png"
 
 linker "xmonad/xmonad.hs" ".xmonad/xmonad.hs"
 
-
-# Make dirs and set links
-find scripts -type d -exec mkdir -p "/home/$username/."{} \;
-find scripts -type f -exec ln -srf {} "/home/$username/."{} \;
+linker "scripts/toolbox.sh" ".binaries/toolbox.sh"

@@ -37,12 +37,6 @@ set -o vi
 source ~/.aliasrc
 source ~/.keyboard
 
-# Loads scripts
-scripts=($(find ~/.scripts -type l))
-for script in "${scripts[@]}"; do
-  source "$script"
-done
-
 # Bash prompt name
 PS1='🦀🚀🛸\w\[$(tput sgr0)\]> '
 
