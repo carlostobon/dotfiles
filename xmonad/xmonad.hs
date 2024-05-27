@@ -61,6 +61,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Launch brave
     , ((modm,               xK_p ), spawn "brave")
 
+    -- Simulate paste
+    , ((modm,               xK_k ), spawn "sleep 0.3 && xdotool key ctrl+shift+v")
 
 
     -- Shrink the master area
