@@ -75,7 +75,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_n ),  moveTo Prev (Not emptyWS))
 
     -- Move to prev workspace
-    , ((modm,               xK_i ),  moveTo Prev (Not emptyWS))
+    , ((modm,               xK_i ),  moveTo Next (Not emptyWS))
 
 
     -- Rotate through the available layout algorithms
