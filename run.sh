@@ -33,8 +33,8 @@ linker "kitty/kitty.conf" ".config/kitty/kitty.conf"
 linker "mpv/input.conf" ".config/mpv/input.conf"
 linker "picom/picom.conf" ".config/picom/picom.conf"
 
-linker "qutebrowser/autoconfig.yml" ".config/picom/picom.conf"
-linker "qutebrowser/config.py" ".config/picom/config.py"
+linker "qutebrowser/autoconfig.yml" ".config/qutebrowser/autoconfig.yml"
+linker "qutebrowser/config.py" ".config/qutebrowser/config.py"
 
 linker "ranger/rc.conf" ".config/ranger/rc.conf"
 linker "ranger/rifle.conf" ".config/ranger/rifle.py"
