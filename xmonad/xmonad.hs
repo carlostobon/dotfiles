@@ -66,6 +66,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Simulate paste
     , ((modm,               xK_k ), spawn "sleep 0.2 && xdotool key ctrl+v")
 
+    -- Simulate scape
+    , ((modm,               xK_apostrophe ), spawn "sleep 0.2 && xdotool key Escape")
+
     -- Shrink the master area
     , ((modm,               xK_m ), sendMessage Shrink)
 
