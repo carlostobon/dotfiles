@@ -39,7 +39,7 @@ linker "qutebrowser/config.py" ".config/qutebrowser/config.py"
 linker "ranger/rc.conf" ".config/ranger/rc.conf"
 linker "ranger/rifle.conf" ".config/ranger/rifle.py"
 
-linker "zathura/zathura.rc" ".config/zathura/zathura.rc"
+linker "zathura/zathurarc" ".config/zathura/zathurarc"
 
 linker "wallpaper/wallpaper.png" ".config/wallpaper/wallpaper.png"
 
