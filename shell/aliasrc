@@ -183,5 +183,5 @@ ship(){
 p(){
 	paru "$@"
 	setxkbmap -option 'caps:super'
-	xdotool key Super_L+u
+	xdotool key Super_L+h
 }

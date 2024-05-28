@@ -44,11 +44,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [ ((modm,               xK_Return), spawn $ XMonad.terminal conf)
 
 
-    -- Recompile xmonad
-    , ((modm,               xK_l ), spawn "xmonad --recompile")
-
-    -- Restart xmonad
-    , ((modm,               xK_u ), spawn "xmonad --restart")
+    -- Recompile and Restart xmonad
+    , ((modm,               xK_h ), spawn "xmonad --recompile && xmonad --restart")
 
     -- Quit xmonad
     , ((modm,               xK_y ), io (exitWith ExitSuccess))
@@ -62,8 +59,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_p ), spawn "brave")
 
     -- Simulate paste
-    , ((modm,               xK_k ), spawn "sleep 0.3 && xdotool key ctrl+shift+v")
+    , ((modm,               xK_k ), spawn "sleep 0.2 && xdotool key ctrl+v")
 
+    -- Simulate copy
+    , ((modm,               xK_v ), spawn "sleep 0.2 && xdotool key ctrl+c")
 
     -- Shrink the master area
     , ((modm,               xK_m ), sendMessage Shrink)
