@@ -20,6 +20,7 @@ alias \
 	bh="v ~/.bash_history" \
   dc="c ~/Documents" \
   dw="c ~/Downloads" \
+	dt="c ~/.dotfiles" \
   nf="neofetch" \
 	ts="ts-node" \
 	clean="p -Qtdp; p -Scc; sudo rm -rf .cache" \
