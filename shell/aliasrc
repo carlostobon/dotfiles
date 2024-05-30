@@ -23,6 +23,7 @@ alias \
 	dt="c ~/.dotfiles" \
   nf="neofetch" \
 	ts="ts-node" \
+	st="sudo systemctl" \
 	clean="p -Qtdp; p -Scc; sudo rm -rf .cache" \
 	empty="sudo rm ~/.cache" \
 	sdn="sudo shutdown now" \
