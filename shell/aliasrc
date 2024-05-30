@@ -36,7 +36,9 @@ alias \
 	vm="vim src/main.rs" \
 	vl="vim src/lib.rs" \
 	vi="vim index.tsx" \
-	vp="vim ./+page.svelte"
+	vp="vim ./+page.svelte" \
+	g="git" \
+	gt="git"
 
 
 base(){

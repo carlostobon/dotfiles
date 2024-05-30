@@ -12,3 +12,7 @@
 	lg = log --stat
 	br = branch
 	sw = switch
+	ps = push
+	pl = pull
+	ad = add
+	cm = commit
