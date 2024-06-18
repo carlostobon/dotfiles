@@ -29,7 +29,7 @@ alias \
 	sdn="sudo shutdown now" \
 	rb="sudo reboot" \
 	ka="killall" \
-	r="ranger" \
+	y="yazi" \
 	see="ncdu"\
 	v="vim" \
 	tree="lsd --tree --depth 2" \
