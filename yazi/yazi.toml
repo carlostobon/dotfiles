@@ -1,0 +1,32 @@
+[manager]
+ratio = [2, 3, 5]
+
+[opener]
+edit = [
+	{ run = 'vim "$@"', block = true },
+]
+play = [
+	{ run = 'mpv "$@"', orphan = true, for = "unix" },
+]
+open = [
+	{ run = 'xdg-open "$@"', desc = "Open" },
+]
+reveal = [
+	{ run = 'sxiv "$@"', desc = "Open images"}
+]
+pdf = [
+	{ run = 'zathura "$@"', desc = "Open pdfs"}
+]
+
+
+[open]
+rules = [
+	{ mime = "text/*", use = "edit" },
+	{ mime = "video/*", use = "play" },
+	{ mime = "image/*", use = "reveal" },
+
+	{ name = "*.json", use = "edit" },
+	{ name = "*.js", use = "edit" },
+	{ name = "*.ts", use = "edit" },
+	{ name = "*.pdf", use = "pdf" },
+]

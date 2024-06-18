@@ -1,0 +1,53 @@
+[manager]
+keymap = [
+  # Navigation
+	{ on = [ "e" ], run = "arrow -1", desc = "Move cursor up" },
+	{ on = [ "n" ], run = "arrow 1",  desc = "Move cursor down" },
+	{ on = [ "m" ], run = "leave", desc = "Go back to the parent directory" },
+
+	{ on = [ "i" ], run = "enter", desc = "Enter the child directory" },
+	{ on = [ "Q" ], run = "quit --no-cwd-file", desc = "Exit the process without writing cwd-file" },
+
+	{ on = [ "g", "g" ], run = "arrow -99999999", desc = "Move cursor to the top" },
+	{ on = [ "G" ],      run = "arrow 99999999",  desc = "Move cursor to the bottom" },
+
+	# Find
+	{ on = [ "/" ], run = "find --smart", desc = "Find next file" },
+
+	# Selection
+	{ on = [ "<Space>" ], run = [ "select --state=none", "arrow 1" ], desc = "Toggle the current selection state" },
+
+	# Operation
+	{ on = [ "o" ], run = "open", desc = "Open the selected files" },
+	{ on = [ "O" ], run = "open --interactive", desc = "Open the selected files interactively" },
+	{ on = [ "y" ], run = "yank", desc = "Copy the selected files" },
+	{ on = [ "Y" ], run = "unyank", desc = "Cancel the yank status of files" },
+	{ on = [ "p" ], run = "paste", desc = "Paste the files" },
+	{ on = [ "P" ], run = "paste --force", desc = "Paste the files (overwrite if the destination exists)" },
+	{ on = [ "d" ], run = "remove --permanently", desc = "Permanently delete the files" },
+	{ on = [ "a" ], run = "create", desc = "Create a file or directory (ends with / for directories)" },
+	{ on = [ "r" ], run = "rename --cursor=before_ext", desc = "Rename a file or directory" },
+
+	# Copy
+	{ on = [ "c", "c" ], run = "copy path",             desc = "Copy the absolute path" },
+	{ on = [ "c", "d" ], run = "copy dirname",          desc = "Copy the path of the parent directory" },
+	{ on = [ "c", "f" ], run = "copy filename",         desc = "Copy the name of the file" },
+	{ on = [ "c", "n" ], run = "copy name_without_ext", desc = "Copy the name of the file without the extension" },
+
+
+	# Name
+	{ on = [ "r" ], run = "rename --cursor=before_ext", desc = "Rename a file or directory" },
+
+	# Search
+	{ on = [ "s" ],         run = "search fd",                  desc = "Search files by name using fd" },
+	{ on = [ "S" ],         run = "search rg",                  desc = "Search files by content using ripgrep" },
+	{ on = [ "<C-s>" ],     run = "search none",                desc = "Cancel the ongoing search" },
+	{ on = [ "Z" ],         run = "plugin fzf",                 desc = "Jump to a directory, or reveal a file using fzf" },
+
+]
+
+[select]
+keymap = [
+	{ on = [ "<Esc>" ], run = "close", desc = "Cancel selection" },
+	{ on = [ "q" ], run = "close", desc = "Cancel selection" },
+]

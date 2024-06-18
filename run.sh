@@ -6,7 +6,7 @@ echo "Making folders..."
 mkdir -p "/home/$username/.config/mpv" \
          "/home/$username/.config/picom" \
          "/home/$username/.config/zathura" \
-         "/home/$username/.config/ranger" \
+         "/home/$username/.config/yazi" \
          "/home/$username/.config/qutebrowser" \
          "/home/$username/.config/kitty" \
          "/home/$username/.config/wallpaper" \
@@ -36,8 +36,9 @@ linker "picom/picom.conf" ".config/picom/picom.conf"
 linker "qutebrowser/autoconfig.yml" ".config/qutebrowser/autoconfig.yml"
 linker "qutebrowser/config.py" ".config/qutebrowser/config.py"
 
-linker "ranger/rc.conf" ".config/ranger/rc.conf"
-linker "ranger/rifle.conf" ".config/ranger/rifle.py"
+linker "yazi/keymap.toml" ".config/yazi/keymap.toml"
+linker "yazi/theme.toml" ".config/yazi/theme.toml"
+linker "yazi/yazi.toml" ".config/yazi/yazi.toml"
 
 linker "zathura/zathurarc" ".config/zathura/zathurarc"
 
