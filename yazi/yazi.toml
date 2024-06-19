@@ -29,4 +29,5 @@ rules = [
 	{ name = "*.js", use = "edit" },
 	{ name = "*.ts", use = "edit" },
 	{ name = "*.pdf", use = "pdf" },
+	{ name = "*.mp3", use = "play" },
 ]
