@@ -16,4 +16,4 @@
 	pl = pull
 	ad = add
 	cm = commit
-	di = diff
+	df = diff
