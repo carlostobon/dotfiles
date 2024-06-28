@@ -90,6 +90,58 @@ video(){
     rm $audio
 }
 
+raw_video(){
+  path=$1
+  audio_code=$2
+  video_code=$3
+  video_output=$4
+
+  if [ $# -lt 4 ]; then
+      echo "Args required: path audio_code video_code video_name"
+      exit 1
+  fi
+
+  # Begins with audio
+  echo "Video download in progress..."
+  yt-dlp -f ${audio_code} ${path} > /dev/null 2>&1 &
+  audio_task_pid=$!
+
+  audio_name=$(yt-dlp --print filename -f ${audio_code} ${path})
+
+  # Proceed with video
+  echo "Audio download in progress..."
+  yt-dlp -f ${video_code} ${path} > /dev/null 2>&1 &
+
+  video_name=$(yt-dlp --print filename -f ${video_code} ${path})
+
+  wait $audio_task_pid
+
+
+  # Convert audio
+  new_audio_name="${audio_name%.*}"
+  ffmpeg -i "$audio_name" "$new_audio_name.wav" > /dev/null 2>&1
+  echo "Converting audio to right format..."
+
+  wait
+
+  # Merge audio+video
+  echo "Merging video and audio"
+  ffmpeg \
+      -i "$video_name" \
+      -i "$new_audio_name.wav" \
+      -c:v copy \
+      -c:a copy \
+      ${video_output}.mp4 > /dev/null 2>&1
+
+
+  # Remove old files
+  echo "Removing old files..."
+  rm "$audio_name"
+  rm "$video_name"
+  rm "$new_audio_name.wav"
+
+  echo "Collection done!"
+}
 
 order=$1
 
@@ -107,6 +159,9 @@ elif [[ ${order} == "uppass-disk" ]]; then
 
 elif [[ ${order} == "video" ]]; then
   video ${2} ${3}
+
+elif [[ ${order} == "raw-video" ]]; then
+  raw_video ${2} ${3} ${4} ${5}
 
 else
   echo "Nothing to do sir!"
