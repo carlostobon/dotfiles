@@ -45,7 +45,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
 
     -- Recompile and Restart xmonad
-    , ((modm,               xK_h ), spawn "xmonad --recompile && xmonad --restart")
+    , ((modm,               xK_period ), spawn "xmonad --recompile && xmonad --restart")
 
     -- Quit xmonad
     , ((modm,               xK_y ), io (exitWith ExitSuccess))
@@ -61,10 +61,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
 
     -- Simulate copy
-    , ((modm,               xK_v ), spawn "sleep 0.2 && xdotool key ctrl+c")
+    , ((modm,               xK_k ), spawn "sleep 0.2 && xdotool key ctrl+c")
 
     -- Simulate paste
-    , ((modm,               xK_k ), spawn "sleep 0.2 && xdotool key ctrl+v")
+    , ((modm,               xK_h ), spawn "sleep 0.2 && xdotool key ctrl+v")
 
     -- Simulate scape
     , ((modm,               xK_apostrophe ), spawn "sleep 0.2 && xdotool key Escape")
