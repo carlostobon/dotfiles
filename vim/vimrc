@@ -346,20 +346,25 @@ autocmd FileType svelte inoremap kkst <style></style><esc>F><right>i<cr><esc>O
 autocmd FileType rust inoremap kkpr println!("{}", );<esc>hi
 autocmd FileType rust inoremap kkpu pub fn () {}<esc>F(i
 autocmd FileType rust nnoremap hp Ipub <esc>w
-autocmd FileType rust nnoremap h# <esc>ggO<esc>O#![allow(dead_code, unused_variables, unused_imports, unused_assignments)]<esc>``
-autocmd FileType rust nnoremap hc lbi_<esc> " variable => _variable
+autocmd FileType rust nnoremap h# <esc>ggO<esc>O
+      \ #![allow(dead_code, unused_variables, unused_imports, unused_assignments)]<esc>``
 
+autocmd FileType rust nnoremap hc lbi_<esc> " variable => _variable
 autocmd FileType rust inoremap kkq assert_eq!(, );<esc>T(i
 autocmd FileType rust inoremap kkb assert!();<esc>T(i
 autocmd FileType rust inoremap kkf fn () {<cr>}<esc><up>f(i
 autocmd FileType rust inoremap kka async fn () {<cr>}<esc><up>f(i
 autocmd FileType rust inoremap kkd #[derive()]<esc>F(a
-autocmd FileType rust inoremap kktc #[cfg(test)]<cr>mod tests {<cr>use super::*;<cr><cr><left><space>#[test]<cr><left><space>fn xx() {<cr>}<cr>}<up><up><esc>fxcw
+autocmd FileType rust inoremap kkm #[()]<esc>F(
+autocmd FileType rust inoremap kktc #[cfg(test)]<cr>
+      \ mod tests {<cr>use super::*;<cr><cr><left><space>#[test]<cr><left><space>
+      \ fn xx() {<cr>}<cr>}<up><up><esc>fxcw
+
 autocmd FileType rust inoremap kktt #[test]<cr>fn xx() {<cr>}<up><esc>fxcw
-autocmd FileType rust inoremap " '
-autocmd FileType rust inoremap ' "
+autocmd FileType rust inoremap " ''<esc>i
+autocmd FileType rust inoremap ' ""<esc>i
 autocmd FileType rust inoremap kki impl x for {<cr>}<up><esc>fxcw
-autocmd FileType rust inoremap kks struct  <esc>cw
+autocmd FileType rust inoremap kks struct <esc>cw
 
 autocmd FileType rust nnoremap <space>mm :!clear; cargo run --
 autocmd FileType rust nnoremap <space>hh :!clear; cargo test -- --nocapture

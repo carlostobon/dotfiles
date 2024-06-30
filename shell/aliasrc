@@ -38,8 +38,17 @@ alias \
 	vl="vim src/lib.rs" \
 	vi="vim index.tsx" \
 	vp="vim ./+page.svelte" \
-	g="git" \
-	gt="git"
+	ga="git add" \
+	gc="git commit -m" \
+	gl="git log --stat" \
+	gps="git push" \
+	gpu="git pull" \
+	gb="git branch" \
+	gs="git status" \
+	gsw="git swtich" \
+	gm="git merge" \
+	gr="git remote" \
+	gd="git diff"
 
 
 base(){
