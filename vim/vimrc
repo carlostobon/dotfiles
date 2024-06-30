@@ -351,8 +351,8 @@ autocmd FileType rust nnoremap hc lbi_<esc> " variable => _variable
 
 autocmd FileType rust inoremap kkq assert_eq!(, );<esc>T(i
 autocmd FileType rust inoremap kkb assert!();<esc>T(i
-autocmd FileType rust inoremap kkf fn () {}<esc>F(i
-autocmd FileType rust inoremap kka async fn () {}<esc>F(i
+autocmd FileType rust inoremap kkf fn () {<cr>}<esc><up>f(i
+autocmd FileType rust inoremap kka async fn () {<cr>}<esc><up>f(i
 autocmd FileType rust inoremap kkd #[derive()]<esc>F(a
 autocmd FileType rust inoremap kktc #[cfg(test)]<cr>mod tests {<cr>use super::*;<cr><cr><left><space>#[test]<cr><left><space>fn xx() {<cr>}<cr>}<up><up><esc>fxcw
 autocmd FileType rust inoremap kktt #[test]<cr>fn xx() {<cr>}<up><esc>fxcw
@@ -368,8 +368,11 @@ autocmd FileType rust nnoremap <space>hh :!clear; cargo test -- --nocapture
 "====== PYTHON
 "
 autocmd FileType python nnoremap <space>mm :!python main.py
-autocmd FileType python xmap kk <Plug>SlimeRegionSend
-autocmd FileType python nmap kk <Plug>SlimeParagraphSend
+
+autocmd FileType python inoremap kkf def ():<esc>F(i
+autocmd FileType python inoremap kki if __name__ == "__main__":<cr>
+"autocmd FileType python xmap kk <Plug>SlimeRegionSend
+"autocmd FileType python nmap kk <Plug>SlimeParagraphSend
 
 
 "======= CSS
