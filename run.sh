@@ -10,6 +10,7 @@ mkdir -p "/home/$username/.config/mpv" \
          "/home/$username/.config/qutebrowser" \
          "/home/$username/.config/kitty" \
          "/home/$username/.config/wallpaper" \
+         "/home/$username/.vim/config" \
          "/home/$username/.xmonad" \
 
 
@@ -27,7 +28,13 @@ linker "shell/aliasrc" ".aliasrc"
 linker "shell/bash_profile" ".bash_profile"
 linker "shell/bashrc" ".bashrc"
 linker "shell/keyboard" ".keyboard"
+
 linker "vim/vimrc" ".vimrc"
+linker "vim/keymaps.vim" ".vim/config/keymaps.vim"
+linker "vim/pluggins.vim" ".vim/config/pluggins.vim"
+linker "vim/settings.vim" ".vim/config/settings.vim"
+linker "vim/shortcuts.vim" ".vim/config/shortcuts.vim"
+
 
 linker "kitty/kitty.conf" ".config/kitty/kitty.conf"
 linker "mpv/input.conf" ".config/mpv/input.conf"
