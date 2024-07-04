@@ -88,6 +88,10 @@ nnoremap cu ci(
 nnoremap cl ci[
 nnoremap cy ci{
 
+nnoremap vu vi(
+nnoremap vl vi[
+nnoremap vy vi{
+
 nnoremap c" ci'
 nnoremap c' ci"
 nnoremap cw ciw
