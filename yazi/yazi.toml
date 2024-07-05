@@ -30,4 +30,5 @@ rules = [
 	{ name = "*.ts", use = "edit" },
 	{ name = "*.pdf", use = "pdf" },
 	{ name = "*.mp3", use = "play" },
+	{ name = "*.wav", use = "play" },
 ]

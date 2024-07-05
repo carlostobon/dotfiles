@@ -16,6 +16,8 @@ keymap = [
 
 	# Selection
 	{ on = [ "<Space>" ], run = [ "select --state=none", "arrow 1" ], desc = "Toggle the current selection state" },
+	{ on = [ "A" ],       run = "select_all --state=true",    desc = "Select all files" },
+	{ on = [ "a" ],       run = "select_all --state=none",    desc = "Select all files" },
 
 	# Operation
 	{ on = [ "o" ], 		 	run = "open", 											desc = "Open the selected files" },
@@ -25,12 +27,12 @@ keymap = [
 	{ on = [ "p" ], 		 	run = "paste", 											desc = "Paste the files" },
 	{ on = [ "P" ], 		 	run = "paste --force", 							desc = "Paste the files (overwrite if the destination exists)" },
 	{ on = [ "d" ], 		 	run = "remove --permanently", 			desc = "Permanently delete the files" },
-	{ on = [ "a" ], 		 	run = "create", 										desc = "Create a file or directory (ends with / for directories)" },
+	{ on = [ "c" ], 		 	run = "create", 										desc = "Create a file or directory (ends with / for directories)" },
 	{ on = [ "r" ], 		 	run = "rename --cursor=before_ext", desc = "Rename a file or directory" },
 	{ on = [ "." ], 		 	run = "hidden toggle",              desc = "Toggle the visibility of hidden files" },
 
 	# Copy
-	{ on = [ "c", "c" ], 	run = "copy path",             			desc = "Copy the absolute path" },
+	{ on = [ "c", "p" ], 	run = "copy path",             			desc = "Copy the absolute path" },
 	{ on = [ "c", "d" ], 	run = "copy dirname",          			desc = "Copy the path of the parent directory" },
 	{ on = [ "c", "f" ], 	run = "copy filename",         			desc = "Copy the name of the file" },
 	{ on = [ "c", "n" ], 	run = "copy name_without_ext", 			desc = "Copy the name of the file without the extension" },
