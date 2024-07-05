@@ -34,6 +34,7 @@ linker "vim/keymaps.vim" ".vim/config/keymaps.vim"
 linker "vim/pluggins.vim" ".vim/config/pluggins.vim"
 linker "vim/settings.vim" ".vim/config/settings.vim"
 linker "vim/shortcuts.vim" ".vim/config/shortcuts.vim"
+linker "vim/functions.vim" ".vim/config/functions.vim"
 
 
 linker "kitty/kitty.conf" ".config/kitty/kitty.conf"
