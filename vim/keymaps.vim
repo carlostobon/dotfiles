@@ -111,3 +111,8 @@ nnoremap vi v$
 
 nnoremap M ^
 nnoremap E $
+
+" ==== Markers ==== "
+nnoremap ,t `t
+nnoremap ,s `s
+nnoremap ,r `r
