@@ -45,7 +45,7 @@ alias \
 	gpu="git pull" \
 	gb="git branch" \
 	gs="git status" \
-	gsw="git swtich" \
+	gsw="git switch -c" \
 	gm="git merge" \
 	gr="git remote" \
 	gd="git diff"

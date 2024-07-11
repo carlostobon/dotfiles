@@ -67,6 +67,7 @@ nnoremap XX ZZ
 nnoremap XQ ZQ
 nnoremap ,h :Goyo 68%+90%x100%<cr>
 nnoremap vy mt{v}y`t
+nnoremap Q <esc>
 
 
 " ==== Switch tabs and buffers ====
