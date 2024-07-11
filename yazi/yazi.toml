@@ -1,5 +1,5 @@
 [manager]
-ratio = [2, 3, 5]
+ratio = [2, 5, 2]
 
 [opener]
 edit = [
