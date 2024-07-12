@@ -29,6 +29,7 @@ rules = [
 	{ name = "*.js", use = "edit" },
 	{ name = "*.ts", use = "edit" },
 	{ name = "*.pdf", use = "pdf" },
+	{ name = "*.epub", use = "pdf" },
 	{ name = "*.mp3", use = "play" },
 	{ name = "*.wav", use = "play" },
 ]
