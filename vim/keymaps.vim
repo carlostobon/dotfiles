@@ -66,8 +66,11 @@ nnoremap ff :FZF $FOLDER<cr>
 nnoremap XX ZZ
 nnoremap XQ ZQ
 nnoremap ,h :Goyo 68%+90%x100%<cr>
-nnoremap vy mt{v}y`t
+nnoremap yp mt{v}y`t
 nnoremap Q <esc>
+nnoremap > >>
+nnoremap < <<
+
 
 
 " ==== Switch tabs and buffers ====
@@ -105,13 +108,23 @@ vnoremap // :s/
 
 " ==== Custom selectors ==== "
 nnoremap cn c^
-nnoremap ci C
+nnoremap co C
+nnoremap ce cb
+nnoremap ci ce
 
 nnoremap vn v^
-nnoremap vi v$
+nnoremap vo v$
 
 nnoremap M ^
 nnoremap E $
+
+nnoremap tl ct]
+nnoremap tu ct)
+nnoremap ty ct}
+
+nnoremap Tl cT[
+nnoremap Tu cT(
+nnoremap Ty cT{
 
 " ==== Markers ==== "
 nnoremap ,t `t

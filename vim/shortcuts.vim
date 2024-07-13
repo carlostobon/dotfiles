@@ -1,7 +1,7 @@
 " ==== Rust ====
 autocmd FileType rust inoremap kkpr println!("{}", );<esc>hi
 autocmd FileType rust inoremap kkpu pub fn () {}<esc>F(i
-autocmd FileType rust nnoremap hp Ipub <esc>w
+autocmd FileType rust nnoremap hp msIpub <esc>`s
 autocmd FileType rust nnoremap h# <esc>ggO<esc>O
       \ #![allow(dead_code, unused_variables, unused_imports, unused_assignments)]<esc>``
 autocmd FileType rust nnoremap hc lbi_<esc> " variable => _variable
