@@ -14,6 +14,7 @@ Plug 'itchyny/vim-gitbranch',
 Plug 'othree/html5.vim',
 Plug 'NoahTheDuke/vim-just',
 Plug 'jpalardy/vim-slime',
+Plug 'makerj/vim-pdf',
 call plug#end()
 
 
