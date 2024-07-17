@@ -48,9 +48,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_period ), spawn "xmonad --recompile && xmonad --restart")
 
     -- Quit xmonad
-    , ((modm,               xK_y ), io (exitWith ExitSuccess))
-
-
+    , ((modm .|. shiftMask,               xK_y ), io (exitWith ExitSuccess))
 
     -- Launch qutebrowser
     , ((modm,               xK_f ), spawn "qutebrowser")
@@ -98,7 +96,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
 
     -- Start recording video
-    , ((modm .|. shiftMask, xK_y ), spawn "toolbox.sh record-screen")
+    --, ((modm .|. shiftMask, xK_y ), spawn "toolbox.sh record-screen")
 
     -- Start recording audio
     , ((modm .|. shiftMask, xK_a ), spawn "toolbox.sh record-audio")
