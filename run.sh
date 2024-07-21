@@ -56,3 +56,4 @@ linker "xmonad/xmonad.hs" ".xmonad/xmonad.hs"
 
 linker "scripts/toolbox" ".binaries/toolbox"
 linker "scripts/ship" ".binaries/ship"
+linker "scripts/video" ".binaries/video"

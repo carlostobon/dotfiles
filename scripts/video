@@ -1,0 +1,94 @@
+#!/bin/bash
+
+path=$1
+output_name=$2
+
+if [ $# -lt 2 ]; then
+    echo "Usage: <path> <output_name>"
+    exit 1
+fi
+
+# Example command
+output=$(yt-dlp -F "$path")
+
+# Extract the first column using awk
+formats=$(echo "$output" | awk '{print $1}')
+
+
+# Check for audio formats
+if echo "$formats" | awk '/140/ { found=1 } END { exit !found }'; then
+  audio_fmt="140"
+  echo "Audio format found: 140."
+elif echo "$formats" | awk '/251/ { found=1 } END { exit !found }'; then
+  audio_fmt="251"
+  echo "Audio format found: 251."
+elif echo "$formats" | awk '/250/ { found=1 } END { exit !found }'; then
+  audio_fmt="250"
+  echo "Audio format found: 250."
+else
+  echo "A suitable audio format could not be found"
+  exit
+fi
+
+# Check for video formats
+if echo "$formats" | awk '/616/ { found=1 } END { exit !found }'; then
+  video_fmt="616"
+  echo "Video format found: 616."
+elif echo "$formats" | awk '/614/ { found=1 } END { exit !found }'; then
+  video_fmt="614"
+  echo "Video format found: 614."
+elif echo "$formats" | awk '/137/ { found=1 } END { exit !found }'; then
+  video_fmt="137"
+  echo "Video format found: 137."
+elif echo "$formats" | awk '/248/ { found=1 } END { exit !found }'; then
+  video_fmt="248"
+  echo "Video format found: 248."
+elif echo "$formats" | awk '/609/ { found=1 } END { exit !found }'; then
+  video_fmt="609"
+  echo "Video format found: 609."
+else
+  echo "A suitable video format could not be found"
+  exit 1
+fi
+
+
+# Dowload video
+echo "Audio download is in progress..."
+yt-dlp -f ${audio_fmt} ${path} > /dev/null 2>&1 &
+audio_task_pid=$!
+
+audio_name=$(yt-dlp --print filename -f ${audio_fmt} ${path})
+
+# Proceed with video
+echo "Video download is in progress..."
+yt-dlp -f ${video_fmt} ${path} > /dev/null 2>&1 &
+
+video_name=$(yt-dlp --print filename -f ${video_fmt} ${path})
+
+wait $audio_task_pid
+
+
+# Convert audio
+new_audio_name="${audio_name%.*}"
+ffmpeg -i "$audio_name" "$new_audio_name.wav" > /dev/null 2>&1
+echo "Converting audio to right format..."
+
+wait
+
+# Merge audio+video
+echo "Merging video and audio..."
+ffmpeg \
+    -i "$video_name" \
+    -i "$new_audio_name.wav" \
+    -c:v copy \
+    -c:a copy \
+    ${output_name}.mp4 > /dev/null 2>&1
+
+
+# Remove old files
+echo "Cleaning buffers..."
+rm "$audio_name"
+rm "$video_name"
+rm "$new_audio_name.wav"
+
+echo "Collection done!"
