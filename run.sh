@@ -54,4 +54,5 @@ linker "wallpaper/wallpaper.png" ".config/wallpaper/wallpaper.png"
 
 linker "xmonad/xmonad.hs" ".xmonad/xmonad.hs"
 
-linker "scripts/toolbox.sh" ".binaries/toolbox.sh"
+linker "scripts/toolbox" ".binaries/toolbox"
+linker "scripts/ship" ".binaries/ship"

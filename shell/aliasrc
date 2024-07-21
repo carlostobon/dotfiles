@@ -161,36 +161,15 @@ tarit(){
 	name=$1
 	optional=$2
 	if [ -z "$optional" ]; then
-		tar -cf - "$name" | pigz > "$name.tar.gz"
+		sudo tar -cf - "$name" | pigz > "$name.tar.gz"
 	else
-		tar -cf - "$name" | pigz > "$optional.tar.gz"
+		sudo tar -cf - "$name" | pigz > "$optional.tar.gz"
 	fi
 }
 
 untarit(){
 	target=$1
-	tar -I pigz -xf "$target"
-}
-
-ship(){
-	origin=$1
-	destination=$2
-	delete=$3
-
-	if [ $# -lt 2 ]; then
-			echo "ship <origin> <destination> delete<bool>"
-			return 1
-	fi
-
-	sudo rsync -urvP "$origin" "$destination"
-
-	if [[ "$delete" == "true" ]]; then
-		echo "File shipped, proceeding to remove original file!"
-		sudo rm -r "$origin"
-	else
-		echo "File shipped!"
-	fi
-
+	sudo tar -I pigz -xf "$target"
 }
 
 p(){

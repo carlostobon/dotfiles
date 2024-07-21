@@ -24,6 +24,7 @@ rules = [
 	{ mime = "text/*", use = "edit" },
 	{ mime = "video/*", use = "play" },
 	{ mime = "image/*", use = "reveal" },
+	{ mime = "*.jpg", use = "reveal" },
 
 	{ name = "*.json", use = "edit" },
 	{ name = "*.js", use = "edit" },

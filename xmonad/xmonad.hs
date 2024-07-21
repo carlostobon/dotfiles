@@ -48,7 +48,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_period ), spawn "xmonad --recompile && xmonad --restart")
 
     -- Quit xmonad
-    , ((modm,               xK_y ), io (exitWith ExitSuccess))
+    , ((modm,               xK_0 ), io (exitWith ExitSuccess))
 
 
 

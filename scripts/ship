@@ -1,0 +1,22 @@
+#!/usr/bin/env sh
+
+origin=$1
+destination=$2
+delete=$3
+
+# Check if the number of arguments is less than 2
+if [ $# -lt 2 ]; then
+    echo "Usage: ship <origin> <destination> [delete]"
+    exit 1
+fi
+
+# Perform the file transfer using rsync
+sudo rsync -urvP "$origin" "$destination"
+
+# Check if the delete argument is 'true'
+if [ "$delete" = "true" ]; then
+  echo "File shipped, proceeding to remove original file!"
+  sudo rm -r "$origin"
+else
+  echo "File shipped!"
+fi
