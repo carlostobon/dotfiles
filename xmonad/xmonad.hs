@@ -96,16 +96,16 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
 
     -- Start recording video
-    --, ((modm .|. shiftMask, xK_y ), spawn "toolbox.sh record-screen")
+    --, ((modm .|. shiftMask, xK_y ), spawn "toolbox record-screen")
 
     -- Start recording audio
-    , ((modm .|. shiftMask, xK_a ), spawn "toolbox.sh record-audio")
+    , ((modm .|. shiftMask, xK_a ), spawn "toolbox record-audio")
 
     -- Kill all recordings
     , ((modm .|. shiftMask, xK_l ), spawn "killall ffmpeg")
 
     -- Screen capture
-    , ((modm .|. shiftMask, xK_p ), spawn "toolbox.sh capture-screen")
+    , ((modm .|. shiftMask, xK_p ), spawn "toolbox capture-screen")
 
     -- Swap the focused window and the master window
     , ((modm,               xK_comma ), windows W.swapMaster)
