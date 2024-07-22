@@ -31,7 +31,13 @@ else
 fi
 
 # Check for video formats
-if echo "$formats" | awk '/616/ { found=1 } END { exit !found }'; then
+if echo "$formats" | awk '/303/ { found=1 } END { exit !found }'; then
+  video_fmt="303"
+  echo "Video format found: 303."
+elif echo "$formats" | awk '/399/ { found=1 } END { exit !found }'; then
+  video_fmt="399"
+  echo "Video format found: 399."
+elif echo "$formats" | awk '/616/ { found=1 } END { exit !found }'; then
   video_fmt="616"
   echo "Video format found: 616."
 elif echo "$formats" | awk '/614/ { found=1 } END { exit !found }'; then
