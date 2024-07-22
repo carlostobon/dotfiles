@@ -118,13 +118,14 @@ nnoremap vo v$
 nnoremap M ^
 nnoremap E $
 
-nnoremap tl ct]
-nnoremap tu ct)
-nnoremap ty ct}
 
-nnoremap Tl cT[
-nnoremap Tu cT(
-nnoremap Ty cT{
+nnoremap tn ct]
+nnoremap te ct)
+nnoremap ti ct}
+
+nnoremap Tn cT[
+nnoremap Te cT(
+nnoremap Ti cT{
 
 " ==== Markers ==== "
 nnoremap ,t `t
