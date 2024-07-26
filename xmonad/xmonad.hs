@@ -28,7 +28,7 @@ myBorderWidth   = 0
 
 myModMask       = mod4Mask
 
-myWorkspaces    = ["1","2","3","4","5","6","7","8","9", "10", "11", "12"]
+myWorkspaces=["1","2","3","4","5","6","7","8","9","10","11","12"]
 
 -- Border colors for unfocused and focused windows, respectively.
 myNormalBorderColor  = "#d4ccb9"
@@ -42,7 +42,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- Launch a terminal
     [ ((modm,               xK_Return), spawn $ XMonad.terminal conf)
-
 
     -- Recompile and Restart xmonad
     , ((modm,               xK_period ), spawn "xmonad --recompile && xmonad --restart")
