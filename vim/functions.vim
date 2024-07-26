@@ -1,5 +1,5 @@
 
-" Creates a component in NextJS.
+" Creates a component in NextJS from Vim.
 "
 function! CreateReactComp(name)
   python3 << EOF
@@ -8,46 +8,54 @@ import os
 import vim
 from pathlib import Path
 
-def create_react_component(name):
+def create_react_component(path: str):
 
-  # Gets envionment var FOLDER
+  # Gets environment var FOLDER
   project_dir = os.getenv("FOLDER")
 
   if not project_dir:
     print("Environment var FOLDER not found.")
     return
 
-  name = name.strip()
-  names = name.strip().lower().split('-')
+  path = Path(path)
+  names = path.name.strip().lower().split('-')
+  #
+  # Adds name as folder to hold the component.
+  path = path.joinpath(path.name)
 
+  # Creates a convenient pascal case name
   pascal_case_name = ""
   for word in names:
     pascal_case_name += word.capitalize()
 
 
-  components = Path(project_dir) / "app" / "components"
-  component_dir = components / name
+  components_path = Path(project_dir).joinpath("app/components")
+  component_parent = components_path.joinpath(path.parent)
 
   try:
-    os.makedirs(component_dir)
+    os.makedirs(component_parent)
   except OSError as e:
     print(f"Error creating directory '{component_dir}': {e}")
     return
 
-
-  component_name = component_dir / str(pascal_case_name + ".tsx")
+  component_name = component_parent / str(pascal_case_name + ".tsx")
 
   try:
     with open(component_name, "w") as file:
         file.write(
-            """// {}.tsx
+            """// components/{}.tsx
 
 export default function {}() {{
   return (
     <div>Hello, {}!</div>
   )
 }}
-    """.format(pascal_case_name, pascal_case_name, pascal_case_name))
+    """.format(
+        path.parent / pascal_case_name,
+        pascal_case_name,
+        pascal_case_name
+    ))
+
 
   except Exception as error:
     print(f"Error while writting component: {error}")
@@ -58,19 +66,19 @@ export default function {}() {{
   statement = (
       'export {{ default as {} }} from "./{}/{}"\n'.format(
           pascal_case_name,
-          name,
+          path.parent,
           pascal_case_name
       )
   )
 
   try:
-    with open(components / "index.ts", "r") as file:
+    with open(components_path / "index.ts", "r") as file:
       content = file.read()
-    with open(components / "index.ts", "w") as file:
+    with open(components_path / "index.ts", "w") as file:
       file.write(content + statement)
 
   except FileNotFoundError:
-    with open(components / "index.ts", "w") as file:
+    with open(components_path / "index.ts", "w") as file:
       file.write(statement)
 
 
