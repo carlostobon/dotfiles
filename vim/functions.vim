@@ -91,3 +91,66 @@ endfunction
 
 
 command! -nargs=1 ReactComp call CreateReactComp(<f-args>)
+
+
+
+" ====
+" Creates a page in NextJS from Vim.
+"
+function! CreateReactPage(name)
+  python3 << EOF
+
+import os
+import vim
+from pathlib import Path
+
+def create_react_page(path: str):
+
+  # Gets environment var FOLDER
+  project_dir = os.getenv("FOLDER")
+
+  if not project_dir:
+    print("Environment var FOLDER not found.")
+    return
+
+
+  path = Path(path)
+  parent = Path(project_dir) / "app" / path
+
+  names = path.name.strip().lower().split('-')
+
+  # Creates a convenient pascal case name
+  pascal_case_name = ""
+  for word in names:
+    pascal_case_name += word.capitalize()
+
+
+  try:
+    os.makedirs(parent)
+  except OSError as e:
+    print(f"Error creating directory '{path}': {e}")
+    return
+
+
+  with open(parent / "page.tsx", "w") as file:
+    file.write(
+            """// {}/page.tsx
+
+export default function {}() {{
+  return (
+    <div>Hello, {}!</div>
+  )
+}}
+            """.format(
+              path,
+              pascal_case_name,
+              path.name))
+
+  print("Page {} created.".format(path))
+
+create_react_page(vim.eval('a:name'))
+
+EOF
+endfunction
+
+command! -nargs=1 ReactPage call CreateReactPage(<f-args>)
