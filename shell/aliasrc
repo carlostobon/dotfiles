@@ -108,7 +108,7 @@ drc(){
 
 # pnpm shortcuts svelte
 alias \
-	dev="pnpm run dev --host" \
+	dev="pnpm run dev" \
 	build="pnpm run build" \
 
 co(){
@@ -128,9 +128,10 @@ bk(){
 }
 
 s(){
-	c "$(base)/src"
+	c "$(base)/src" > /dev/null 2>&1 || \
+	c "$(base)/app" > /dev/null 2>&1 || \
+	echo "Error when cd to src | app."
 }
-
 
 # video editing shortcuts
 convert(){
