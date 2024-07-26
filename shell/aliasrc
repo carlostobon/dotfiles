@@ -37,7 +37,6 @@ alias \
 	vm="vim src/main.rs" \
 	vl="vim src/lib.rs" \
 	vi="vim index.tsx" \
-	vp="vim ./+page.svelte" \
 	ga="git add" \
 	gc="git commit -m" \
 	gl="git log --stat" \
@@ -114,6 +113,14 @@ alias \
 
 co(){
 	c "$(base)/src/components"
+}
+
+vp(){
+	if [ -e "./+page.svelte" ]; then
+		vim "./+page.svelte"
+	else
+		vim "./page.tsx"
+	fi
 }
 
 ro(){
