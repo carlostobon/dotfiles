@@ -47,7 +47,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_period ), spawn "xmonad --recompile && xmonad --restart")
 
     -- Quit xmonad
-    , ((modm .|. shiftMask,               xK_y ), io (exitWith ExitSuccess))
+    , ((modm .|. shiftMask, xK_y ), io (exitWith ExitSuccess))
 
     -- Launch qutebrowser
     , ((modm,               xK_f ), spawn "qutebrowser")
