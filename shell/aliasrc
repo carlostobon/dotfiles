@@ -112,7 +112,9 @@ alias \
 	build="pnpm run build" \
 
 co(){
-	c "$(base)/src/components"
+	c "$(base)/src/components" > /dev/null 2>&1 || \
+	c "$(base)/app/components" > /dev/null 2>&1 || \
+	echo "Error when cd to src/components | app/components."
 }
 
 vp(){
