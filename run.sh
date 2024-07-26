@@ -39,6 +39,7 @@ linker "vim/functions.vim" ".vim/config/functions.vim"
 
 linker "kitty/kitty.conf" ".config/kitty/kitty.conf"
 linker "mpv/input.conf" ".config/mpv/input.conf"
+linker "mpv/mpv.conf" ".config/mpv/mpv.conf"
 linker "picom/picom.conf" ".config/picom/picom.conf"
 
 linker "qutebrowser/autoconfig.yml" ".config/qutebrowser/autoconfig.yml"
