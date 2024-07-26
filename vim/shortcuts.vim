@@ -79,7 +79,7 @@ autocmd FileType css inoremap pd padding:<space>
 
 
 " ==== Python ====
-autocmd FileType python nnoremap <space>mm :!python main.py
+autocmd FileType python nnoremap <space>mm :!clear; python main.py
 autocmd FileType python inoremap kkf def ():<esc>F(i
 autocmd FileType python inoremap kki if __name__ == "__main__":<cr>
 "autocmd FileType python xmap kk <Plug>SlimeRegionSend
