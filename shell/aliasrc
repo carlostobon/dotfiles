@@ -48,7 +48,8 @@ alias \
 	gsw="git switch -c" \
 	gm="git merge" \
 	gr="git remote" \
-	gd="git diff"
+	gd="git diff" \
+	xmr="xmonad --restart"
 
 
 base(){
