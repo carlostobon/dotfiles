@@ -16,13 +16,20 @@ formats=$(echo "$output" | awk '{print $1}')
 
 
 # Check for audio formats
-if echo "$formats" | awk '/140/ { found=1 } END { exit !found }'; then
+
+if [[ "$formats" =~ (^|[[:space:]])140($|[[:space:]]) ]]; then
   audio_fmt="140"
   echo "Audio format found: 140."
-elif echo "$formats" | awk '/251/ { found=1 } END { exit !found }'; then
+
+elif [[ "$formats" =~ (^|[[:space:]])140-3($|[[:space:]]) ]]; then
+  audio_fmt="140-3"
+  echo "Audio format found: 140-3."
+
+elif [[ "$formats" =~ (^|[[:space:]])251($|[[:space:]]) ]]; then
   audio_fmt="251"
   echo "Audio format found: 251."
-elif echo "$formats" | awk '/250/ { found=1 } END { exit !found }'; then
+
+elif [[ "$formats" =~ (^|[[:space:]])250($|[[:space:]]) ]]; then
   audio_fmt="250"
   echo "Audio format found: 250."
 else
@@ -30,16 +37,41 @@ else
   exit
 fi
 
+
 # Check for video formats
-if echo "$formats" | awk '/303/ { found=1 } END { exit !found }'; then
+if echo "$formats" | awk '/636/ { found=1 } END { exit !found }'; then
+  video_fmt="636"
+  echo "Video format found: 636."
+
+elif echo "$formats" | awk '/699/ { found=1 } END { exit !found }'; then
+  video_fmt="699"
+  echo "Video format found: 699."
+
+elif echo "$formats" | awk '/617/ { found=1 } END { exit !found }'; then
+  video_fmt="617"
+  echo "Video format found: 617."
+
+elif echo "$formats" | awk '/614/ { found=1 } END { exit !found }'; then
+  video_fmt="614"
+  echo "Video format found: 614."
+
+elif echo "$formats" | awk '/312/ { found=1 } END { exit !found }'; then
+  video_fmt="312"
+  echo "Video format found: 312."
+
+
+elif echo "$formats" | awk '/303/ { found=1 } END { exit !found }'; then
   video_fmt="303"
   echo "Video format found: 303."
+
 elif echo "$formats" | awk '/399/ { found=1 } END { exit !found }'; then
   video_fmt="399"
   echo "Video format found: 399."
+
 elif echo "$formats" | awk '/616/ { found=1 } END { exit !found }'; then
   video_fmt="616"
   echo "Video format found: 616."
+
 elif echo "$formats" | awk '/614/ { found=1 } END { exit !found }'; then
   video_fmt="614"
   echo "Video format found: 614."
@@ -52,6 +84,12 @@ elif echo "$formats" | awk '/248/ { found=1 } END { exit !found }'; then
 elif echo "$formats" | awk '/609/ { found=1 } END { exit !found }'; then
   video_fmt="609"
   echo "Video format found: 609."
+elif echo "$formats" | awk '/232/ { found=1 } END { exit !found }'; then
+  video_fmt="232"
+  echo "Video format found: 232."
+elif echo "$formats" | awk '/605/ { found=1 } END { exit !found }'; then
+  video_fmt="605"
+  echo "Video format found: 605."
 else
   echo "A suitable video format could not be found"
   exit 1
