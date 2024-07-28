@@ -154,3 +154,38 @@ EOF
 endfunction
 
 command! -nargs=1 ReactPage call CreateReactPage(<f-args>)
+
+
+" Function to search upwards line by line for a pattern
+"
+function! SearchUpwards(pattern)
+    " Save the original position
+    let l:original_pos = getpos('.')
+
+    " Start from the current line
+    let l:line_num = line('.')
+
+    " Loop to search each line upwards
+    while l:line_num > 0
+        " Get the content of the current line
+        let l:line_content = getline(l:line_num)
+
+        " Check if the pattern is in the line
+        if l:line_content =~ a:pattern
+            " Move the cursor to the matching line
+            call cursor(l:line_num, 1)
+            echo "Pattern found at line " . l:line_num
+            return
+        endif
+
+        " Move to the previous line
+        let l:line_num -= 1
+    endwhile
+
+    " If pattern is not found, move back to the original position
+    call setpos('.', l:original_pos)
+    echo "Pattern not found"
+endfunction
+
+" Map the function to a command for easier usage
+command! -nargs=1 SearchUp call SearchUpwards(<q-args>)
