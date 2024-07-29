@@ -60,9 +60,9 @@ autocmd FileType typescriptreact inoremap kkcl className=""<esc>i
 autocmd FileType typescriptreact inoremap kkb <button onClick={}></button><esc>F/hi
 autocmd FileType typescriptreact nnoremap <space>mm :!clear; pnpm run dev
 
-autocmd FileType typescriptreact nnoremap hir msgg{<down>Oimport {  } from "react"<esc>F}<left>i
-autocmd FileType typescriptreact nnoremap hic msgg{<down>Oimport {  } from "@components/index"<esc>F}<left>i
-autocmd FileType typescriptreact nnoremap hu msggo<esc>0dei"use client"<esc>`s
+autocmd FileType typescriptreact nnoremap hr msgg}oimport {  } from "react"<esc>F}<left>i
+autocmd FileType typescriptreact nnoremap hi msgg}oimport {  } from "@components/index"<esc>F}<left>i
+autocmd FileType typescriptreact nnoremap hu msgg<down>i"use client"<cr><esc>`s
 
 autocmd FileType html inoremap kkan <a href=""></a><Esc>Fhf"a
 autocmd FileType html inoremap kkim <img src="" alt=""/><esc>fsf"a
