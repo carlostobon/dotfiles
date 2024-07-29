@@ -1,13 +1,14 @@
 " ==== Rust ====
 autocmd FileType rust inoremap kkpr println!("{}", );<esc>hi
 autocmd FileType rust inoremap kkpu pub fn () {}<esc>F(i
-autocmd FileType rust nnoremap hp ms:SearchUp fn<cr>Ipub <esc>`s
-autocmd FileType rust nnoremap ha ms:SearchUp fn<cr>f(BBiasync <esc>`s
+autocmd FileType rust nnoremap hp ms:SearchUp<cr>Ipub <esc>`s
+autocmd FileType rust nnoremap ha ms:SearchUp<cr>f(BBiasync <esc>`s
+autocmd FileType rust nnoremap hm :SearchUp<cr>O#[]<esc>i
+autocmd FileType rust nnoremap ht ms:SearchUp<cr>O#[test]<esc>`s
 autocmd FileType rust nnoremap hs msggO
       \#![allow(dead_code, unused_variables, unused_imports, unused_assignments)]<cr><esc>`s
 autocmd FileType rust nnoremap hc lbi_<esc> " variable => _variable
 autocmd FileType rust nnoremap hb f}i<cr><esc>O
-autocmd FileType rust nnoremap ht ms:SearchUp fn<cr>{i#[test]<esc>`s
 autocmd FileType rust nnoremap hc :!cargo add<space>
 autocmd FileType rust inoremap kkq assert_eq!(, );<esc>T(i
 autocmd FileType rust inoremap kkb assert!();<esc>T(i
