@@ -85,4 +85,4 @@ settings:
       mx: https://chat.mistral.ai/chat/{}
       cl: https://claude.ai/onboarding/{}
   zoom.default:
-    global: 90%
+    global: 100%

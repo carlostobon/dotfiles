@@ -161,7 +161,7 @@ config.set('content.javascript.enabled', True, 'qute://*/*')
 
 # Default zoom level.
 # Type: Perc
-c.zoom.default = '90%'
+c.zoom.default = '100%'
 
 # Custom Colors
 blue_color = '#191724'
@@ -195,7 +195,7 @@ c.fonts.tabs.selected = real_font_size
 c.fonts.tabs.unselected = real_font_size
 c.colors.prompts.bg = blue_color
 c.colors.prompts.selected.bg = blue_color
-c.zoom.default = 90
+c.zoom.default = 100 
 c.colors.hints.bg = yellow_color
 c.colors.hints.fg = blue_color
 c.colors.statusbar.command.bg = blue_color
