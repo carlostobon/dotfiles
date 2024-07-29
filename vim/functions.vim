@@ -17,8 +17,8 @@ def create_react_component(path: str):
     print("Environment var FOLDER not found.")
     return
 
-  path = Path(path)
-  names = path.name.strip().lower().split('-')
+  path = Path(path.lower())
+  names = path.name.strip().split('-')
   #
   # Adds name as folder to hold the component.
   path = path.joinpath(path.name)
