@@ -1,6 +1,6 @@
 " ==== Rust ====
 autocmd FileType rust inoremap kkpr println!("{}", );<esc>hi
-autocmd FileType rust inoremap kkpu pub fn () {}<esc>F(i
+autocmd FileType rust nnoremap hhp msIpub<space><esc>`s
 autocmd FileType rust nnoremap hp ms:SearchUp<cr>Ipub <esc>`s
 autocmd FileType rust nnoremap ha ms:SearchUp<cr>f(BBiasync <esc>`s
 autocmd FileType rust nnoremap hm :SearchUp<cr>O#[]<esc>i
@@ -23,7 +23,7 @@ autocmd FileType rust inoremap kkt #[test]<cr>fn xx() {<cr>}<up><esc>fxcw
 autocmd FileType rust inoremap " ''<esc>i
 autocmd FileType rust inoremap ' ""<esc>i
 autocmd FileType rust inoremap kki impl x for {<cr>}<up><esc>fxcw
-autocmd FileType rust inoremap kks struct <esc>cw
+autocmd FileType rust inoremap kks struct x {}<esc>Fxcw
 autocmd FileType rust nnoremap <space>mm :!clear; cargo run --
 autocmd FileType rust nnoremap <space>hh :!clear; cargo test -- --nocapture
 

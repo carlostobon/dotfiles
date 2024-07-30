@@ -105,6 +105,8 @@ nnoremap v' vi"
 nnoremap v" vi'
 vnoremap // :s/
 
+nnoremap dp {<down>V}d
+nnoremap gg msgg
 
 " ==== Custom selectors ==== "
 nnoremap cn c^
