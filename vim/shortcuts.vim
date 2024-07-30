@@ -1,5 +1,4 @@
 " ==== Rust ====
-autocmd FileType rust inoremap kkpr println!("{}", );<esc>hi
 autocmd FileType rust nnoremap hhp msIpub<space><esc>`s
 autocmd FileType rust nnoremap hp ms:SearchUp<cr>Ipub <esc>`s
 autocmd FileType rust nnoremap ha ms:SearchUp<cr>f(BBiasync <esc>`s
@@ -9,7 +8,8 @@ autocmd FileType rust nnoremap hs msggO
       \#![allow(dead_code, unused_variables, unused_imports, unused_assignments)]<cr><esc>`s
 autocmd FileType rust nnoremap hc lbi_<esc> " variable => _variable
 autocmd FileType rust nnoremap hb f}i<cr><esc>O
-autocmd FileType rust nnoremap hc :!cargo add<space>
+autocmd FileType rust nnoremap hi :!cargo add<space>
+autocmd FileType rust inoremap kkpr println!("{}", );<esc>hi
 autocmd FileType rust inoremap kkq assert_eq!(, );<esc>T(i
 autocmd FileType rust inoremap kkb assert!();<esc>T(i
 autocmd FileType rust inoremap kkf fn () {<cr>}<esc><up>f(i
@@ -25,7 +25,6 @@ autocmd FileType rust inoremap ' ""<esc>i
 autocmd FileType rust inoremap kki impl x for {<cr>}<up><esc>fxcw
 autocmd FileType rust inoremap kks struct x {}<esc>Fxcw
 autocmd FileType rust nnoremap <space>mm :!clear; cargo run --
-autocmd FileType rust nnoremap <space>hh :!clear; cargo test -- --nocapture
 
 
 
