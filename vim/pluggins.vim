@@ -15,6 +15,7 @@ Plug 'othree/html5.vim',
 Plug 'NoahTheDuke/vim-just',
 Plug 'jpalardy/vim-slime',
 Plug 'makerj/vim-pdf',
+Plug 'prisma/vim-prisma',
 call plug#end()
 
 
