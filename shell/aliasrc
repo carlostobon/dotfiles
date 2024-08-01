@@ -48,7 +48,8 @@ alias \
 	gm="git merge" \
 	gr="git remote" \
 	gd="git diff" \
-	xmr="xmonad --restart"
+	xmr="xmonad --restart" \
+	pnpx="pnpm dlx"
 
 
 base(){
@@ -117,6 +118,12 @@ co(){
 	echo "Error when cd to src/components | app/components."
 }
 
+li(){
+	c "$(base)/src/lib" > /dev/null 2>&1 || \
+	c "$(base)/app/lib" > /dev/null 2>&1 || \
+	echo "Error when cd to src/lib | app/lib."
+}
+
 vp(){
 	if [ -e "./+page.svelte" ]; then
 		vim "./+page.svelte"
@@ -127,10 +134,6 @@ vp(){
 
 ro(){
 	c "$(base)/src/routes"
-}
-
-li(){
-	c "$(base)/src/lib"
 }
 
 bk(){
