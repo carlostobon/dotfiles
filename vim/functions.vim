@@ -18,6 +18,7 @@ def create_react_component(path: str):
     return
 
   path = Path(path.lower())
+  name = path.name
   names = path.name.strip().split('-')
   #
   # Adds name as folder to hold the component.
@@ -35,10 +36,10 @@ def create_react_component(path: str):
   try:
     os.makedirs(component_parent)
   except OSError as e:
-    print(f"Error creating directory '{component_dir}': {e}")
+    print(f"Error creating directory '{component_parent}': {e}")
     return
 
-  component_name = component_parent / str(pascal_case_name + ".tsx")
+  component_name = component_parent / str(name + ".tsx")
 
   try:
     with open(component_name, "w") as file:
@@ -51,7 +52,7 @@ export default function {}() {{
   )
 }}
     """.format(
-        path.parent / pascal_case_name,
+        path.parent / name,
         pascal_case_name,
         pascal_case_name
     ))
@@ -67,7 +68,7 @@ export default function {}() {{
       'export {{ default as {} }} from "./{}/{}"\n'.format(
           pascal_case_name,
           path.parent,
-          pascal_case_name
+          name,
       )
   )
 
