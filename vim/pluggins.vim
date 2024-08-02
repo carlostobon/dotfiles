@@ -16,6 +16,7 @@ Plug 'NoahTheDuke/vim-just',
 Plug 'jpalardy/vim-slime',
 Plug 'makerj/vim-pdf',
 Plug 'prisma/vim-prisma',
+Plug 'morhetz/gruvbox',
 call plug#end()
 
 
@@ -33,7 +34,7 @@ let g:ale_fixers = {
 
 
 let g:lightline = {
-      \ 'colorscheme': 'one',
+      \ 'colorscheme': 'gruvbox',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
@@ -63,7 +64,6 @@ endfunction
 
 " Makes Goyo keep syntax colors
 autocmd! ColorScheme default call s:tweak_colors()
-
 
 let g:rainbow_active = 1
 

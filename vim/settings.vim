@@ -7,8 +7,10 @@ set noshowmode
 set autoindent expandtab tabstop=2 shiftwidth=2
 set hidden
 set autoread
-set background=dark
-colorscheme default
+set background=light
+
+"Activates true colors
+set termguicolors
 
 " never persist buffers, useful
 " when working with encrypted files.
@@ -66,3 +68,6 @@ autocmd FileType css nnoremap vv :call SintaxOnSave()<cr>
 autocmd FileType html syntax on
 autocmd FileType html nnoremap fw :call SintaxOn()<cr>
 autocmd FileType html nnoremap vv :call SintaxOnSave()<cr>
+
+"sets color scheme gruvbox
+autocmd vimenter * ++nested colorscheme gruvbox
