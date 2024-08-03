@@ -24,12 +24,18 @@ call plug#end()
 let g:ale_linters = {
       \ 'rust': ['analyzer'],
       \ 'python': ['pyright'],
+      \ 'javascript': [ 'eslint' ],
+      \ 'typescript': [ 'eslint' ],
+      \ 'typescriptreact': ['eslint'],
       \ }
 
 let g:ale_fixers = {
       \ '*': ['remove_trailing_lines', 'trim_whitespace'],
       \ 'rust': ['rustfmt'],
       \ 'python': ['ruff'],
+      \ 'typescript': ['prettier'],
+      \ 'javascript': ['prettier'],
+      \ 'typescriptreact': ['prettier'],
       \ }
 
 
@@ -67,6 +73,7 @@ autocmd! ColorScheme default call s:tweak_colors()
 
 let g:rainbow_active = 1
 
+let g:ale_set_highlights = 0
 let g:ale_fix_on_save = 1
 let g:ale_completion_enabled = 1
 let g:ale_completion_autoimport = 1
