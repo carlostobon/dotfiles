@@ -23,16 +23,16 @@ call plug#end()
 " ==== ALE confgs ====
 let g:ale_linters = {
       \ 'rust': ['analyzer'],
-      \ 'python': ['pyright'],
-      \ 'javascript': [ 'eslint' ],
-      \ 'typescript': [ 'eslint' ],
+      \ 'python': ['pyright', 'ruff'],
+      \ 'javascript': ['eslint'],
+      \ 'typescript': ['eslint'],
       \ 'typescriptreact': ['eslint'],
       \ }
 
 let g:ale_fixers = {
       \ '*': ['remove_trailing_lines', 'trim_whitespace'],
       \ 'rust': ['rustfmt'],
-      \ 'python': ['ruff'],
+      \ 'python': ['black'],
       \ 'typescript': ['prettier'],
       \ 'javascript': ['prettier'],
       \ 'typescriptreact': ['prettier'],
