@@ -1,5 +1,6 @@
-
+" ===================================
 " Creates a component in NextJS from Vim.
+" ===================================
 "
 function! CreateReactComp(name)
   python3 << EOF
@@ -95,8 +96,9 @@ command! -nargs=1 ReactComp call CreateReactComp(<f-args>)
 
 
 
-" ====
+" ===================================
 " Creates a page in NextJS from Vim.
+" ===================================
 "
 function! CreateReactPage(name)
   python3 << EOF
@@ -127,7 +129,7 @@ def create_react_page(path: str):
 
 
   try:
-    os.makedirs(parent)
+    os.makedirs(parent, exist_ok=True)
   except OSError as e:
     print(f"Error creating directory '{path}': {e}")
     return
@@ -157,7 +159,75 @@ endfunction
 command! -nargs=1 ReactPage call CreateReactPage(<f-args>)
 
 
-" Function to search upwards line by line for a pattern
+
+" ===================================
+" Creates a layout in NextJS from Vim.
+" ===================================
+"
+function! CreateReactLayout(name)
+  python3 << EOF
+
+import os
+import vim
+from pathlib import Path
+
+def create_react_layout(path: str):
+
+  # Gets environment var FOLDER
+  project_dir = os.getenv("FOLDER")
+
+  if not project_dir:
+    print("Environment var FOLDER not found.")
+    return
+
+
+  path = Path(path)
+  parent = Path(project_dir) / "app" / path
+
+  names = path.name.strip().lower().split('-')
+
+  # Creates a convenient pascal case name
+  pascal_case_name = ""
+  for word in names:
+    pascal_case_name += word.capitalize()
+
+
+  try:
+    os.makedirs(parent, exist_ok=True)
+  except OSError as e:
+    print(f"Error creating directory '{path}': {e}")
+    return
+
+
+  with open(parent / "layout.tsx", "w") as file:
+    file.write(
+            """// {}/layout.tsx
+
+export default function {}Layout({{
+  children,
+}}: {{ children: React.ReactNode }}) {{
+  return (
+  <>{{children}}</>
+  )
+}}
+            """.format(
+              path,
+              pascal_case_name))
+
+  print("Layout {} created.".format(path))
+
+create_react_layout(vim.eval('a:name'))
+
+EOF
+endfunction
+
+command! -nargs=1 ReactLayout call CreateReactLayout(<f-args>)
+
+
+
+" ===================================
+" Helpful function to search upwards
+" ===================================
 "
 function! SearchUpwards()
     " Save the original position
