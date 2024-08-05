@@ -64,6 +64,9 @@ autocmd FileType typescriptreact inoremap kkim <img src={} alt="" /><esc>Frf}i
 autocmd FileType typescriptreact inoremap kkc className=""<esc>i
 autocmd FileType typescriptreact inoremap kkb <button onClick={}></button><esc>F/hi
 autocmd FileType typescriptreact nnoremap <space>mm :!clear; pnpm run dev
+autocmd FileType typescriptreact nnoremap <space>pm :!clear; cd $FOLDER; pnpm<space>
+autocmd FileType typescriptreact nnoremap <space>px :!clear; cd $FOLDER; pnpx<space>
+
 
 
 " Adds a basic function component on the
@@ -83,13 +86,13 @@ autocmd FileType typescriptreact inoremap kkw const x = ()
 
 
 " Adds the sequence to import from react
-autocmd FileType typescriptreact nnoremap hr msgg}o
+autocmd FileType typescriptreact nnoremap hir msgg}o
                   \import {  } from "react"<esc>F}<left>i
 
 
 " Adds the sequence to import from components
 " path alias should be set @components
-autocmd FileType typescriptreact nnoremap hi msgg}o
+autocmd FileType typescriptreact nnoremap hic msgg}o
                   \import {  } from "@components/index"<esc>F}<left>i
 
 
