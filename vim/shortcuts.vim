@@ -35,7 +35,7 @@ autocmd FileType rust nnoremap <space>mm :!clear; cargo run --
 
 
 
-" ==== Html and React ====
+" ==== HTML AND React ====
 autocmd FileType html,typescriptreact inoremap kkd <div></div><Esc>F>a
 autocmd FileType html,typescriptreact inoremap kkin <input type=""/><Esc>F"i
 autocmd FileType html,typescriptreact inoremap kk1 <h1></h1><Esc>FhT>i
@@ -55,17 +55,17 @@ autocmd FileType html,typescriptreact nnoremap tk ^xxx<esc>$xxx<esc>^
 autocmd FileType html,typescriptreact nnoremap c. f<cT>
 autocmd FileType html,typescriptreact inoremap ' ""<Esc>i
 autocmd FileType html,typescriptreact inoremap " ''<Esc>i
-autocmd FileType html,typescriptreact nnoremap hc :ReactComp<space>
-autocmd FileType html,typescriptreact nnoremap hp :ReactPage<space>
+autocmd FileType html,typescriptreact nnoremap hhc :ReactComp<space>
+autocmd FileType html,typescriptreact nnoremap hhp :ReactPage<space>
 
 autocmd FileType typescriptreact inoremap kka <a href=""></a><esc>Fhf"a
 autocmd FileType typescriptreact inoremap kklo console.log()<esc>i
 autocmd FileType typescriptreact inoremap kkim <img src={} alt="" /><esc>Frf}i
 autocmd FileType typescriptreact inoremap kkc className=""<esc>i
 autocmd FileType typescriptreact inoremap kkb <button onClick={}></button><esc>F/hi
-autocmd FileType typescriptreact nnoremap <space>mm :!clear; pnpm run dev
-autocmd FileType typescriptreact nnoremap <space>pm :!clear; cd $FOLDER; pnpm<space>
-autocmd FileType typescriptreact nnoremap <space>px :!clear; cd $FOLDER; pnpx<space>
+autocmd FileType typescriptreact nnoremap hhd :!clear; pnpm run dev
+autocmd FileType typescriptreact nnoremap hhm :!clear; cd $FOLDER; pnpm<space>
+autocmd FileType typescriptreact nnoremap hhx :!clear; cd $FOLDER; pnpx<space>
 
 
 
@@ -86,20 +86,27 @@ autocmd FileType typescriptreact inoremap kkw const x = ()
 
 
 " Adds the sequence to import from react
-autocmd FileType typescriptreact nnoremap hir msgg}o
+autocmd FileType typescriptreact nnoremap hr msgg}o
                   \import {  } from "react"<esc>F}<left>i
 
 
 " Adds the sequence to import from components
 " path alias should be set @components
-autocmd FileType typescriptreact nnoremap hic msgg}o
+autocmd FileType typescriptreact nnoremap hc msgg}o
                   \import {  } from "@components/index"<esc>F}<left>i
+
+
+autocmd FileType typescriptreact nnoremap hi msgg}o
+                  \import {  } from ""<esc>F}<left>i
 
 
 " Adds use client declaration
 autocmd FileType typescriptreact nnoremap hu msgg<down>i
                   \"use client"<cr><esc>`s
 
+
+
+" ==== HTML ====
 autocmd FileType html inoremap kkan <a href=""></a><Esc>Fhf"a
 autocmd FileType html inoremap kkim <img src="" alt=""/><esc>fsf"a
 autocmd FileType html inoremap kkcn class=""<esc>i
