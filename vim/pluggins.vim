@@ -17,6 +17,7 @@ Plug 'jpalardy/vim-slime',
 Plug 'makerj/vim-pdf',
 Plug 'prisma/vim-prisma',
 Plug 'morhetz/gruvbox',
+Plug 'ryanoasis/vim-devicons',
 call plug#end()
 
 
@@ -26,7 +27,7 @@ let g:ale_linters = {
       \ 'python': ['pyright', 'ruff'],
       \ 'javascript': ['eslint'],
       \ 'typescript': ['eslint'],
-      \ 'typescriptreact': ['eslint'],
+      \ 'typescriptreact': ['eslint', 'tsserver', 'tslint'],
       \ }
 
 let g:ale_fixers = {
@@ -71,6 +72,7 @@ endfunction
 " Makes Goyo keep syntax colors
 autocmd! ColorScheme default call s:tweak_colors()
 
+
 let g:rainbow_active = 1
 
 let g:ale_set_highlights = 0
@@ -78,7 +80,6 @@ let g:ale_fix_on_save = 1
 let g:ale_completion_enabled = 1
 let g:ale_completion_autoimport = 1
 let g:ale_set_balloons = 1
-let g:ale_cache_executable_check_failures = 1
 
 let g:slime_target = "tmux"
 
