@@ -30,7 +30,7 @@ def create_react_component(path: str):
     pascal_case_name += word.capitalize()
 
 
-  components_path = Path(project_dir).joinpath("app/components")
+  components_path = Path(project_dir).joinpath("components")
   component_parent = components_path.joinpath(path.parent)
 
   try:
