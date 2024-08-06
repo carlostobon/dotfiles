@@ -35,7 +35,7 @@ config.load_autoconfig(True)
 #   - no-3rdparty: Accept cookies from the same origin only. This is known to break some sites, such as GMail.
 #   - no-unknown-3rdparty: Accept cookies from the same origin only, unless a cookie is already set for the domain. On QtWebEngine, this is the same as no-3rdparty.
 #   - never: Don't accept cookies at all.
-config.set('content.cookies.accept', 'all', 'chrome-devtools://*')
+config.set("content.cookies.accept", "all", "chrome-devtools://*")
 
 # Which cookies to accept. With QtWebEngine, this setting also controls
 # other features with tracking capabilities similar to those of cookies;
@@ -59,13 +59,12 @@ config.set('content.cookies.accept', 'all', 'chrome-devtools://*')
 #   - no-3rdparty: Accept cookies from the same origin only. This is known to break some sites, such as GMail.
 #   - no-unknown-3rdparty: Accept cookies from the same origin only, unless a cookie is already set for the domain. On QtWebEngine, this is the same as no-3rdparty.
 #   - never: Don't accept cookies at all.
-config.set('content.cookies.accept', 'all', 'devtools://*')
+config.set("content.cookies.accept", "all", "devtools://*")
 
 # Value to send in the `Accept-Language` header. Note that the value
 # read from JavaScript is always the global value.
 # Type: String
-config.set('content.headers.accept_language',
-           '', 'https://matchmaker.krunker.io/*')
+config.set("content.headers.accept_language", "", "https://matchmaker.krunker.io/*")
 
 # User agent to send.  The following placeholders are defined:  *
 # `{os_info}`: Something like "X11; Linux x86_64". * `{webkit_version}`:
@@ -81,8 +80,11 @@ config.set('content.headers.accept_language',
 # between 5.12 and 5.14 (inclusive), changing the value exposed to
 # JavaScript requires a restart.
 # Type: FormatString
-config.set('content.headers.user_agent',
-           'Mozilla/5.0 ({os_info}) AppleWebKit/{webkit_version} (KHTML, like Gecko) {upstream_browser_key}/{upstream_browser_version} Safari/{webkit_version}', 'https://web.whatsapp.com/')
+config.set(
+    "content.headers.user_agent",
+    "Mozilla/5.0 ({os_info}) AppleWebKit/{webkit_version} (KHTML, like Gecko) {upstream_browser_key}/{upstream_browser_version} Safari/{webkit_version}",
+    "https://web.whatsapp.com/",
+)
 
 # User agent to send.  The following placeholders are defined:  *
 # `{os_info}`: Something like "X11; Linux x86_64". * `{webkit_version}`:
@@ -98,8 +100,11 @@ config.set('content.headers.user_agent',
 # between 5.12 and 5.14 (inclusive), changing the value exposed to
 # JavaScript requires a restart.
 # Type: FormatString
-config.set('content.headers.user_agent',
-           'Mozilla/5.0 ({os_info}; rv:90.0) Gecko/20100101 Firefox/90.0', 'https://accounts.google.com/*')
+config.set(
+    "content.headers.user_agent",
+    "Mozilla/5.0 ({os_info}; rv:90.0) Gecko/20100101 Firefox/90.0",
+    "https://accounts.google.com/*",
+)
 
 # User agent to send.  The following placeholders are defined:  *
 # `{os_info}`: Something like "X11; Linux x86_64". * `{webkit_version}`:
@@ -115,32 +120,35 @@ config.set('content.headers.user_agent',
 # between 5.12 and 5.14 (inclusive), changing the value exposed to
 # JavaScript requires a restart.
 # Type: FormatString
-config.set('content.headers.user_agent',
-           'Mozilla/5.0 ({os_info}) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99 Safari/537.36', 'https://*.slack.com/*')
+config.set(
+    "content.headers.user_agent",
+    "Mozilla/5.0 ({os_info}) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99 Safari/537.36",
+    "https://*.slack.com/*",
+)
 
 # Load images automatically in web pages.
 # Type: Bool
-config.set('content.images', True, 'chrome-devtools://*')
+config.set("content.images", True, "chrome-devtools://*")
 
 # Load images automatically in web pages.
 # Type: Bool
-config.set('content.images', True, 'devtools://*')
+config.set("content.images", True, "devtools://*")
 
 # Enable JavaScript.
 # Type: Bool
-config.set('content.javascript.enabled', True, 'chrome-devtools://*')
+config.set("content.javascript.enabled", True, "chrome-devtools://*")
 
 # Enable JavaScript.
 # Type: Bool
-config.set('content.javascript.enabled', True, 'devtools://*')
+config.set("content.javascript.enabled", True, "devtools://*")
 
 # Enable JavaScript.
 # Type: Bool
-config.set('content.javascript.enabled', True, 'chrome://*/*')
+config.set("content.javascript.enabled", True, "chrome://*/*")
 
 # Enable JavaScript.
 # Type: Bool
-config.set('content.javascript.enabled', True, 'qute://*/*')
+config.set("content.javascript.enabled", True, "qute://*/*")
 
 # When to show the statusbar.
 # Type: String
@@ -161,20 +169,20 @@ config.set('content.javascript.enabled', True, 'qute://*/*')
 
 # Default zoom level.
 # Type: Perc
-c.zoom.default = '100%'
+c.zoom.default = "100%"
 
 # Custom Colors
-blue_color = '#191724'
-white_color = '#e0def4'
-yellow_color = '#f6c177'
+blue_color = "#191724"
+white_color = "#e0def4"
+yellow_color = "#f6c177"
 
 
 # main_font = 'Fira Code'
-main_font = 'Roboto'
+main_font = "Roboto"
 
 
 # Keep the space at the end of the font size
-font_size_items = '15pt '
+font_size_items = "15pt "
 real_font_size = font_size_items + main_font
 
 
@@ -189,13 +197,13 @@ c.colors.statusbar.normal.bg = blue_color
 c.colors.statusbar.insert.bg = blue_color
 c.colors.keyhint.bg = blue_color
 c.hints.border = yellow_color
-c.hints.chars = 'arstneio'
+c.hints.chars = "arstneio"
 
 c.fonts.tabs.selected = real_font_size
 c.fonts.tabs.unselected = real_font_size
 c.colors.prompts.bg = blue_color
 c.colors.prompts.selected.bg = blue_color
-c.zoom.default = 100 
+c.zoom.default = 100
 c.colors.hints.bg = yellow_color
 c.colors.hints.fg = blue_color
 c.colors.statusbar.command.bg = blue_color
@@ -233,4 +241,5 @@ c.url.open_base_url = True
 
 # Background
 config.set("colors.webpage.darkmode.enabled", False)
-config.bind('K', 'hint links spawn mpv {hint-url}')
+config.bind("K", "hint links spawn mpv {hint-url}")
+config.source("gruvbox.py")
