@@ -44,6 +44,7 @@ linker "picom/picom.conf" ".config/picom/picom.conf"
 
 linker "qutebrowser/autoconfig.yml" ".config/qutebrowser/autoconfig.yml"
 linker "qutebrowser/config.py" ".config/qutebrowser/config.py"
+linker "qutebrowser/gruvbox.py" ".config/qutebrowser/gruvbox.py"
 
 linker "yazi/keymap.toml" ".config/yazi/keymap.toml"
 linker "yazi/theme.toml" ".config/yazi/theme.toml"
