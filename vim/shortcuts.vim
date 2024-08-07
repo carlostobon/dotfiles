@@ -1,9 +1,9 @@
 " ==== Rust ====
 autocmd FileType rust nnoremap hhp msIpub<space><esc>`s
-autocmd FileType rust nnoremap hp ms:SearchUp<cr>Ipub <esc>`s
-autocmd FileType rust nnoremap ha ms:SearchUp<cr>f(BBiasync <esc>`s
-autocmd FileType rust nnoremap hm :SearchUp<cr>O#[]<esc>i
-autocmd FileType rust nnoremap ht ms:SearchUp<cr>O#[test]<esc>`s
+autocmd FileType rust nnoremap hp ms:RustSearch<cr>Ipub <esc>`s
+autocmd FileType rust nnoremap ha ms:RustSearch<cr>f(BBiasync <esc>`s
+autocmd FileType rust nnoremap hm :RustSearch<cr>O#[]<esc>i
+autocmd FileType rust nnoremap ht ms:RustSearch<cr>O#[test]<esc>`s
 
 " Adds macro to disable warnings
 autocmd FileType rust nnoremap hs msggO
@@ -87,14 +87,12 @@ autocmd FileType typescriptreact inoremap kkw const x = ()
 
 
 " Adds the sequence to import from react
-autocmd FileType typescriptreact nnoremap hr msgg}o
-                  \import {  } from "react"<esc>F}<left>i
+autocmd FileType typescriptreact nnoremap hc ms:NextImporter react<cr>
 
 
 " Adds the sequence to import from components
 " path alias should be set @components
-autocmd FileType typescriptreact nnoremap hc msgg}o
-                  \import {  } from "@components/index"<esc>F}<left>i
+autocmd FileType typescriptreact nnoremap hc ms:NextImporter @components/index<cr>
 
 
 autocmd FileType typescriptreact nnoremap hi msgg}o

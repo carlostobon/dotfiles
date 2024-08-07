@@ -229,7 +229,7 @@ command! -nargs=1 ReactLayout call CreateReactLayout(<f-args>)
 " Helpful function to search upwards
 " ===================================
 "
-function! SearchUpwards()
+function! RustCodeSearcher()
     " Save the original position
     let l:original_pos = getpos('.')
 
@@ -264,4 +264,43 @@ function! SearchUpwards()
 endfunction
 
 " Map the function to a command for easier usage
-command! -nargs=0 SearchUp call SearchUpwards()
+command! -nargs=0 RustSearch call RustCodeSearcher()
+
+
+" ===================================
+" Import in Nextjs by pattern
+" ===================================
+"
+function! NextImporter(pattern)
+  " Save the original cursor position
+  let l:original_pos = getpos('.')
+
+  " Initialize the current line number to the cursor's current line
+  let l:current_line = line('.')
+
+
+  let l:import_statement = 'import {  } from "' . a:pattern . '"'
+
+  " Loop until the top of the file is reached
+  while l:current_line > 0
+    " Get the content of the current line
+    let l:line_content = getline(l:current_line)
+
+    " Check if the current line matches the pattern
+    if l:line_content =~ a:pattern
+      " Move the cursor to the start of the matched line
+      call cursor(l:current_line, 1)
+      " Insert a comma and space after the closing brace
+      execute "normal! f}\<left>i, \<right>"
+      startinsert
+      return
+    endif
+    " Move to the previous line
+    let l:current_line -= 1
+  endwhile
+
+  execute "normal! gg}o" . l:import_statement . "\<Esc>F}\<left>"
+  startinsert
+endfunction
+
+command! -nargs=1 NextImporter call NextImporter(<f-args>)
