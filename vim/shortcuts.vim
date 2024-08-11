@@ -58,6 +58,8 @@ autocmd FileType html,typescriptreact inoremap " ''<Esc>i
 autocmd FileType html,typescriptreact nnoremap hhc :ReactComp<space>
 autocmd FileType html,typescriptreact nnoremap hhp :ReactPage<space>
 autocmd FileType html,typescriptreact nnoremap hhl :ReactLayout<space>
+autocmd FileType html,typescriptreact nnoremap hhf :CreateFile<space>
+
 
 autocmd FileType typescriptreact inoremap kka <a href=""></a><esc>Fhf"a
 autocmd FileType typescriptreact inoremap kklo console.log()<esc>i

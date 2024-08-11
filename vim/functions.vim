@@ -304,3 +304,50 @@ function! NextImporter(pattern)
 endfunction
 
 command! -nargs=1 NextImporter call NextImporter(<f-args>)
+
+
+
+" ===================================
+" File creator for vim base $FOLDER
+" ===================================
+"
+
+function! CreateFile(path)
+  python3 << EOF
+
+from pathlib import Path
+import os
+
+def create_file(path: str):
+  path = Path(path)
+
+  # Gets environment var FOLDER
+  project_dir = os.getenv("FOLDER")
+
+  target_path = Path(project_dir).joinpath(path)
+
+  if target_path.exists():
+    print("File already exists.")
+    return
+
+  try:
+    target_path.parent.mkdir(parents=True, exist_ok=False)
+  except Exception as e:
+    print("Error while making parents: {}".format(e))
+
+  try:
+    with open(target_path, "w") as file:
+      file.write("// {}".format(path))
+
+  except OSError as e:
+    print("Something when wrong: {}".format(e))
+    return
+
+  print("File {} created.".format(path))
+
+
+create_file(vim.eval('a:path'))
+EOF
+endfunction
+
+command! -nargs=1 CreateFile call CreateFile(<f-args>)
