@@ -51,6 +51,8 @@ autocmd FileType html,typescriptreact inoremap kkli <li></li><Esc>FlT>i
 autocmd FileType html,typescriptreact inoremap kkla <label></label><esc>FlT>i
 autocmd FileType html,typescriptreact inoremap kkn <nav></nav><esc>FnT>i
 autocmd FileType html,typescriptreact nnoremap tg I{/*<esc>A*/}<esc>^
+autocmd FileType html,typescriptreact nnoremap t. 0/<\/<CR>i
+
 autocmd FileType html,typescriptreact nnoremap tk ^xxx<esc>$xxx<esc>^
 autocmd FileType html,typescriptreact nnoremap c. f<cT>
 autocmd FileType html,typescriptreact inoremap ' ""<Esc>i

@@ -331,7 +331,7 @@ def create_file(path: str):
     return
 
   try:
-    target_path.parent.mkdir(parents=True, exist_ok=False)
+    target_path.parent.mkdir(parents=True, exist_ok=True)
   except Exception as e:
     print("Error while making parents: {}".format(e))
 
