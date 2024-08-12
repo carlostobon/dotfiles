@@ -47,13 +47,17 @@ def create_react_component(path: str):
         file.write(
             """// components/{}.tsx
 
-export default function {}() {{
+interface {}Props {{}}
+
+export default function {}({{ }}: {}Props) {{
   return (
     <div>Hello, {}!</div>
   )
 }}
     """.format(
         path.parent / name,
+        pascal_case_name,
+        pascal_case_name,
         pascal_case_name,
         pascal_case_name
     ))
