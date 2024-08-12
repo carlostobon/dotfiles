@@ -7,7 +7,7 @@ set noshowmode
 set autoindent expandtab tabstop=2 shiftwidth=2
 set hidden
 set autoread
-set background=light
+set background=dark
 set pumheight=5
 
 "Activates true colors
