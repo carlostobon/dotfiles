@@ -48,6 +48,7 @@ alias \
 	gm="git merge" \
 	gr="git remote" \
 	gd="git diff" \
+	p="paru" \
 	xmr="xmonad --restart" \
 	pnpx="pnpm dlx"
 
@@ -184,12 +185,6 @@ tarit(){
 untarit(){
 	target=$1
 	sudo tar -I pigz -xf "$target"
-}
-
-p(){
-	paru "$@"
-	setxkbmap -option 'caps:super'
-	xdotool key Super_L+h
 }
 
 kduer(){
