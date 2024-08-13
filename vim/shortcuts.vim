@@ -57,10 +57,18 @@ autocmd FileType html,typescriptreact nnoremap tk ^xxx<esc>$xxx<esc>^
 autocmd FileType html,typescriptreact nnoremap c. f<cT>
 autocmd FileType html,typescriptreact inoremap ' ""<Esc>i
 autocmd FileType html,typescriptreact inoremap " ''<Esc>i
-autocmd FileType html,typescriptreact nnoremap hhc :ReactComp<space>
-autocmd FileType html,typescriptreact nnoremap hhp :ReactPage<space>
-autocmd FileType html,typescriptreact nnoremap hhl :ReactLayout<space>
-autocmd FileType html,typescriptreact nnoremap hhf :CreateFile<space>
+
+
+autocmd FileType typescriptreact nnoremap hhc :ReactComp<space>
+autocmd FileType typescriptreact nnoremap hhp :ReactPage<space>
+autocmd FileType typescriptreact nnoremap hhl :ReactLayout<space>
+autocmd FileType typescriptreact nnoremap hhf :CreateFile<space>
+
+autocmd FileType typescriptreact nnoremap hhd :!clear; pnpm run dev
+autocmd FileType typescriptreact nnoremap hhm :!clear; cd $FOLDER; pnpm add<space>
+autocmd FileType typescriptreact nnoremap hhx :!clear; cd $FOLDER; pnpx<space>
+autocmd FileType typescriptreact nnoremap hhs :!clear; cd $FOLDER; pnpx shadcn-ui@latest<space>
+autocmd FileType typescriptreact nnoremap hhr :!clear; cd $FOLDER;<space>
 
 
 autocmd FileType typescriptreact inoremap kka <a href=""></a><esc>Fhf"a
@@ -68,9 +76,6 @@ autocmd FileType typescriptreact inoremap kklo console.log()<esc>i
 autocmd FileType typescriptreact inoremap kkim <img src={} alt="" /><esc>Frf}i
 autocmd FileType typescriptreact inoremap kkc className=""<esc>i
 autocmd FileType typescriptreact inoremap kkb <button onClick={}></button><esc>F/hi
-autocmd FileType typescriptreact nnoremap hhd :!clear; pnpm run dev
-autocmd FileType typescriptreact nnoremap hhm :!clear; cd $FOLDER; pnpm add<space>
-autocmd FileType typescriptreact nnoremap hhx :!clear; cd $FOLDER; pnpx<space>
 
 
 
@@ -107,6 +112,8 @@ autocmd FileType typescriptreact nnoremap hi msgg}o
 autocmd FileType typescriptreact nnoremap hu msgg<down>i
                   \"use client"<cr><esc>`s
 
+
+autocmd FileType typescriptreact nnoremap hb f}i<cr><esc>O
 
 
 " ==== HTML ====
