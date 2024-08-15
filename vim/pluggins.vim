@@ -26,17 +26,17 @@ let g:ale_linters = {
       \ 'rust': ['analyzer'],
       \ 'python': ['pyright', 'ruff'],
       \ 'javascript': ['eslint'],
-      \ 'typescript': ['eslint'],
-      \ 'typescriptreact': ['eslint', 'tsserver', 'tslint'],
+      \ 'typescript': ['biome', 'tsserver'],
+      \ 'typescriptreact': ['biome', 'tsserver'],
       \ }
 
 let g:ale_fixers = {
       \ '*': ['remove_trailing_lines', 'trim_whitespace'],
       \ 'rust': ['rustfmt'],
       \ 'python': ['black'],
-      \ 'typescript': ['prettier'],
       \ 'javascript': ['prettier'],
-      \ 'typescriptreact': ['prettier'],
+      \ 'typescript': ['biome'],
+      \ 'typescriptreact': ['biome'],
       \ }
 
 
@@ -51,9 +51,6 @@ let g:lightline = {
       \ },
       \ }
 
-
-let g:ale_rust_rustfmt_options = '--edition 2021'
-let g:ale_lint_delay=0
 
 
 " Makes Tab the switcher in ALE
@@ -83,6 +80,10 @@ let g:ale_completion_autoimport = 1
 let g:ale_set_balloons = 1
 let g:ale_sign_error = '👹'
 let g:ale_sign_warning = '👽'
+let g:ale_lint_delay = 0
+let g:ale_completion_delay = 0
+let g:ale_rust_rustfmt_options = '--edition 2021'
+
 
 let g:slime_target = "tmux"
 
