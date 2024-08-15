@@ -187,12 +187,6 @@ untarit(){
 	sudo tar -I pigz -xf "$target"
 }
 
-p(){
-	paru "$@"
-	setxkbmap -option 'caps:super'
-	xdotool key Super_L+h
-}
-
 kduer(){
 	for file in *; do echo "$file" $(duer "$file"); done
 }
