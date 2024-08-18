@@ -35,7 +35,7 @@ autocmd FileType rust nnoremap <space>mm :!clear; cargo run --
 
 
 
-" ==== HTML AND React ====
+" ==== HTML AND NextJS ====
 autocmd FileType html,typescriptreact inoremap kkd <div></div><Esc>F>a
 autocmd FileType html,typescriptreact inoremap kkin <input type=""/><Esc>F"i
 autocmd FileType html,typescriptreact inoremap kk1 <h1></h1><Esc>FhT>i
@@ -58,6 +58,9 @@ autocmd FileType html,typescriptreact nnoremap c. f<cT>
 autocmd FileType html,typescriptreact inoremap ' ""<Esc>i
 autocmd FileType html,typescriptreact inoremap " ''<Esc>i
 
+" Comment and Uncomment by blocks
+autocmd FileType html,typescriptreact vmap tg :norm ^co{/**/aammp<cr>
+autocmd FileType html,typescriptreact vmap tk :norm ^xxx$xxx<cr>
 
 autocmd FileType typescriptreact nnoremap hhc :ReactComp<space>
 autocmd FileType typescriptreact nnoremap hhp :ReactPage<space>
@@ -104,8 +107,9 @@ autocmd FileType typescriptreact nnoremap hr ms:NextImporter react<cr>
 autocmd FileType typescriptreact nnoremap hc ms:NextImporter @/components/index<cr>
 
 
+" Adds import statement
 autocmd FileType typescriptreact nnoremap hi msgg}o
-                  \import {  } from ""<esc>F}<left>i
+                  \import {  } from ""<esc>i
 
 
 " Adds use client declaration
