@@ -64,11 +64,11 @@ autocmd FileType typescriptreact nnoremap hhp :ReactPage<space>
 autocmd FileType typescriptreact nnoremap hhl :ReactLayout<space>
 autocmd FileType typescriptreact nnoremap hhf :CreateFile<space>
 
-autocmd FileType typescriptreact nnoremap hhd :!clear; pnpm run dev
-autocmd FileType typescriptreact nnoremap hhm :!clear; cd $FOLDER; pnpm add<space>
-autocmd FileType typescriptreact nnoremap hhx :!clear; cd $FOLDER; pnpx<space>
-autocmd FileType typescriptreact nnoremap hhs :!clear; cd $FOLDER; pnpx shadcn-ui@latest<space>
-autocmd FileType typescriptreact nnoremap hhr :!clear; cd $FOLDER;<space>
+autocmd FileType typescriptreact nnoremap hhd :Command pnpm run dev
+autocmd FileType typescriptreact nnoremap hhm :Command pnpm add<space>
+autocmd FileType typescriptreact nnoremap hhx :Command pnpx<space>
+autocmd FileType typescriptreact nnoremap hhs :Command pnpx shadcn-ui@latest<space>
+autocmd FileType typescriptreact nnoremap hhr :Command<space>
 
 
 autocmd FileType typescriptreact inoremap kka <a href=""></a><esc>Fhf"a

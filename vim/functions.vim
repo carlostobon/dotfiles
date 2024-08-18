@@ -314,6 +314,7 @@ command! -nargs=1 NextImporter call NextImporter(<f-args>)
 " ===================================
 " File creator for vim base $FOLDER
 " ===================================
+" Creates files from the FOLDER dir.
 "
 
 function! CreateFile(path)
@@ -355,3 +356,24 @@ EOF
 endfunction
 
 command! -nargs=1 CreateFile call CreateFile(<f-args>)
+
+
+" ===================================
+" Command runner
+" ===================================
+" A simple function to run bash commands
+" from Vim
+"
+function Command(...)
+  " Clear the buffer and cd FOLDER var
+  let s:command = "clear && cd " . expand('$FOLDER') . "; "
+  let s:args = a:000
+
+  for arg in s:args
+    let s:command = s:command . " " . arg
+  endfor
+
+  execute "!" . s:command
+endfunction
+
+command! -nargs=* Command call Command(<f-args>)
