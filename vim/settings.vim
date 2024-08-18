@@ -7,7 +7,7 @@ set noshowmode
 set autoindent expandtab tabstop=2 shiftwidth=2
 set hidden
 set autoread
-set background=dark
+set background=light
 set pumheight=5
 
 "Activates true colors
@@ -70,5 +70,6 @@ autocmd FileType html syntax on
 autocmd FileType html nnoremap fw :call SintaxOn()<cr>
 autocmd FileType html nnoremap vv :call SintaxOnSave()<cr>
 
-"sets color scheme gruvbox
-autocmd vimenter * ++nested colorscheme gruvbox
+"sets color scheme gruvbox or ayu
+"autocmd vimenter * ++nested colorscheme gruvbox
+colorscheme ayu
