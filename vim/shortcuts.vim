@@ -58,12 +58,6 @@ autocmd FileType html,typescriptreact nnoremap c. f<cT>
 autocmd FileType html,typescriptreact inoremap ' ""<Esc>i
 autocmd FileType html,typescriptreact inoremap " ''<Esc>i
 
-" Comment and Uncomment by blocks
-" quite slow -> fix is required
-"
-autocmd FileType html,typescriptreact vnoremap tg :norm ^co{/**/aammp<cr>
-autocmd FileType html,typescriptreact vnoremap tk :norm ^xxx$xxx<cr>
-
 " Generates a block to comment
 autocmd FileType html,typescriptreact inoremap kko {/*<cr>*/}<esc>^
 

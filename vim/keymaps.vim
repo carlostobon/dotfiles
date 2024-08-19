@@ -41,10 +41,12 @@ nnoremap fl <right>bvu
 
 " ==== Comments ====
 nmap tt \cc
-nmap tu \cu
+nmap tg \cu
 vmap tt \cc
-vmap tu \cu
+vmap tg \cu
 
+"" Switch alternative commenters
+nmap ta \ca
 
 " ==== Jump from word to word ====
 nnoremap w W
