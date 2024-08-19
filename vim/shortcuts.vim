@@ -117,7 +117,14 @@ autocmd FileType typescriptreact nnoremap hu msgg<down>i
                   \"use client"<cr><esc>`s
 
 
+" Breks {} statement
 autocmd FileType typescriptreact nnoremap hb f}i<cr><esc>O
+
+
+" Adds import statement for shadcn
+autocmd FileType typescriptreact nnoremap hs msgg}o
+                  \import {  } from "@/components/ui/"<esc>i
+
 
 
 " ==== HTML ====
