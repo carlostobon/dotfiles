@@ -107,19 +107,20 @@ drc(){
 	dk rm ${instance}
 }
 
-
-# pnpm shortcuts svelte
+# pnpm shortcuts svelte and react
 alias \
 	dev="pnpm run dev" \
 	build="pnpm run build" \
 
 co(){
+	c "$(base)/components" > /dev/null 2>&1 || \
 	c "$(base)/src/components" > /dev/null 2>&1 || \
 	c "$(base)/app/components" > /dev/null 2>&1 || \
 	echo "Error when cd to src/components | app/components."
 }
 
 li(){
+	c "$(base)/lib" > /dev/null 2>&1 || \
 	c "$(base)/src/lib" > /dev/null 2>&1 || \
 	c "$(base)/app/lib" > /dev/null 2>&1 || \
 	echo "Error when cd to src/lib | app/lib."
