@@ -1,0 +1,64 @@
+#!/bin/bash
+
+function mutate_index(){
+  # Checks if at leas two args were passed.
+  if [ "$#" -lt 2 ]; then
+      echo >&2 "Error: This function requires at least two arguments."
+      exit 1
+  fi
+
+
+  # Checks if pnpm is installed
+  if ! [ -x "$(command -v pnpm)" ]; then
+    echo >&2 "Error: pnpm is not installed."
+    exit 1
+  fi
+
+  # Run the command
+  pnpm dlx shadcn-ui@latest add $@
+
+  # Removes the first arg
+  shift
+
+  # Collect env var $FOLDER
+  if [ -z "$FOLDER" ]; then
+    echo >&2 "FOLDER is not set."
+    exit 1
+  else
+    component_address="$FOLDER/components/ui"
+    index_address="$FOLDER/components/ui/index.ts"
+  fi
+
+  # Attempt to create component directory
+  if mkdir -p "$component_address"; then
+    echo "Directory created successfully: $component_address"
+  else
+    echo >&2 "Error: Failed to create direactory: $component_address"
+    exit 1
+  fi
+
+  # Attempt to create file index.ts
+  if touch "$index_address"; then
+    echo "File created successfully: $index_address"
+  else
+    echo >&2 "Error: Failed to create file: $index_address"
+    exit 1
+  fi
+
+  # Append an export command per component installed
+  for component in "$@"; do
+    basename="${component%.*}"
+    echo "export * from \"./$basename\";" >> "$index_address"
+    echo "Shadcn component $component added."
+  done
+
+}
+
+
+if [[ "$1" == "add" ]]; then
+  # It runs just when add is used.
+  mutate_index "$@"
+else
+  # Otherwise regular approach is used.
+  pnpm dlx shadcn-ui@latest "$@"
+fi
