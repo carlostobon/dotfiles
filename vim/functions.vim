@@ -232,6 +232,7 @@ command! -nargs=1 ReactLayout call CreateReactLayout(<f-args>)
 " ===================================
 " Helpful function to search upwards
 " ===================================
+" Thi script is used for Rust coding
 "
 function! RustCodeSearcher()
     " Save the original position
@@ -290,8 +291,8 @@ function! NextImporter(pattern)
     " Get the content of the current line
     let l:line_content = getline(l:current_line)
 
-    " Check if the current line matches the pattern
-    if l:line_content =~ a:pattern
+    " Check if the current line matches the pattern in an exact way
+    if l:line_content =~ '^' . a:pattern . '$'
       " Move the cursor to the start of the matched line
       call cursor(l:current_line, 1)
       " Insert a comma and space after the closing brace

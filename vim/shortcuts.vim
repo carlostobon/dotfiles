@@ -70,7 +70,7 @@ autocmd FileType typescriptreact nnoremap hhf :CreateFile<space>
 autocmd FileType typescriptreact nnoremap hhd :Command pnpm run dev
 autocmd FileType typescriptreact nnoremap hhm :Command pnpm add<space>
 autocmd FileType typescriptreact nnoremap hhx :Command pnpx<space>
-autocmd FileType typescriptreact nnoremap hhs :Command pnpx shadcn-ui@latest<space>
+autocmd FileType typescriptreact nnoremap hhs :Command shadcn<space>
 autocmd FileType typescriptreact nnoremap hhr :Command<space>
 
 
@@ -104,7 +104,13 @@ autocmd FileType typescriptreact nnoremap hr ms:NextImporter react<cr>
 
 " Adds the sequence to import from components
 " path alias should be set @/components
-autocmd FileType typescriptreact nnoremap hc ms:NextImporter @/components/index<cr>
+autocmd FileType typescriptreact nnoremap hc ms:NextImporter @/components<cr>
+
+
+" Adds the sequence to import from components/ui
+" path alias should be set @/components/ui,
+" it's specifically used to import shadcn components
+autocmd FileType typescriptreact nnoremap hs ms:NextImporter @/components/ui<cr>
 
 
 " Adds import statement
@@ -117,13 +123,9 @@ autocmd FileType typescriptreact nnoremap hu msgg<down>i
                   \"use client"<cr><esc>`s
 
 
-" Breks {} statement
+" Breaks {} statement
 autocmd FileType typescriptreact nnoremap hb f}i<cr><esc>O
 
-
-" Adds import statement for shadcn
-autocmd FileType typescriptreact nnoremap hs msgg}o
-                  \import {  } from "@/components/ui/"<esc>i
 
 
 
