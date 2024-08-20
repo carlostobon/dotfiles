@@ -292,7 +292,7 @@ function! NextImporter(pattern)
     let l:line_content = getline(l:current_line)
 
     " Check if the current line matches the pattern in an exact way
-    if l:line_content =~ '^' . a:pattern . '$'
+    if l:line_content =~ '"' . a:pattern . '"'
       " Move the cursor to the start of the matched line
       call cursor(l:current_line, 1)
       " Insert a comma and space after the closing brace
