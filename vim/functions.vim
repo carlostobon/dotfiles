@@ -246,9 +246,10 @@ function! RustCodeSearcher()
         " Get the content of the current line
         let l:line_content = getline(l:line_num)
 
-        let l:patterns = ['fn', 'struct', 'trait', 'enum']
-        " Check if the pattern is in the line
+        " Patterns
+        let l:patterns = ['fn', 'struct', 'trait', 'enum', 'type']
 
+        " Check if the pattern is in the line
         for pattern in patterns
           if l:line_content =~ pattern
               " Move the cursor to the matching line
