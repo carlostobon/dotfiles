@@ -145,6 +145,7 @@ bk(){
 s(){
 	c "$(base)/src" > /dev/null 2>&1 || \
 	c "$(base)/app" > /dev/null 2>&1 || \
+	exa || \
 	echo "Error when cd to src | app."
 }
 
