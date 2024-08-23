@@ -1,18 +1,20 @@
 "
 " ============ RUST ============
 "
-autocmd FileType rust nnoremap hhp msIpub<space><esc>`s
+autocmd FileType rust nnoremap tp msIpub<space><esc>`s
 autocmd FileType rust nnoremap hp ms:RustSearch<cr>Ipub <esc>`s
 autocmd FileType rust nnoremap ha ms:RustSearch<cr>f(BBiasync <esc>`s
-autocmd FileType rust nnoremap hm :RustSearch<cr>O#[]<esc>i
+autocmd FileType rust nnoremap ht ms:GeneralSearch fn<cr>O#[test]<esc>`s
+autocmd FileType rust nnoremap hm :GeneralSearch fn<cr>O#[]<esc>i
+autocmd FileType rust nnoremap hd :GeneralSearch struct<cr>O#[derive()]<esc>F)i
 autocmd FileType rust nnoremap hc lbi_<esc> " variable => _variable
 autocmd FileType rust nnoremap hb f}i<cr><esc>O
-autocmd FileType rust nnoremap hhm :!cargo add<space>
+autocmd FileType rust nnoremap hha :!cargo add<space>
 autocmd FileType rust nnoremap hhr :!clear; cargo run --
-autocmd FileType rust inoremap kkpr println!("{}", );<esc>hi
+autocmd FileType rust inoremap kkp println!("{}", );<esc>F{i
 autocmd FileType rust inoremap kkq assert_eq!(, );<esc>T(i
 autocmd FileType rust inoremap kkb assert!();<esc>T(i
-autocmd FileType rust inoremap kkf fn () {<cr>}<esc><up>f(i
+autocmd FileType rust inoremap kkf fn () {}<esc>F(i
 autocmd FileType rust inoremap kka async fn () {<cr>}<esc><up>f(i
 autocmd FileType rust inoremap kkd #[derive()]<esc>F(a
 autocmd FileType rust inoremap kkm #[]<esc>i
