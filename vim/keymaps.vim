@@ -108,6 +108,7 @@ nnoremap v" vi'
 vnoremap // :s/
 
 nnoremap dp {<down>V}d
+nnoremap vp {<down>V}
 nnoremap gg msgg
 
 " ==== Custom selectors ==== "
