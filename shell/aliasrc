@@ -21,7 +21,7 @@ alias \
   dc="c ~/Documents" \
   dw="c ~/Downloads" \
 	dt="c ~/.dotfiles" \
-	dv="c ~/.dotfiles/vim" \
+	dv="c ~/.dotfiles/vim && v shortcuts.vim" \
   nf="neofetch" \
 	ts="ts-node" \
 	st="sudo systemctl" \
