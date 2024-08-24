@@ -134,3 +134,5 @@ nnoremap Ty cT{
 nnoremap ,t `t
 nnoremap ,s `s
 nnoremap ,r `r
+
+nnoremap hht :Command<space>

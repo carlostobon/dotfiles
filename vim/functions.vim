@@ -407,7 +407,7 @@ command! -nargs=1 CreateFile call CreateFile(<f-args>)
 "
 function Command(...)
   " Clear the buffer and cd FOLDER var
-  let s:command = "clear && cd " . expand('$FOLDER') . "; "
+  let s:command = "clear && cd " . expand('$FOLDER') . " && "
   let s:args = a:000
 
   for arg in s:args

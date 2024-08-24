@@ -71,7 +71,6 @@ autocmd FileType typescriptreact nnoremap hhd :Command pnpm run dev
 autocmd FileType typescriptreact nnoremap hhm :Command pnpm add<space>
 autocmd FileType typescriptreact nnoremap hhx :Command pnpx<space>
 autocmd FileType typescriptreact nnoremap hhs :Command shadcn<space>
-autocmd FileType typescriptreact nnoremap hhr :Command<space>
 
 autocmd FileType typescriptreact nnoremap t. 0/<\/<CR>i
 autocmd FileType typescriptreact nnoremap c. f<cT>
