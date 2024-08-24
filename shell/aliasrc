@@ -61,16 +61,18 @@ if ! [ -x "$(command -v fd)" ]; then
   return 1
 fi
 
+# Checks if $1 is empty or not provided
 if [ -z "$1" ]; then
   cd "$HOME" && export ROOT="$HOME"
   return 0
 fi
 
-# This statement is key to run
-# other commands based in ROOT
+# Checks if $1 exists,
+# key for other commands that use it
 if [ -e "$1" ]; then
-	cd $1
+	cd "$1"
 else
+	echo "cd $1: No such file or directory" >&2
 	return 1
 fi
 
