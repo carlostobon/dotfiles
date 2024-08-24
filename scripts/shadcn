@@ -20,13 +20,13 @@ function mutate_index(){
   # Removes the first arg
   shift
 
-  # Collect env var $FOLDER
-  if [ -z "$FOLDER" ]; then
-    echo >&2 "FOLDER is not set."
+  # Collect env var $ROOT
+  if [ -z "$ROOT" ]; then
+    echo >&2 "ROOT is not set."
     exit 1
   else
-    component_address="$FOLDER/components/ui"
-    index_address="$FOLDER/components/ui/index.ts"
+    component_address="$ROOT/components/ui"
+    index_address="$ROOT/components/ui/index.ts"
   fi
 
   # Attempt to create component directory

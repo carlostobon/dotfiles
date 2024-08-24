@@ -64,7 +64,7 @@ nmap vv :w<cr>
 
 " ==== Missc ====
 nnoremap ft :NERDTree<cr>
-nnoremap ff :FZF $FOLDER<cr>
+nnoremap ff :FZF $ROOT<cr>
 nnoremap XX ZZ
 nnoremap XQ ZQ
 nnoremap ,h :Goyo 68%+90%x100%<cr>

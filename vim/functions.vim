@@ -11,11 +11,11 @@ from pathlib import Path
 
 def create_react_component(path: str):
 
-  # Gets environment var FOLDER
-  project_dir = os.getenv("FOLDER")
+  # Gets environment var ROOT
+  project_dir = os.getenv("ROOT")
 
   if not project_dir:
-    print("Environment var FOLDER not found.")
+    print("Environment var ROOT not found.")
     return
 
   path = Path(path.lower())
@@ -113,11 +113,11 @@ from pathlib import Path
 
 def create_react_page(path: str):
 
-  # Gets environment var FOLDER
-  project_dir = os.getenv("FOLDER")
+  # Gets environment var ROOT
+  project_dir = os.getenv("ROOT")
 
   if not project_dir:
-    print("Environment var FOLDER not found.")
+    print("Environment var ROOT not found.")
     return
 
 
@@ -177,11 +177,11 @@ from pathlib import Path
 
 def create_react_layout(path: str):
 
-  # Gets environment var FOLDER
-  project_dir = os.getenv("FOLDER")
+  # Gets environment var ROOT
+  project_dir = os.getenv("ROOT")
 
   if not project_dir:
-    print("Environment var FOLDER not found.")
+    print("Environment var ROOT not found.")
     return
 
 
@@ -353,9 +353,9 @@ command! -nargs=1 NextImporter call NextImporter(<f-args>)
 
 
 " ===================================
-" File creator for vim base $FOLDER
+" File creator for vim base $ROOT
 " ===================================
-" Creates files from the FOLDER dir.
+" Creates files from the ROOT dir.
 "
 
 function! CreateFile(path)
@@ -367,8 +367,8 @@ import os
 def create_file(path: str):
   path = Path(path)
 
-  # Gets environment var FOLDER
-  project_dir = os.getenv("FOLDER")
+  # Gets environment var ROOT
+  project_dir = os.getenv("ROOT")
 
   target_path = Path(project_dir).joinpath(path)
 
@@ -406,8 +406,8 @@ command! -nargs=1 CreateFile call CreateFile(<f-args>)
 " from Vim
 "
 function Command(...)
-  " Clear the buffer and cd FOLDER var
-  let s:command = "clear && cd " . expand('$FOLDER') . " && "
+  " Clear the buffer and cd ROOT var
+  let s:command = "clear && cd " . expand('$ROOT') . " && "
   let s:args = a:000
 
   for arg in s:args

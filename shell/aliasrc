@@ -52,21 +52,69 @@ alias \
 	p="paru"
 
 
-base(){
-	pwd | cut -d'/' -f1-4
-}
 
+# Change directory setting $ROOT
 c(){
-	cd "$1" && export FOLDER=$(base)
+
+if ! [ -x "$(command -v fd)" ]; then
+  echo >&2 "Error: fd is not installed."
+  return 1
+fi
+
+if [ -z "$1" ]; then
+  cd "$HOME" && export ROOT="$HOME"
+  return 0
+fi
+
+# This statement is key to run
+# other commands based in ROOT
+if [ -e "$1" ]; then
+	cd $1
+else
+	return 1
+fi
+
+current_dir=$(pwd)
+
+# Checks if current dir includes HOME
+if [[ "$current_dir" != "$HOME"* ]]; then
+	export ROOT="$current_dir"
+	return 0
+fi
+
+current_dir_holder="$current_dir"
+
+while [[ "$current_dir_holder" != "$HOME" ]]
+do
+  # Try to finds .git in path current_dir
+  result=$(fd \
+      --hidden \
+      --type d \
+      --max-depth 1 \
+      --glob .git \
+      "$current_dir_holder")
+
+  if [ -z "$result" ]; then
+    current_dir_holder="${current_dir_holder%/*}"
+  else
+    export ROOT="$current_dir_holder"
+    return 0
+  fi
+
+done
+
+
+export ROOT="$current_dir"
+return 0
+
 }
 
 b(){
-	c $(base)
+	c $ROOT
 }
 
 mkd(){
-	mkdir -p "$1"
-	c "$1"
+	mkdir -p "$1" && c "$1"
 }
 
 # Python terminal shortcuts
@@ -75,11 +123,12 @@ alias \
 
 # Rust terminal shortcuts
 alias \
-	cr="cargo build --release" \
+	cb="cargo build --release" \
+	cr="cargo run --" \
 	ca="cargo add" \
 
 ta(){
-	c "$(base)/target/release"
+	c "$ROOT/target/release"
 }
 
 # Docker terminal shortcuts
@@ -111,24 +160,22 @@ alias \
 	build="pnpm run build" \
 
 co(){
-	c "$(base)/components" > /dev/null 2>&1 || \
-	c "$(base)/src/components" > /dev/null 2>&1 || \
-	c "$(base)/app/components" > /dev/null 2>&1 || \
-	echo "Error when cd to src/components | app/components."
+	c "$ROOT/components" || \
+	c "$ROOT/src/components" || \
+	c "$ROOT/app/components" || \
+	echo "Error while cd components | src/components | app/components."
 }
 
 li(){
-	c "$(base)/lib" > /dev/null 2>&1 || \
-	c "$(base)/src/lib" > /dev/null 2>&1 || \
-	c "$(base)/app/lib" > /dev/null 2>&1 || \
-	echo "Error when cd to src/lib | app/lib."
+	c "$ROOT/lib" || \
+	c "$ROOT/src/lib" || \
+	c "$ROOT/app/lib" || \
+	echo "Error while cd lib | src/lib | app/lib."
 }
 
-s(){
-	c "$(base)/src" > /dev/null 2>&1 || \
-	c "$(base)/app" > /dev/null 2>&1 || \
-	exa || \
-	echo "Error when cd to src | app."
+s() {
+    c "$ROOT/src" || c "$ROOT/app" || exa ||
+		echo "Error while cd src | app."
 }
 
 # Video editing shortcuts
