@@ -14,7 +14,7 @@ autocmd FileType rust inoremap kkp println!("{}", );<esc>F{i
 autocmd FileType rust inoremap kkq assert_eq!(, );<esc>T(i
 autocmd FileType rust inoremap kkb assert!();<esc>T(i
 autocmd FileType rust inoremap kkf fn () {}<esc>F(i
-autocmd FileType rust inoremap kka async fn () {<cr>}<esc><up>f(i
+autocmd FileType rust inoremap kka async fn () {}<esc>F(i
 autocmd FileType rust inoremap kkd #[derive()]<esc>F(a
 autocmd FileType rust inoremap kkm #[]<esc>i
 autocmd FileType rust inoremap kkt #[test]<cr>fn xx() {<cr>}<up><esc>fxcw

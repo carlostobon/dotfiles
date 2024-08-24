@@ -35,9 +35,7 @@ alias \
 	v="vim" \
 	tree="lsd --tree --depth 2" \
 	vc="vim ~/.vimrc" \
-	vm="vim src/main.rs" \
-	vl="vim src/lib.rs" \
-	vi="vim index.tsx" \
+	vp="vim page.tsx" \
 	ga="git add" \
 	gc="git commit -m" \
 	gl="git log --stat" \
@@ -71,12 +69,11 @@ mkd(){
 	c "$1"
 }
 
-
-# Python shortcuts
+# Python terminal shortcuts
 alias \
 	pye="source ~/Documents/venvs/maths/bin/activate" \
 
-# rust shortcuts
+# Rust terminal shortcuts
 alias \
 	cr="cargo build --release" \
 	ca="cargo add" \
@@ -85,7 +82,7 @@ ta(){
 	c "$(base)/target/release"
 }
 
-# docker shortcuts
+# Docker terminal shortcuts
 alias \
 	dk="sudo docker" \
 	dkc="sudo docker ps -a" \
@@ -108,7 +105,7 @@ drc(){
 	dk rm ${instance}
 }
 
-# pnpm shortcuts svelte and react
+# NextJS terminal shortcuts
 alias \
 	dev="pnpm run dev" \
 	build="pnpm run build" \
@@ -127,22 +124,6 @@ li(){
 	echo "Error when cd to src/lib | app/lib."
 }
 
-vp(){
-	if [ -e "./+page.svelte" ]; then
-		vim "./+page.svelte"
-	else
-		vim "./page.tsx"
-	fi
-}
-
-ro(){
-	c "$(base)/src/routes"
-}
-
-bk(){
-	c "$(base)/backend"
-}
-
 s(){
 	c "$(base)/src" > /dev/null 2>&1 || \
 	c "$(base)/app" > /dev/null 2>&1 || \
@@ -150,7 +131,7 @@ s(){
 	echo "Error when cd to src | app."
 }
 
-# video editing shortcuts
+# Video editing shortcuts
 convert(){
 	target=$1
 	output=$2
@@ -164,6 +145,7 @@ mixer(){
 	ffmpeg -i ${video} -i ${sound} -c:v copy -c:a copy ${name}.mp4
 }
 
+# Device mount and unmount
 mt(){
 	target=$1
 	sudo mount /dev/${target} /mnt/simple
@@ -175,6 +157,7 @@ um(){
 	sudo umount /mnt/simple
 }
 
+# Compress and decompress archives
 tarit(){
 	name=$1
 	optional=$2
@@ -190,6 +173,34 @@ untarit(){
 	sudo tar -I pigz -xf "$target"
 }
 
+# Lists files using Duer
+# TODO: This feature should be integrated directly into Duer
 kduer(){
 	for file in *; do echo "$file" $(duer "$file"); done
+}
+
+# Opens the file with Vim if the target exists
+vm(){
+	targets=("src/main.rs" "main.py")
+
+	for target in "${targets[@]}"; do
+		if [ -e "$target" ]; then
+			vim "$target"
+		fi
+	done
+
+	echo "Neither src/main.rs nor main.py found." >&2
+}
+
+
+vl(){
+	targets=("src/lib.rs" "layout.tsx")
+
+	for target in "${targets[@]}"; do
+		if [ -e "$target" ]; then
+			vim "$target"
+		fi
+	done
+
+	echo "Neither src/lib.rs nor layout.tsx found." >&2
 }
