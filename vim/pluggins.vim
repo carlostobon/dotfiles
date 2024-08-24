@@ -1,5 +1,6 @@
 " ==== Plugins ====
 call plug#begin('~/.vim/plugged')
+Plug 'tpope/vim-fugitive',
 Plug 'frazrepo/vim-rainbow',
 Plug 'scrooloose/nerdcommenter',
 Plug 'itchyny/lightline.vim',
