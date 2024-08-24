@@ -4,8 +4,7 @@
 autocmd FileType rust nnoremap tp msIpub<space><esc>`s
 autocmd FileType rust nnoremap hp ms:RustSearch<cr>Ipub <esc>`s
 autocmd FileType rust nnoremap ha ms:RustSearch<cr>f(BBiasync <esc>`s
-autocmd FileType rust nnoremap ht ms:GeneralSearch fn<cr>O#[test]<esc>`s
-autocmd FileType rust nnoremap hm :GeneralSearch fn<cr>O#[]<esc>i
+autocmd FileType rust nnoremap hm ms:GeneralSearch fn<cr>O#[]<esc>i
 autocmd FileType rust nnoremap hd :GeneralSearch struct<cr>O#[derive()]<esc>F)i
 autocmd FileType rust nnoremap hc lbi_<esc> " variable => _variable
 autocmd FileType rust nnoremap hb f}i<cr><esc>O
