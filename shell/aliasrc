@@ -53,61 +53,61 @@ alias \
 
 
 
-# Change directory setting $ROOT
+# Changes directory & sets $ROOT
 c(){
 
-if ! [ -x "$(command -v fd)" ]; then
-  echo >&2 "Error: fd is not installed."
-  return 1
-fi
+	if ! [ -x "$(command -v fd)" ]; then
+		echo >&2 "Error: fd is not installed."
+		return 1
+	fi
 
-# Checks if $1 is empty or not provided
-if [ -z "$1" ]; then
-  cd "$HOME" && export ROOT="$HOME"
-  return 0
-fi
+	# Checks if $1 is empty or not provided
+	if [ -z "$1" ]; then
+		cd "$HOME" && export ROOT="$HOME"
+		return 0
+	fi
 
-# Checks if $1 exists,
-# key for other commands that use it
-if [ -e "$1" ]; then
-	cd "$1"
-else
-	echo "cd $1: No such file or directory" >&2
-	return 1
-fi
+	# Checks if $1 exists,
+	# key for other commands that use it
+	if [ -e "$1" ]; then
+		cd "$1"
+	else
+		echo "cd $1: No such file or directory" >&2
+		return 1
+	fi
 
-current_dir=$(pwd)
+	current_dir=$(pwd)
 
-# Checks if current dir includes HOME
-if [[ "$current_dir" != "$HOME"* ]]; then
+	# Checks if current dir includes HOME
+	if [[ "$current_dir" != "$HOME"* ]]; then
+		export ROOT="$current_dir"
+		return 0
+	fi
+
+	current_dir_holder="$current_dir"
+
+	while [[ "$current_dir_holder" != "$HOME" ]]
+	do
+		# Try to finds .git in path current_dir
+		result=$(fd \
+				--hidden \
+				--type d \
+				--max-depth 1 \
+				--glob .git \
+				"$current_dir_holder")
+
+		if [ -z "$result" ]; then
+			current_dir_holder="${current_dir_holder%/*}"
+		else
+			export ROOT="$current_dir_holder"
+			return 0
+		fi
+
+	done
+
+
 	export ROOT="$current_dir"
 	return 0
-fi
-
-current_dir_holder="$current_dir"
-
-while [[ "$current_dir_holder" != "$HOME" ]]
-do
-  # Try to finds .git in path current_dir
-  result=$(fd \
-      --hidden \
-      --type d \
-      --max-depth 1 \
-      --glob .git \
-      "$current_dir_holder")
-
-  if [ -z "$result" ]; then
-    current_dir_holder="${current_dir_holder%/*}"
-  else
-    export ROOT="$current_dir_holder"
-    return 0
-  fi
-
-done
-
-
-export ROOT="$current_dir"
-return 0
 
 }
 
@@ -128,8 +128,9 @@ alias \
 	cb="cargo build --release" \
 	cr="cargo run --" \
 	ca="cargo add" \
+	cw="cargo watch -x check -x test -x run" \
 
-ta(){
+ct(){
 	c "$ROOT/target/release"
 }
 
@@ -202,22 +203,44 @@ mt(){
 }
 
 um(){
-	sync
-	sudo umount /mnt/simple
+	sync && sudo umount /mnt/simple
 }
 
 # Compress and decompress archives
 tarit(){
-	name=$1
-	optional=$2
+	if ! [ -x "$(command -v tar)" ]; then
+		echo >&2 "Error: tar is not installed."
+		return 1
+	fi
+
+	if ! [ -x "$(command -v pigz)" ]; then
+		echo >&2 "Error: pigz is not installed."
+		return 1
+	fi
+
+	name="$1"
+	optional="$2"
+
 	if [ -z "$optional" ]; then
-		sudo tar -cf - "$name" | pigz > "$name.tar.gz"
+		tar -cf - "$name" | pigz > "$name.tar.gz"
 	else
-		sudo tar -cf - "$name" | pigz > "$optional.tar.gz"
+	  tar -cf - "$name" | pigz > "$optional.tar.gz"
 	fi
 }
 
+
 untarit(){
+	if ! [ -x "$(command -v tar)" ]; then
+		echo >&2 "Error: tar is not installed."
+		return 1
+	fi
+
+	if ! [ -x "$(command -v pigz)" ]; then
+		echo >&2 "Error: pigz is not installed."
+		return 1
+	fi
+
+
 	target=$1
 	sudo tar -I pigz -xf "$target"
 }
