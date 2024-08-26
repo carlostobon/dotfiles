@@ -25,6 +25,7 @@ call plug#end()
 " ==== ALE confgs ====
 let g:ale_linters = {
       \ 'rust': ['analyzer'],
+      \ 'sh': ['shellcheck'],
       \ 'python': ['pyright', 'ruff'],
       \ 'javascript': ['eslint'],
       \ 'typescript': ['biome', 'tsserver'],
