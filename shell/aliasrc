@@ -258,6 +258,7 @@ vm(){
 	for target in "${targets[@]}"; do
 		if [ -e "$target" ]; then
 			vim "$target"
+			return 0
 		fi
 	done
 
@@ -271,6 +272,7 @@ vl(){
 	for target in "${targets[@]}"; do
 		if [ -e "$target" ]; then
 			vim "$target"
+			return 0
 		fi
 	done
 
