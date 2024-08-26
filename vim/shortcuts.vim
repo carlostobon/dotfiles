@@ -95,12 +95,12 @@ autocmd FileType typescriptreact nnoremap hr ms:NextImporter react<cr>
 
 
 " Adds the sequence to import from components
-autocmd FileType typescriptreact nnoremap hc ms:NextImporter @/components<cr>
+autocmd FileType typescriptreact nnoremap hc ms:NextImporter @/components/index<cr>
 
 
 " Adds the sequence to import from components/ui
 " it's specifically used to import shadcn components
-autocmd FileType typescriptreact nnoremap hs ms:NextImporter @/components/ui<cr>
+autocmd FileType typescriptreact nnoremap hs ms:NextImporter @/components/ui/index<cr>
 
 
 " Adds regulas import statement

@@ -138,4 +138,4 @@ nnoremap ,r `r
 
 " ==== General shorcuts ==== "
 nnoremap hht :Command<space>
-nnoremap ht :
+nnoremap ht :G

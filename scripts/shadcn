@@ -7,7 +7,6 @@ function mutate_index(){
       exit 1
   fi
 
-
   # Checks if pnpm is installed
   if ! [ -x "$(command -v pnpm)" ]; then
     echo >&2 "Error: pnpm is not installed."
@@ -29,30 +28,21 @@ function mutate_index(){
 
   # Collect env var $ROOT
   if [ -z "$ROOT" ]; then
-    echo >&2 "ROOT is not set."
-    exit 1
+    echo >&2 "ROOT is not set." && exit 1
   else
     component_address="$ROOT/components/ui"
     index_address="$ROOT/components/ui/index.ts"
   fi
 
   # Attempt to create component directory
-  if mkdir -p "$component_address"; then
-    echo "Directory created successfully: $component_address"
-  else
-    echo >&2 "Error: Failed to create direactory: $component_address"
-    exit 1
+  if ! [ -e "$component_address" ]; then
+    mkdir -p "$component_address" ||
+      (echo "Couln't create $component_address" >&2 && exit 1)
   fi
 
-  # Attempt to create file index.ts
-  if touch "$index_address"; then
-    echo "File created successfully: $index_address"
-  else
-    echo >&2 "Error: Failed to create file: $index_address"
-    exit 1
-  fi
+  cd "$component_address" ||
+    (echo >&2 "Couldn't cd to $component_address" && exit 1)
 
-  cd "$component_address" || echo "Couldn't cd to $component_address" && return 1
   content=$(fd .tsx --exec echo 'export * from "{}";' | sed 's/.tsx//g')
   echo "$content" > "$index_address"
 
