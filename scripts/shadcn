@@ -45,12 +45,9 @@ function mutate_index(){
     exit 1
   fi
 
-  # Append an export command per component installed
-  for component in "$@"; do
-    basename="${component%.*}"
-    echo "export * from \"./$basename\";" >> "$index_address"
-    echo "Shadcn component $component added."
-  done
+  cd "$component_address"
+  content=$(fd .tsx --exec echo 'export * from "{}";' | sed 's/.tsx//g')
+  echo "$content" > "$index_address"
 
 }
 
