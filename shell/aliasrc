@@ -163,22 +163,24 @@ alias \
 	build="pnpm run build" \
 
 co(){
-	c "$ROOT/components" || \
-	c "$ROOT/src/components" || \
-	c "$ROOT/app/components" || \
+	c "$ROOT/components" >/dev/null 2>&1 || \
+	c "$ROOT/src/components" >/dev/null 2>&1 || \
+	c "$ROOT/app/components" >/dev/null 2>&1 || \
 	echo "Error while cd components | src/components | app/components."
 }
 
 li(){
-	c "$ROOT/lib" || \
-	c "$ROOT/src/lib" || \
-	c "$ROOT/app/lib" || \
+	c "$ROOT/lib" >/dev/null 2>&1 || \
+	c "$ROOT/src/lib" >/dev/null 2>&1 || \
+	c "$ROOT/app/lib" >/dev/null 2>&1 || \
 	echo "Error while cd lib | src/lib | app/lib."
 }
 
 s() {
-    c "$ROOT/src" || c "$ROOT/app" || exa ||
-		echo "Error while cd src | app."
+    c "$ROOT/src" >/dev/null 2>&1 || \
+    c "$ROOT/app" >/dev/null 2>&1 || \
+    exa || \
+    echo "Error while cd src | app."
 }
 
 # Video editing shortcuts
