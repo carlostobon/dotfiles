@@ -14,8 +14,15 @@ function mutate_index(){
     exit 1
   fi
 
+  # Checks if fd is installed
+  if ! [ -x "$(command -v fd)" ]; then
+    echo >&2 "Error: fd is not installed."
+    exit 1
+  fi
+
+
   # Run the command
-  pnpm dlx shadcn-ui@latest add $@
+  pnpm dlx shadcn-ui@latest add "$@"
 
   # Removes the first arg
   shift
@@ -45,7 +52,7 @@ function mutate_index(){
     exit 1
   fi
 
-  cd "$component_address"
+  cd "$component_address" || echo "Couldn't cd to $component_address" && return 1
   content=$(fd .tsx --exec echo 'export * from "{}";' | sed 's/.tsx//g')
   echo "$content" > "$index_address"
 
