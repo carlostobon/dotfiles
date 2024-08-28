@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # General shortcuts
 alias \
@@ -70,7 +70,7 @@ c(){
 	# Checks if $1 exists,
 	# key for other commands that use it
 	if [ -e "$1" ]; then
-		cd "$1"
+		cd "$1" || return 1
 	else
 		echo "cd $1: No such file or directory" >&2
 		return 1
@@ -112,7 +112,7 @@ c(){
 }
 
 b(){
-	c $ROOT
+	c "$ROOT"
 }
 
 mkd(){
@@ -148,13 +148,13 @@ alias \
 
 dri(){
 	instances=$(docker image ls -q)
-	dk rmi ${instances}
+	dk rmi "${instances}"
 }
 
 drc(){
 	instance=$(docker ps -a -q &)
-	dk stop ${instance}
-	dk rm ${instance}
+	dk stop "${instance}"
+	dk rm "${instance}"
 }
 
 # NextJS terminal shortcuts
@@ -187,20 +187,20 @@ s() {
 convert(){
 	target=$1
 	output=$2
-	ffmpeg -i ${target} -c:v copy -c:a aac ${output}.mp4
+	ffmpeg -i "${target}" -c:v copy -c:a aac "${output}.mp4"
 }
 
 mixer(){
 	video=$1
 	sound=$2
 	name=$3
-	ffmpeg -i ${video} -i ${sound} -c:v copy -c:a copy ${name}.mp4
+	ffmpeg -i "${video}" -i "${sound}" -c:v copy -c:a copy "${name}.mp4"
 }
 
 # Device mount and unmount
 mt(){
 	target=$1
-	sudo mount /dev/${target} /mnt/simple
+	sudo mount "/dev/${target}" /mnt/simple
 	c /mnt/simple
 }
 
@@ -250,7 +250,7 @@ untarit(){
 # Lists files using Duer
 # TODO: This feature should be integrated directly into Duer
 kduer(){
-	for file in *; do echo "$file" $(duer "$file"); done
+	for file in *; do echo "$file" "$(duer "$file")"; done
 }
 
 # Opens the file with Vim if the target exists

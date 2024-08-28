@@ -82,6 +82,11 @@ let g:ale_completion_autoimport = 1
 let g:ale_set_balloons = 1
 let g:ale_sign_error = '👹'
 let g:ale_sign_warning = '👽'
+let g:ale_sign_info = '🎃'
+
+
+
+
 let g:ale_lint_delay = 0
 let g:ale_completion_delay = 0
 let g:ale_rust_rustfmt_options = '--edition 2021'
