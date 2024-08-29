@@ -11,7 +11,6 @@ alias \
 	cl="clear" \
 	t="touch" \
 	a="c .." \
-	k="c -" \
   z="zathura" \
 	g="git" \
 	gk="gpg --list-keys --keyid-format long" \
@@ -117,6 +116,10 @@ b(){
 
 mkd(){
 	mkdir -p "$1" && c "$1"
+}
+
+k(){
+	c "$OLDPWD"
 }
 
 # Python terminal shortcuts
