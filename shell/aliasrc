@@ -258,7 +258,7 @@ kduer(){
 
 # Opens the file with Vim if the target exists
 vm(){
-	targets=("src/main.rs" "main.py")
+	targets=("src/main.rs" "main.rs" "main.py")
 
 	for target in "${targets[@]}"; do
 		if [ -e "$target" ]; then
@@ -267,7 +267,7 @@ vm(){
 		fi
 	done
 
-	echo "Neither src/main.rs nor main.py found." >&2
+	echo "Neither src/main.rs, main.rs, nor main.py were found." >&2
 }
 
 
