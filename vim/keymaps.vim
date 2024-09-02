@@ -67,7 +67,7 @@ nnoremap ft :NERDTree<cr>
 nnoremap ff :FZF $ROOT<cr>
 nnoremap XX ZZ
 nnoremap XQ ZQ
-nnoremap ,h :Goyo 68%+90%x100%<cr>
+nnoremap ,h :Goyo 75%+90%x100%<cr>
 nnoremap yp mt{v}y`t
 nnoremap Q <esc>
 nnoremap > >>
