@@ -1,29 +1,31 @@
 #!/bin/bash
 
-username=$(whoami)
-
 echo "Making folders..."
-mkdir -p "/home/$username/.config/mpv" \
-         "/home/$username/.config/picom" \
-         "/home/$username/.config/zathura" \
-         "/home/$username/.config/yazi" \
-         "/home/$username/.config/qutebrowser" \
-         "/home/$username/.config/kitty" \
-         "/home/$username/.config/wallpaper" \
-         "/home/$username/.vim/config" \
-         "/home/$username/.xmonad" \
+folders=(
+  ".config/mpv"
+  ".config/picom"
+  ".config/zathura"
+  ".config/yazi"
+  ".config/qutebrowser"
+  ".config/kitty"
+  ".config/wallpaper"
+  ".vim/config"
+  ".xmonad"
+)
 
+for folder in "${folders[@]}"; do
+  mkdir -p "$HOME/$folder"
+done
 
 linker(){
-  local from=$1
-  local to=$2
+  local from="$1"
+  local to="$2"
 
-  ln -srf "/home/$username/.dotfiles/$from" "/home/$username/$to"
+  ln -srf "$HOME/.dotfiles/$from" "$HOME/$to"
 }
 
 echo "Setting links..."
 
-linker "git/gitconfig" ".gitconfig"
 linker "shell/aliasrc" ".aliasrc"
 linker "shell/bash_profile" ".bash_profile"
 linker "shell/bashrc" ".bashrc"
@@ -36,11 +38,8 @@ linker "vim/settings.vim" ".vim/config/settings.vim"
 linker "vim/shortcuts.vim" ".vim/config/shortcuts.vim"
 linker "vim/functions.vim" ".vim/config/functions.vim"
 
-
-linker "kitty/kitty.conf" ".config/kitty/kitty.conf"
 linker "mpv/input.conf" ".config/mpv/input.conf"
 linker "mpv/mpv.conf" ".config/mpv/mpv.conf"
-linker "picom/picom.conf" ".config/picom/picom.conf"
 
 linker "qutebrowser/autoconfig.yml" ".config/qutebrowser/autoconfig.yml"
 linker "qutebrowser/config.py" ".config/qutebrowser/config.py"
@@ -54,7 +53,13 @@ linker "zathura/zathurarc" ".config/zathura/zathurarc"
 
 linker "wallpaper/wallpaper.png" ".config/wallpaper/wallpaper.png"
 
+linker "git/gitconfig" ".gitconfig"
+
 linker "xmonad/xmonad.hs" ".xmonad/xmonad.hs"
+
+linker "picom/picom.conf" ".config/picom/picom.conf"
+
+linker "kitty/kitty.conf" ".config/kitty/kitty.conf"
 
 linker "scripts/toolbox" ".binaries/toolbox"
 linker "scripts/ship" ".binaries/ship"
