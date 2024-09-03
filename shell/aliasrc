@@ -48,8 +48,8 @@ alias \
 	gd="git diff" \
 	xmr="xmonad --restart" \
 	pnpx="pnpm dlx" \
-	p="paru"
-
+	p="paru" \
+	podman="sudo podman"
 
 
 # Changes directory & sets $ROOT
@@ -139,26 +139,58 @@ ct(){
 
 # Docker terminal shortcuts
 alias \
-	dk="sudo docker" \
-	dkc="sudo docker ps -a" \
-	dkei="sudo docker exec -it" \
-	dki="sudo docker images" \
-	dcc="sudo docker-compose" \
-	rdcc="sudo docker-compose up --build -d" \
-	dre="sudo docker system prune -a" \
-	dvp="sudo docker volume prune" \
+	dre="docker system prune -a" \
+	dco="docker-compose" \
+	dcb="docker-compose up --build -d" \
+	dvp="docker volume prune" \
 
+d(){
+	if [ $# -eq 0 ]; then
+		docker ps -a
+	else
+		docker "$@"
+	fi
+}
 
-dri(){
-	instances=$(docker image ls -q)
-	dk rmi "${instances}"
+dlc(){
+	docker ps -a | awk '{printf "%s ", $1}'
+}
+
+di(){
+	if [ $# -eq 0 ]; then
+		docker images -a
+	else
+		docker image "$@"
+	fi
+}
+
+dli(){
+	docker images -a | awk '{printf "%s ", $3}'
+}
+
+de(){
+	if ! [ $# -eq 1 ]; then
+		echo >&2 "Number of arguments is wrong."
+	else
+		docker exec -it "$1" /bin/bash
+	fi
 }
 
 drc(){
-	instance=$(docker ps -a -q &)
-	dk stop "${instance}"
-	dk rm "${instance}"
+	if [ $# -eq 0 ]; then
+		docker container prune -f
+	fi
+
+	if [ "$1" == "force" ]; then
+		docker rm -f "$(docker ps -aq)"
+	fi
 }
+
+dri(){
+	docker image prune "$@"
+	echo "To remove images with not container running use \`-a\` flag."
+}
+
 
 # NextJS terminal shortcuts
 alias \
