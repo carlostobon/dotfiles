@@ -47,7 +47,6 @@ alias \
 	gr="git remote" \
 	gd="git diff" \
 	xmr="xmonad --restart" \
-	pnpx="pnpm dlx" \
 	p="paru" \
 	podman="sudo podman"
 
