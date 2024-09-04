@@ -412,3 +412,38 @@ function Command(...)
 endfunction
 
 command! -nargs=* Command call Command(<f-args>)
+
+
+
+" *** AddPkg ***
+" Adds pkg based on the current project.
+function AddPkg(...)
+    let base = $ROOT
+
+    if empty(base)
+        throw "Environment variable ROOT is not set."
+    endif
+
+    " Join arguments into a single string
+    let s:command = join(a:000, ' ')
+
+    " Helper function to handle command execution
+    function! Executer(binary, command)
+        if executable(a:binary)
+            execute "!clear && " . a:binary . " " . a:command
+        else
+            throw a:binary . " is not reachable."
+        endif
+    endfunction
+
+    " Check for pnpm or Cargo
+    if filereadable(base . "/pnpm-lock.yaml")
+        call Executer('pnpm', 'add ' . s:command)
+    elseif filereadable(base . "/Cargo.toml")
+        call Executer('cargo', 'add ' . s:command)
+    else
+        echo "Nothing to do here."
+    endif
+
+endfunction
+command! -nargs=* AddPkg call AddPkg(<f-args>)
