@@ -2,7 +2,7 @@
 " *          FINE-GRAINED MAPPINGS              *
 " * Custom mappings for commonly used languages *
 " ***********************************************
-"
+
 " ============ RUST ============
 autocmd FileType rust nnoremap tp msIpub<space><esc>`s
 autocmd FileType rust nnoremap hp ms:RustSearch<cr>Ipub <esc>`s
@@ -12,7 +12,7 @@ autocmd FileType rust nnoremap hd :GeneralSearch struct<cr>O#[derive()]<esc>F)i
 autocmd FileType rust nnoremap hc lbi_<esc> " variable => _variable
 autocmd FileType rust nnoremap hb f}i<cr><esc>O
 autocmd FileType rust nnoremap hhf :CreateFile<space>
-autocmd FileType rust nnoremap hha :!cargo add<space>
+autocmd FileType rust nnoremap hha :AddPkg<space>
 autocmd FileType rust nnoremap hhr :!clear; cargo run --
 autocmd FileType rust inoremap kkp println!("{}", );<esc>F{i
 autocmd FileType rust inoremap kkq assert_eq!(, );<esc>T(i
@@ -68,8 +68,8 @@ autocmd FileType typescriptreact nnoremap hhp :ReactPage<space>
 autocmd FileType typescriptreact nnoremap hhl :ReactLayout<space>
 autocmd FileType typescriptreact nnoremap hhf :CreateFile<space>
 
-autocmd FileType typescriptreact nnoremap hhd :Command pnpm run dev
-autocmd FileType typescriptreact nnoremap hhm :Command pnpm add<space>
+autocmd FileType typescriptreact nnoremap hhr :Command pnpm run dev
+autocmd FileType typescriptreact nnoremap hha :AddPkg<space>
 autocmd FileType typescriptreact nnoremap hhx :Command pnpx<space>
 autocmd FileType typescriptreact nnoremap hhs :Command shadcn<space>
 
@@ -169,7 +169,7 @@ autocmd FileType css inoremap pd padding:<space>
 
 
 " ============ PYTHON ============
-autocmd FileType python nnoremap <space>mm :!clear; python main.py
+autocmd FileType python nnoremap hhr :!clear; python main.py
 autocmd FileType python inoremap kkf def ():<esc>F(i
 autocmd FileType python inoremap kki if __name__ == "__main__":<cr>
 "autocmd FileType python xmap kk <Plug>SlimeRegionSend
