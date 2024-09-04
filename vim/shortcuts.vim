@@ -1,6 +1,9 @@
+" ***********************************************
+" *          FINE-GRAINED MAPPINGS              *
+" * Custom mappings for commonly used languages *
+" ***********************************************
 "
 " ============ RUST ============
-"
 autocmd FileType rust nnoremap tp msIpub<space><esc>`s
 autocmd FileType rust nnoremap hp ms:RustSearch<cr>Ipub <esc>`s
 autocmd FileType rust nnoremap ha ms:RustSearch<cr>f(BBiasync <esc>`s
@@ -37,9 +40,7 @@ autocmd FileType rust inoremap kkc #[cfg(test)]<cr>
 
 
 
-"
-" ============ NEXTJS ============
-"
+" ============ TYPESCRIPTREACT ============
 autocmd FileType typescriptreact inoremap kkd <div></div><Esc>F>a
 autocmd FileType typescriptreact inoremap kkin <input type=""/><Esc>F"i
 autocmd FileType typescriptreact inoremap kk1 <h1></h1><Esc>FhT>i
@@ -118,9 +119,7 @@ autocmd FileType typescriptreact nnoremap hu msgg<down>i
 autocmd FileType typescriptreact nnoremap hb f}i<cr><esc>O
 
 
-"
 " ============ HTML ============
-"
 autocmd FileType html nnoremap t. 0/<\/<CR>i
 autocmd FileType html nnoremap c. f<cT>
 autocmd FileType html inoremap kkd <div></div><Esc>F>a
@@ -145,9 +144,7 @@ autocmd FileType html inoremap kkcn class=""<esc>i
 autocmd FileType html inoremap kkb <button></button><esc>F{a
 
 
-"
 " ============ CSS ============
-"
 autocmd FileType css inoremap gcs grid-column-start:<space>
 autocmd FileType css inoremap gce grid-column-end:<space>
 
@@ -171,9 +168,7 @@ autocmd FileType css inoremap mg margin:<space>
 autocmd FileType css inoremap pd padding:<space>
 
 
-"
 " ============ PYTHON ============
-"
 autocmd FileType python nnoremap <space>mm :!clear; python main.py
 autocmd FileType python inoremap kkf def ():<esc>F(i
 autocmd FileType python inoremap kki if __name__ == "__main__":<cr>
