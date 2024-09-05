@@ -74,7 +74,8 @@ autocmd FileType typescriptreact nnoremap hhx :Command pnpx<space>
 autocmd FileType typescriptreact nnoremap hhs :Command shadcn<space>
 
 autocmd FileType typescriptreact nnoremap t. 0/<\/<CR>i
-autocmd FileType typescriptreact nnoremap c. f<cT>
+autocmd FileType typescriptreact nnoremap t, 0/[^=]><cr>li<cr><esc>OclassName=""<esc>i<cr><esc>O
+autocmd FileType typescriptreact nnoremap c. 0f>lct<
 
 " Adds a basic function component with
 " structure function
