@@ -59,7 +59,7 @@ autocmd FileType typescriptreact inoremap kka <a href=""></a><esc>Fhf"a
 autocmd FileType typescriptreact inoremap kklo console.log()<esc>i
 autocmd FileType typescriptreact inoremap kkim <img src={} alt="" /><esc>Frf}i
 autocmd FileType typescriptreact inoremap kkc className=""<esc>i
-autocmd FileType typescriptreact inoremap kkb <button onClick={}></button><esc>F/hi
+autocmd FileType typescriptreact inoremap kkb <button onClick={() => {}}></button><esc>F/hi
 autocmd FileType typescriptreact inoremap ' ""<Esc>i
 autocmd FileType typescriptreact inoremap " ''<Esc>i
 
