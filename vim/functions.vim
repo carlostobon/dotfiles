@@ -6,14 +6,44 @@
 " ============ Frontend ============
 
 " *** CreateReactComponent ***
-" Creates a component
-function! CreateReactComp(name)
+" Creates a component in NextJS or RemixJS
+function! CreateReactComp(...)
   python3 << EOF
 
 import os
 import sys
 import vim
 from pathlib import Path
+
+# This function serves as a checkpoint to verify
+# that the new component's name does not conflict
+# with any existing component names.
+def check_name_conflict(
+    components_path: Path, framework: str, component: Path
+) -> bool:
+    if not components_path.exists():
+        return False
+
+    # Collects all files in folder components_path
+    files = [file for file in components_path.rglob("*") if file.is_file()]
+
+    for file in files:
+        # Compare if both components have the same name
+        if file.stem == component.stem:
+            print(
+                "<- {} -> 🧨 Component {} conflicts with {}.".format(
+                    # *file.parts[-2:] returns the last two segments
+                    framework,
+                    str(component),
+                    str(Path(*file.parts[-3:])),
+                )
+            )
+
+            return True
+
+    return False
+
+
 
 def create_react_component(component: str):
   # Makes component a path object
@@ -28,9 +58,9 @@ def create_react_component(component: str):
   else:
       root = Path(root)
 
-  # Adds name as folder to hold the component.
-  # Say component is foo/bar, it will
-  # create foo/bar/bar
+  # Adds the specified name as a folder to contain the component.
+  # For example, if the component is "foo/bar", it will
+  # create the directory structure "foo/bar/bar".
   component = component.joinpath(component.name + ".tsx")
 
   # Creates a convenient pascal case name
@@ -56,6 +86,10 @@ def create_react_component(component: str):
   except Exception as error:
       print("Error reading file package.json: {}".format(error), file=sys.stderr)
 
+
+  # Checks if component's name conflicts with any existent component.
+  if check_name_conflict(components_folder_path, framework, component):
+    return
 
   # $ROOT/components_folder_path/component
   component_whole_path = components_folder_path.joinpath(component)
@@ -108,7 +142,7 @@ export default function {}({{ }}: {}Props) {{
       file.write(statement)
 
 
-  print("<- {} -> : Component {} created.".format(framework, pascal_case_name))
+  print("<- {} -> 🚀 Component {} created.".format(framework, pascal_case_name))
 
 # Creates all passed components
 for component in vim.eval("a:000"):
