@@ -1,11 +1,13 @@
-" ===================================
-" Creates Components
-" ===================================
-" This function is able to generate
-" components in NextJS or RemixJS from
-" Vim.
-"
-function! CreateReactComp(...)
+" ***********************************************
+" *                 FUNCTIONS                   *
+" *        Collection of helpful scripts        *
+" ***********************************************
+
+" ============ NextJS ============
+
+" *** CreateReactComponent ***
+" Creates a component
+function! CreateReactComp(name)
   python3 << EOF
 
 import os
@@ -86,7 +88,7 @@ export default function {}({{ }}: {}Props) {{
     print(f"Error while writting component: {error}", file=sys.stderr)
     return
 
-  # Statement for component
+  # Adds component to index.ts
   statement = (
       'export {{ default as {} }} from "./{}";\n'.format(
           pascal_case_name,
@@ -115,15 +117,11 @@ for component in vim.eval("a:000"):
 EOF
 endfunction
 
-
 command! -nargs=* ReactComp call CreateReactComp(<f-args>)
 
 
-
-" ===================================
+" *** CreateReactPage ***
 " Creates a page in NextJS from Vim.
-" ===================================
-"
 function! CreateReactPage(name)
   python3 << EOF
 
@@ -184,10 +182,8 @@ command! -nargs=1 ReactPage call CreateReactPage(<f-args>)
 
 
 
-" ===================================
-" Creates a layout in NextJS from Vim.
-" ===================================
-"
+" *** CreateReactLayout ***
+" Creates a layout
 function! CreateReactLayout(name)
   python3 << EOF
 
@@ -248,10 +244,50 @@ endfunction
 command! -nargs=1 ReactLayout call CreateReactLayout(<f-args>)
 
 
+" *** NextImporter ***
+" Facilitates easier imports from a specified pattern;
+" refer to fine-grained mappings for details.
+function! NextImporter(pattern)
+  " Save the original cursor position
+  let l:original_pos = getpos('.')
 
-" ===================================
-" Search upwards specific for Rust
-" ===================================
+  " Initialize the current line number to the cursor's current line
+  let l:current_line = line('.')
+
+
+  let l:import_statement = 'import {  } from "' . a:pattern . '"'
+
+  " Loop until the top of the file is reached
+  while l:current_line > 0
+    " Get the content of the current line
+    let l:line_content = getline(l:current_line)
+
+    " Check if the current line matches the pattern in an exact way
+    if l:line_content =~ '"' . a:pattern . '"'
+      " Move the cursor to the start of the matched line
+      call cursor(l:current_line, 1)
+      " Insert a comma and space after the closing brace
+      execute "normal! f}\<left>i, \<right>"
+      startinsert
+      return
+    endif
+    " Move to the previous line
+    let l:current_line -= 1
+  endwhile
+
+  execute "normal! gg}o" . l:import_statement . "\<Esc>F}\<left>"
+  startinsert
+endfunction
+
+command! -nargs=1 NextImporter call NextImporter(<f-args>)
+
+
+
+" ============ RUST ============
+
+" *** RustCodeSearcher ***
+" Searches upwards for patterns like fn, struct,
+" trait, enum, and type.
 function! RustCodeSearcher()
     " Save the original position
     let l:original_pos = getpos('.')
@@ -291,10 +327,11 @@ endfunction
 command! -nargs=0 RustSearch call RustCodeSearcher()
 
 
-" ===================================
-" A general searcher by pattern
-" ===================================
-"
+
+" ============ General ============
+
+" *** GeneralSeach ***
+" Searches for a given pattern upwards
 function! GeneralSearch(pattern)
     " Save the original position
     let l:original_pos = getpos('.')
@@ -332,52 +369,8 @@ command! -nargs=1 GeneralSearch call GeneralSearch(<f-args>)
 
 
 
-" ===================================
-" Import in Nextjs by pattern
-" ===================================
-"
-function! NextImporter(pattern)
-  " Save the original cursor position
-  let l:original_pos = getpos('.')
-
-  " Initialize the current line number to the cursor's current line
-  let l:current_line = line('.')
-
-
-  let l:import_statement = 'import {  } from "' . a:pattern . '"'
-
-  " Loop until the top of the file is reached
-  while l:current_line > 0
-    " Get the content of the current line
-    let l:line_content = getline(l:current_line)
-
-    " Check if the current line matches the pattern in an exact way
-    if l:line_content =~ '"' . a:pattern . '"'
-      " Move the cursor to the start of the matched line
-      call cursor(l:current_line, 1)
-      " Insert a comma and space after the closing brace
-      execute "normal! f}\<left>i, \<right>"
-      startinsert
-      return
-    endif
-    " Move to the previous line
-    let l:current_line -= 1
-  endwhile
-
-  execute "normal! gg}o" . l:import_statement . "\<Esc>F}\<left>"
-  startinsert
-endfunction
-
-command! -nargs=1 NextImporter call NextImporter(<f-args>)
-
-
-
-" ===================================
-" File creator for vim base $ROOT
-" ===================================
-" Creates files from the ROOT dir.
-"
-
+" *** CreateFile ***
+" Creates a file from current ROOT directory.
 function! CreateFile(path)
   python3 << EOF
 
@@ -419,14 +412,12 @@ endfunction
 command! -nargs=1 CreateFile call CreateFile(<f-args>)
 
 
-" ===================================
-" Command runner
-" ===================================
-" A simple function to run bash commands
-" from Vim
-"
+
+" *** Command ***
+" Run a specified command in the terminal within
+" the ROOT directory.
 function Command(...)
-  " Clear the buffer and cd ROOT var
+  " Clear the buffer and cd ROOT env-var
   let s:command = "clear && cd " . expand('$ROOT') . " && "
   let s:args = a:000
 
@@ -438,3 +429,38 @@ function Command(...)
 endfunction
 
 command! -nargs=* Command call Command(<f-args>)
+
+
+
+" *** AddPkg ***
+" Adds pkg based on the current project.
+function AddPkg(...)
+    let base = $ROOT
+
+    if empty(base)
+        throw "Environment variable ROOT is not set."
+    endif
+
+    " Join arguments into a single string
+    let s:command = join(a:000, ' ')
+
+    " Helper function to handle command execution
+    function! Executer(binary, command)
+        if executable(a:binary)
+            execute "!clear && " . a:binary . " " . a:command
+        else
+            throw a:binary . " is not reachable."
+        endif
+    endfunction
+
+    " Check for pnpm or Cargo
+    if filereadable(base . "/pnpm-lock.yaml")
+        call Executer('pnpm', 'add ' . s:command)
+    elseif filereadable(base . "/Cargo.toml")
+        call Executer('cargo', 'add ' . s:command)
+    else
+        echo "Nothing to do here."
+    endif
+
+endfunction
+command! -nargs=* AddPkg call AddPkg(<f-args>)

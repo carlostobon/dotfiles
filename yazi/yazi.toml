@@ -21,16 +21,13 @@ pdf = [
 
 [open]
 rules = [
-	{ mime = "text/*", use = "edit" },
-	{ mime = "video/*", use = "play" },
-	{ mime = "image/*", use = "reveal" },
-	{ mime = "*.jpg", use = "reveal" },
+    { mime = "text/*", use = "edit" },
+    { mime = "video/*", use = "play" },
+    { mime = "image/*", use = "reveal" },
 
-	{ name = "*.json", use = "edit" },
-	{ name = "*.js", use = "edit" },
-	{ name = "*.ts", use = "edit" },
-	{ name = "*.pdf", use = "pdf" },
-	{ name = "*.epub", use = "pdf" },
-	{ name = "*.mp3", use = "play" },
-	{ name = "*.wav", use = "play" },
+    { name = "*.jpg", use = "reveal" },
+    { name = "*.{json,js,ts,tsx,jsx}", use = "edit" },
+    { name = "*.pdf", use = "pdf" },
+    { name = "*.epub", use = "pdf" },
+    { name = "*.{mp3,wav}", use = "play" },
 ]
