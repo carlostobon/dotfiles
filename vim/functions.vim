@@ -3,7 +3,7 @@
 " *        Collection of helpful scripts        *
 " ***********************************************
 
-" ============ NextJS ============
+" ============ Frontend ============
 
 " *** CreateReactComponent ***
 " Creates a component
@@ -118,6 +118,7 @@ EOF
 endfunction
 
 command! -nargs=* ReactComp call CreateReactComp(<f-args>)
+
 
 
 " *** CreateReactPage ***
