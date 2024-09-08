@@ -1,51 +1,70 @@
 " ===================================
-" Creates a component in NextJS from Vim.
+" Creates Components
 " ===================================
+" This function is able to generate
+" components in NextJS or RemixJS from
+" Vim.
 "
-function! CreateReactComp(name)
+function! CreateReactComp(...)
   python3 << EOF
 
 import os
+import sys
 import vim
 from pathlib import Path
 
-def create_react_component(path: str):
+def create_react_component(component: str):
+  # Makes component a path object
+  component = Path(component)
 
-  # Gets environment var ROOT
-  project_dir = os.getenv("ROOT")
+  # Project root, comes from a script in aliasrc
+  root = os.getenv("ROOT")
 
-  if not project_dir:
-    print("Environment var ROOT not found.")
+  if not root:
+    print("Project root not found!", file=sys.stderr)
     return
+  else:
+      root = Path(root)
 
-  path = Path(path.lower())
-  name = path.name
-  names = path.name.strip().split('-')
-  #
   # Adds name as folder to hold the component.
-  path = path.joinpath(path.name)
+  # Say component is foo/bar, it will
+  # create foo/bar/bar
+  component = component.joinpath(component.name + ".tsx")
 
   # Creates a convenient pascal case name
+  names = component.stem.lower().strip().split('-')
   pascal_case_name = ""
   for word in names:
     pascal_case_name += word.capitalize()
 
 
-  components_path = Path(project_dir).joinpath("components")
-  component_parent = components_path.joinpath(path.parent)
+  components_folder_path = Path()
+  framework = str()
 
   try:
-    os.makedirs(component_parent)
-  except OSError as e:
-    print(f"Error creating directory '{component_parent}': {e}")
-    return
+      with open(root.joinpath("package.json"), "r") as file:
+          content = file.read()
+          if "remix-run" in content:
+              components_folder_path = root.joinpath("app/components")
+              framework = "RemixJS"
+          else:
+              components_folder_path = root.joinpath("components")
+              framework = "NextJS"
 
-  component_name = component_parent / str(name + ".tsx")
+  except Exception as error:
+      print("Error reading file package.json: {}".format(error), file=sys.stderr)
+
+
+  # $ROOT/components_folder_path/component
+  component_whole_path = components_folder_path.joinpath(component)
+
+  # Creates parent directory
+  component_whole_path.parent.mkdir(parents=True)
 
   try:
-    with open(component_name, "w") as file:
+    with open(component_whole_path, "w") as file:
         file.write(
-            """// components/{}.tsx
+            """// components/{}
 
 interface {}Props {{}}
 
@@ -55,7 +74,7 @@ export default function {}({{ }}: {}Props) {{
   )
 }}
     """.format(
-        path.parent / name,
+        component,
         pascal_case_name,
         pascal_case_name,
         pascal_case_name,
@@ -64,39 +83,40 @@ export default function {}({{ }}: {}Props) {{
 
 
   except Exception as error:
-    print(f"Error while writting component: {error}")
+    print(f"Error while writting component: {error}", file=sys.stderr)
     return
 
-  # This section adds component to index.ts
-  #
+  # Statement for component
   statement = (
-      'export {{ default as {} }} from "./{}/{}"\n'.format(
+      'export {{ default as {} }} from "./{}";\n'.format(
           pascal_case_name,
-          path.parent,
-          name,
+          # Returns path without file extension
+          component.with_suffix(''),
       )
   )
 
+  # Creates index.ts file
   try:
-    with open(components_path / "index.ts", "r") as file:
+    with open(components_folder_path / "index.ts", "r+") as file:
       content = file.read()
-    with open(components_path / "index.ts", "w") as file:
-      file.write(content + statement)
+      file.write(statement)
 
   except FileNotFoundError:
-    with open(components_path / "index.ts", "w") as file:
+    with open(components_folder_path / "index.ts", "w") as file:
       file.write(statement)
 
 
-  print("Component {} created.".format(pascal_case_name))
+  print("<- {} -> : Component {} created.".format(framework, pascal_case_name))
 
-create_react_component(vim.eval('a:name'))
+# Creates all passed components
+for component in vim.eval("a:000"):
+  create_react_component(component)
 
 EOF
 endfunction
 
 
-command! -nargs=1 ReactComp call CreateReactComp(<f-args>)
+command! -nargs=* ReactComp call CreateReactComp(<f-args>)
 
 
 
