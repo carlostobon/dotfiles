@@ -1,2 +1,3 @@
-binaries
 kitty/theme.conf
+__pycache__/
+*.py[cod]

@@ -64,7 +64,7 @@ autocmd FileType typescriptreact inoremap ' ""<Esc>i
 autocmd FileType typescriptreact inoremap " ''<Esc>i
 
 autocmd FileType typescriptreact nnoremap hhc :ReactComp<space>
-autocmd FileType typescriptreact nnoremap hhp :ReactPage<space>
+autocmd FileType typescriptreact nnoremap hhp :ReactRoute<space>
 autocmd FileType typescriptreact nnoremap hhl :ReactLayout<space>
 autocmd FileType typescriptreact nnoremap hhf :CreateFile<space>
 
