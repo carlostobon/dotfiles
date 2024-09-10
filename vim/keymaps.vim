@@ -135,6 +135,7 @@ nnoremap Ty cT{
 nnoremap ,t `t
 nnoremap ,s `s
 nnoremap ,r `r
+nnoremap .t mt
 
 " ==== General shorcuts ==== "
 nnoremap hht :Command<space>

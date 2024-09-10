@@ -74,7 +74,7 @@ def create_react_component(component: str):
 
 
   # Returns the components folder path and identifies the framework.
-  components_folder_path, framework = find_framework(root)
+  components_folder_path, _, framework = find_framework(root)
 
   # Checks if component's name conflicts with any existent component.
   if check_name_conflict(components_folder_path, framework, component):
@@ -145,64 +145,39 @@ command! -nargs=* ReactComp call CreateReactComp(<f-args>)
 
 
 " *** CreateReactPage ***
-" Creates a page in NextJS from Vim.
-function! CreateReactPage(name)
+" Creates a page in NextJS or a route in RemixJS
+function! CreateReactRoute(route)
   python3 << EOF
 
 import os
+import sys
 import vim
 from pathlib import Path
 
-def create_react_page(path: str):
+sys.path.append(os.getenv("HOME") + '/.vim/modules')
+from frontend import create_next_page, create_remix_route, find_framework, get_root_directory
 
-  # Gets environment var ROOT
-  project_dir = os.getenv("ROOT")
+root = get_root_directory()
 
-  if not project_dir:
-    print("Environment var ROOT not found.")
-    return
+if not root:
+    print("Project root not found!", file=sys.stderr)
+    sys.exit(1)
 
+framework = find_framework(root)[2]
 
-  path = Path(path)
-  parent = Path(project_dir) / "app" / path
+if framework == "NextJS":
+    create_next_page(Path(vim.eval('a:route')))
+elif framework == "RemixJS":
+    create_remix_route(Path(vim.eval('a:route')))
+else:
+    print("Framework not found!", file=sys.stderr)
+    sys.exit(1)
 
-  names = path.name.strip().lower().split('-')
-
-  # Creates a convenient pascal case name
-  pascal_case_name = ""
-  for word in names:
-    pascal_case_name += word.capitalize()
-
-
-  try:
-    os.makedirs(parent, exist_ok=True)
-  except OSError as e:
-    print(f"Error creating directory '{path}': {e}")
-    return
-
-
-  with open(parent / "page.tsx", "w") as file:
-    file.write(
-            """// {}/page.tsx
-
-export default function {}() {{
-  return (
-    <div>Hello, {}!</div>
-  )
-}}
-            """.format(
-              path,
-              pascal_case_name,
-              path.name))
-
-  print("Page {} created.".format(path))
-
-create_react_page(vim.eval('a:name'))
 
 EOF
 endfunction
 
-command! -nargs=1 ReactPage call CreateReactPage(<f-args>)
+command! -nargs=1 ReactRoute call CreateReactRoute(<f-args>)
 
 
 
@@ -513,8 +488,9 @@ if not root:
   print("Project root not found!", file=sys.stderr)
   sys.exit(1)
 
-# Returns the components folder path and identifies the framework.
-_, framework = find_framework(root)
+# Returns components and route folder path,
+# and identifies the framework.
+framework = find_framework(root)[2]
 
 vim.vars['framework'] = framework
 
