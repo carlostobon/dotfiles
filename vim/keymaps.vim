@@ -140,3 +140,4 @@ nnoremap .t mt
 " ==== General shorcuts ==== "
 nnoremap hht :Command<space>
 nnoremap ht :G
+nnoremap hd :ALEDetail<cr>
