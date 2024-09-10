@@ -15,6 +15,9 @@ import sys
 import vim
 from pathlib import Path
 
+sys.path.append(os.getenv("HOME") + '/.vim/modules')
+from frontend import find_framework
+
 # This function serves as a checkpoint to verify
 # that the new component's name does not conflict
 # with any existing component names.
@@ -70,22 +73,8 @@ def create_react_component(component: str):
     pascal_case_name += word.capitalize()
 
 
-  components_folder_path = Path()
-  framework = str()
-
-  try:
-      with open(root.joinpath("package.json"), "r") as file:
-          content = file.read()
-          if "remix-run" in content:
-              components_folder_path = root.joinpath("app/components")
-              framework = "RemixJS"
-          else:
-              components_folder_path = root.joinpath("components")
-              framework = "NextJS"
-
-  except Exception as error:
-      print("Error reading file package.json: {}".format(error), file=sys.stderr)
-
+  # Returns the components folder path and identifies the framework.
+  components_folder_path, framework = find_framework(root)
 
   # Checks if component's name conflicts with any existent component.
   if check_name_conflict(components_folder_path, framework, component):
@@ -279,10 +268,10 @@ endfunction
 command! -nargs=1 ReactLayout call CreateReactLayout(<f-args>)
 
 
-" *** NextImporter ***
+" *** ReactImporter ***
 " Facilitates easier imports from a specified pattern;
 " refer to fine-grained mappings for details.
-function! NextImporter(pattern)
+function! ReactImporter(pattern)
   " Save the original cursor position
   let l:original_pos = getpos('.')
 
@@ -290,7 +279,7 @@ function! NextImporter(pattern)
   let l:current_line = line('.')
 
 
-  let l:import_statement = 'import {  } from "' . a:pattern . '"'
+  let l:import_statement = 'import {  } from "' . a:pattern . '";'
 
   " Loop until the top of the file is reached
   while l:current_line > 0
@@ -310,11 +299,14 @@ function! NextImporter(pattern)
     let l:current_line -= 1
   endwhile
 
-  execute "normal! gg}o" . l:import_statement . "\<Esc>F}\<left>"
+  " Removes \ in patterns
+  let l:result = substitute(l:import_statement, '\', '', 'g')
+
+  execute "normal! gg}o" . l:result . "\<Esc>F}\<left>"
   startinsert
 endfunction
 
-command! -nargs=1 NextImporter call NextImporter(<f-args>)
+command! -nargs=1 ReactImporter call ReactImporter(<f-args>)
 
 
 
@@ -499,3 +491,44 @@ function AddPkg(...)
 
 endfunction
 command! -nargs=* AddPkg call AddPkg(<f-args>)
+
+
+
+function! Importer(next_import, remix_import)
+  python3 << EOF
+
+import sys
+import os
+import vim
+from pathlib import Path
+
+sys.path.append(os.getenv("HOME") + '/.vim/modules')
+from frontend import find_framework, get_root_directory
+
+
+# Collects root directory
+root = get_root_directory()
+
+if not root:
+  print("Project root not found!", file=sys.stderr)
+  sys.exit(1)
+
+# Returns the components folder path and identifies the framework.
+_, framework = find_framework(root)
+
+vim.vars['framework'] = framework
+
+EOF
+
+  let l:framework = g:framework
+
+  if &filetype == 'typescriptreact'
+    if l:framework == 'RemixJS'
+      call ReactImporter(a:remix_import)
+    else
+      call ReactImporter(a:next_import)
+    endif
+  endif
+
+endfunction
+command! -nargs=* FrameworkImport call Importer(<f-args>)
