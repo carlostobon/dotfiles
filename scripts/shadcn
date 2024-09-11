@@ -1,48 +1,73 @@
 #!/bin/bash
+: "
+A handy script for dynamically importing components from ShadCN
+in both Next.js and Remix applications
+"
 
-function mutate_index(){
-  # Checks if at leas two args were passed.
+function shadcn_importer(){
+  # Ensures at leas two args are passed.
   if [ "$#" -lt 2 ]; then
-      echo >&2 "Error: This function requires at least two arguments."
+      echo >&2 "Error: Requires at least two arguments."
       exit 1
   fi
 
-  # Checks if pnpm is installed
+  # Ensures pnpm is installed.
   if ! [ -x "$(command -v pnpm)" ]; then
     echo >&2 "Error: pnpm is not installed."
     exit 1
   fi
 
-  # Checks if fd is installed
+  # Ensures fd is installed.
   if ! [ -x "$(command -v fd)" ]; then
     echo >&2 "Error: fd is not installed."
     exit 1
   fi
 
+  # Ensures ripgrep is installed.
+  if ! [ -x "$(command -v rg)" ]; then
+    echo >&2 "Error: ripgrep is not installed."
+    exit 1
+  fi
 
-  # Run the command
-  pnpm dlx shadcn-ui@latest add "$@"
-
-  # Removes the first arg
-  shift
-
-  # Collect env var $ROOT
+  # Ensures root does exist.
   if [ -z "$ROOT" ]; then
-    echo >&2 "ROOT is not set." && exit 1
+    echo >&2 "Failed to get root directory."
+    exit 1
+  fi
+
+
+  package_json="$ROOT/package.json"
+
+  # Check if package.json exists
+  if [ -f "$package_json" ]; then
+      # Set components address based on whether Remix is present in
+      # package.json
+      if rg -q remix "$package_json"; then
+          components_address="$ROOT/app/components/ui"
+      else
+          components_address="$ROOT/components/ui"
+      fi
   else
-    component_address="$ROOT/components/ui"
-    index_address="$ROOT/components/ui/index.ts"
+      echo >&2 "Error: package.json not found in $ROOT."
+      exit 1
   fi
 
-  # Attempt to create component directory
-  if ! [ -e "$component_address" ]; then
-    mkdir -p "$component_address" ||
-      (echo "Couln't create $component_address" >&2 && exit 1)
-  fi
 
-  cd "$component_address" ||
-    (echo >&2 "Couldn't cd to $component_address" && exit 1)
+  # Run the specified command using pnpx shadcn@latest
+  pnpx shadcn@latest "$@" || {
+      echo >&2 "Error: Failed to run shadcn@latest."
+      exit 1
+  }
 
+
+  cd "$components_address" ||
+    (echo >&2 "Failed to change to directory $components_address." &&
+    exit 1)
+
+
+  index_address="$components_address/index.ts"
+
+  # Automatically appends each new component to index.ts upon addition.
   content=$(fd .tsx --exec echo 'export * from "{}";' | sed 's/.tsx//g')
   echo "$content" > "$index_address"
 
@@ -50,9 +75,9 @@ function mutate_index(){
 
 
 if [[ "$1" == "add" ]]; then
-  # It runs just when add is used.
-  mutate_index "$@"
+  # Executes only when the 'add' command is specified.
+  shadcn_importer "$@"
 else
-  # Otherwise regular approach is used.
-  pnpm dlx shadcn-ui@latest "$@"
+  # For all other commands, the default behavior is used.
+  pnpx shadcn@latest "$@"
 fi
