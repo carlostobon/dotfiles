@@ -440,9 +440,9 @@ command! -nargs=1 CreateFile call CreateFile(<f-args>)
 " *** Command ***
 " Run a specified command in the terminal within
 " the ROOT directory.
-function Command(...)
+function RootCommand(...)
   " Clear the buffer and cd ROOT env-var
-  let s:command = "clear && cd " . expand('$ROOT') . " && "
+  let s:command = "clear && cd " . expand('$ROOT') . " &&"
   let s:args = a:000
 
   for arg in s:args
@@ -452,7 +452,7 @@ function Command(...)
   execute "!" . s:command
 endfunction
 
-command! -nargs=* Command call Command(<f-args>)
+command! -nargs=* Command call RootCommand(<f-args>)
 
 
 
