@@ -13,7 +13,8 @@
 	br = branch
 	sw = switch
 	ps = push
-	pl = pull
+	pu = pull
 	ad = add
 	cm = commit
-	df = diff
+	di = diff
+	re = restore
