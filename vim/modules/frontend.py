@@ -1,4 +1,3 @@
-import sys
 import os
 from pathlib import Path
 from typing import Tuple, Optional
@@ -34,9 +33,8 @@ def find_framework(root: Path) -> Tuple[Path, Path, str]:
     try:
         with open(root.joinpath("package.json"), "r") as file:
             content = file.read()
-    except Exception as error:
-        print("Error reading package.json: {}".format(error), file=sys.stderr)
-        raise
+    except OSError:
+        raise OSError("Failed to read package.json")
 
     if "remix-run" in content:
         components_folder = root.joinpath("app/components")
@@ -114,8 +112,7 @@ def create_next_page(page: Path):
 
     root = get_root_directory()
     if not root:
-        print("Failed to get root directory.", file=sys.stderr)
-        raise
+        raise ValueError("Failed to get root directory.")
 
     pascal_case = PathHandler(page).pascal_case()
 
@@ -123,17 +120,21 @@ def create_next_page(page: Path):
 
     page_path = routes_folder / page
 
+    target = page_path / "page.tsx"
+    if target.exists():
+        raise FileExistsError("Route {} already exists.".format(page))
+
     # First try to create the required folders.
     try:
         os.makedirs(page_path, exist_ok=True)
 
-    except Exception as error:
-        print("Exception: {}".format(error), file=sys.stderr)
+    except OSError:
+        raise OSError("Failed to create parent directories.")
 
-    # Once folder is created, tries to write the scalfold
-    # into page.tsx
+    # Once folders are created, attempt to write the scaffold
+    # into page.tsx.
     try:
-        with open(page_path / "page.tsx", "w") as file:
+        with open(target, "w") as file:
             file.write(
                 """// {}/page.tsx
 
@@ -146,24 +147,22 @@ export default function {}() {{
                     page, pascal_case, pascal_case
                 )
             )
-    except OSError as error:
-        print("Exception: {}".format(error), file=sys.stderr)
-        raise
+    except OSError:
+        raise OSError("Failed to write page {}".format(page.name))
 
-    print("<-- NextJS --> : Page {} created.".format(page))
+    print("<- NextJS -> : 🚀 Page {} created.".format(page))
 
 
 def create_remix_route(route: Path):
     """
-    Create a Remix.js page scaffold.
+    Create a Remix.js route scaffold.
 
     Args:
-        page (Path): page to be createad.
+        route (Path): route to be createad.
     """
     root = get_root_directory()
     if not root:
-        print("Failed to get root directory.", file=sys.stderr)
-        raise
+        raise ValueError("Failed to get root directory.")
 
     routes_folder = find_framework(root)[1]
 
@@ -171,8 +170,12 @@ def create_remix_route(route: Path):
     page_name = path_handler.find_name()
     pascal_case = path_handler.pascal_case(page_name)
 
+    target = routes_folder / route
+    if target.exists():
+        raise FileExistsError("Route {} already exists.".format(route))
+
     try:
-        with open(routes_folder / route, "w") as file:
+        with open(target, "w") as file:
             file.write(
                 """// {}
 
@@ -185,8 +188,7 @@ export default function {}() {{
                     route, pascal_case, pascal_case
                 )
             )
-    except OSError as error:
-        print("Exception: {}".format(error), file=sys.stderr)
-        raise
+    except OSError as e:
+        raise OSError("Error when writting route {} : {}".format(route.name, e))
 
-    print("<-- RemixJS --> : Route {} created.".format(route))
+    print("<- RemixJS -> : 🚀 Route {} created.".format(route))

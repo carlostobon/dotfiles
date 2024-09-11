@@ -21,7 +21,7 @@ from frontend import find_framework
 # This function serves as a checkpoint to verify
 # that the new component's name does not conflict
 # with any existing component names.
-def check_name_conflict(
+def check_component_conflict(
     components_path: Path, framework: str, component: Path
 ) -> bool:
     if not components_path.exists():
@@ -77,7 +77,7 @@ def create_react_component(component: str):
   components_folder_path, _, framework = find_framework(root)
 
   # Checks if component's name conflicts with any existent component.
-  if check_name_conflict(components_folder_path, framework, component):
+  if check_component_conflict(components_folder_path, framework, component):
     return
 
   # $ROOT/components_folder_path/component
@@ -146,7 +146,7 @@ command! -nargs=* ReactComp call CreateReactComp(<f-args>)
 
 " *** CreateReactPage ***
 " Creates a page in NextJS or a route in RemixJS
-function! CreateReactRoute(route)
+function! CreateReactRoute(...)
   python3 << EOF
 
 import os
@@ -154,31 +154,53 @@ import sys
 import vim
 from pathlib import Path
 
-sys.path.append(os.getenv("HOME") + '/.vim/modules')
-from frontend import create_next_page, create_remix_route, find_framework, get_root_directory
 
-root = get_root_directory()
+def create_routes_exec(route: str):
+  # Gets HOME
+  home = os.getenv("HOME")
+  if home is None:
+      print("HOME env-var is not set.")
+      return
 
-if not root:
-    print("Project root not found!", file=sys.stderr)
-    sys.exit(1)
-
-framework = find_framework(root)[2]
-
-if framework == "NextJS":
-    create_next_page(Path(vim.eval('a:route')))
-elif framework == "RemixJS":
-    create_remix_route(Path(vim.eval('a:route')))
-else:
-    print("Framework not found!", file=sys.stderr)
-    sys.exit(1)
+  # Makes modules available
+  sys.path.append(home + '/.vim/modules')
+  from frontend import create_next_page, create_remix_route, find_framework, get_root_directory
 
 
+  root = get_root_directory()
+
+  if not root:
+      print("Failed to get root directory.")
+      return
+
+  try:
+      # Index acquisition is guaranteed to succeed
+      framework = find_framework(root)[2]
+  except Exception as error:
+      print(error)
+      return
+
+
+  if framework == "NextJS":
+      try:
+          create_next_page(Path(route))
+      except Exception as error:
+          print("<- NextJS -> : 🧨 {}".format(error))
+
+  else:
+      try:
+          create_remix_route(Path(route))
+      except Exception as error:
+          print("<- RemixJS -> : 🧨 {}".format(error))
+
+
+# Creates all passed routes
+for route in vim.eval("a:000"):
+  create_routes_exec(route)
 EOF
 endfunction
 
-command! -nargs=1 ReactRoute call CreateReactRoute(<f-args>)
-
+command! -nargs=* ReactRoute call CreateReactRoute(<f-args>)
 
 
 " *** CreateReactLayout ***
