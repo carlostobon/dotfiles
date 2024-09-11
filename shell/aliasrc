@@ -35,6 +35,7 @@ alias \
 	tree="lsd --tree --depth 2" \
 	vc="vim ~/.vimrc" \
 	vp="vim page.tsx" \
+	vi="vim _index.tsx" \
 	ga="git add" \
 	gc="git commit -m" \
 	gl="git log --stat" \
@@ -215,6 +216,19 @@ s() {
     c "$ROOT/app" >/dev/null 2>&1 || \
     exa || \
     echo "Error while cd src | app."
+}
+
+ro() {
+	c "$ROOT/app/routes" >/dev/null 2>&1 || \
+    echo "Error while cd app/routes."
+}
+
+pk() {
+	if [ -e "$ROOT/package.json" ]; then
+		c "$ROOT" && v package.json
+	else
+			echo "Failed to find package.json"
+	fi
 }
 
 # Video editing shortcuts
