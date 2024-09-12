@@ -1,6 +1,9 @@
+# frontend.py
+
 import os
 from pathlib import Path
 from typing import Tuple, Optional
+from utils import PathHandler
 
 
 def get_root_directory() -> Optional[Path]:
@@ -47,54 +50,6 @@ def find_framework(root: Path) -> Tuple[Path, Path, str]:
 
     # Returns the path for components and the framework's name.
     return components_folder, routes_folder, framework
-
-
-class PathHandler:
-    """
-    Handles path conversion to PascalCase.
-
-    Attributes:
-        path (Path): The file or directory path.
-
-    Methods:
-        pascal_case() -> str:
-            Converts the path stem to PascalCase.
-    """
-
-    def __init__(self, path: Path):
-        self.path = path
-
-    def pascal_case(self, name: Optional[str] = None) -> str:
-        """
-        Converts the path stem to PascalCase. If a
-        name is provided, it converts that name
-        to PascalCase instead.
-
-        Returns:
-            str: PascalCase version of the path stem.
-        """
-
-        if not name:
-            names = self.path.stem.strip().lower().split("-")
-        else:
-            names = name.strip().lower().split("-")
-
-        pascal_case = str()
-        for word in names:
-            pascal_case += word.capitalize()
-
-        return pascal_case
-
-    def find_name(self) -> str:
-        """
-        Gets the name of the page to be created
-        in RemixJS.
-
-        Example:
-            input: _foo.bar.baz.tsx
-            output: baz
-        """
-        return self.path.name.replace("$", "").replace(":", "").split(".")[-2]
 
 
 def create_next_page(page: Path):
@@ -164,18 +119,25 @@ def create_remix_route(route: Path):
     if not root:
         raise ValueError("Failed to get root directory.")
 
-    routes_folder = find_framework(root)[1]
+    _, routes_path, _ = find_framework(root)
 
-    path_handler = PathHandler(route)
-    page_name = path_handler.find_name()
-    pascal_case = path_handler.pascal_case(page_name)
+    handler = PathHandler(route)
+    route_name = handler.remix_find_name()
+    pascal_case = handler.pascal_case(route_name)
 
-    target = routes_folder / route
-    if target.exists():
-        raise FileExistsError("Route {} already exists.".format(route))
+    # List all .tsx files in the routes_path directory.
+    tsx_files = [
+        # relative_to extracts routes path from file path.
+        file.relative_to(routes_path)
+        for file in routes_path.rglob("*.tsx")  # Filter for .tsx files only
+        if file.is_file()  # Ensure the path is a file
+    ]
+
+    # Ensures the route doesn't conflict with an existing one.
+    handler.remix_route_collision(route, tsx_files)
 
     try:
-        with open(target, "w") as file:
+        with open(routes_path / route, "w") as file:
             file.write(
                 """// {}
 
