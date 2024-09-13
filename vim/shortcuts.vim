@@ -94,7 +94,11 @@ autocmd FileType typescriptreact inoremap kkw const x = ()
 
 
 " Adds the sequence to import from react
-autocmd FileType typescriptreact nnoremap hr ms:FrameworkImport react @remix-run/react<cr>
+autocmd FileType typescriptreact nnoremap hr ms:FrameworkImport react react<cr>
+
+
+" Adds the sequence to import from framework
+autocmd FileType typescriptreact nnoremap hf ms:FrameworkImport next @remix-run/react<cr>
 
 
 " Adds the sequence to import from components
