@@ -52,7 +52,7 @@ autocmd FileType typescriptreact inoremap kksp <span></span><esc>FsT>i
 autocmd FileType typescriptreact inoremap kkse <section></section><esc>FsT>i
 autocmd FileType typescriptreact inoremap kkp <p></p><Esc>FpT>i
 autocmd FileType typescriptreact inoremap kku <ul><CR></ul><Esc>O
-autocmd FileType typescriptreact inoremap kkli <li></li><Esc>FlT>i
+autocmd FileType typescriptreact inoremap kkli <li></li><Esc>T>i
 autocmd FileType typescriptreact inoremap kkla <label></label><esc>FlT>i
 autocmd FileType typescriptreact inoremap kkn <nav></nav><esc>FnT>i
 autocmd FileType typescriptreact inoremap kka <a href=""></a><esc>Fhf"a

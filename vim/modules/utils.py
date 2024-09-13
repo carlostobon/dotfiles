@@ -71,15 +71,19 @@ class PathHandler:
         # Used to standardize route comparison in Remix.
         pattern = re.compile(r"_[^.]*\.")
 
-        for path in paths:
-            # Extract pattern from target
-            clean_target = re.sub(pattern, "", str(target))
+        # Extract pattern from target
+        clean_target = re.sub(pattern, "", str(target))
 
-            # Extract pattern from path
+        if clean_target == "tsx":
+            if target in paths:
+                raise ValueError(f"Route {target} conflicts with {target} route.")
+            else:
+                return
+
+        for path in paths:
+            # Clean the path by removing the pattern
             clean_path = re.sub(pattern, "", str(path))
 
-            # Compares the two statements; if they match, it indicates a conflict.
+            # Check for conflicts between the target and cleaned path
             if clean_target == clean_path:
-                raise ValueError(
-                    "Route {} conflicts with {} route.".format(str(target), str(path))
-                )
+                raise ValueError(f"Route {target} conflicts with path {path}.")

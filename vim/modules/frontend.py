@@ -105,7 +105,7 @@ export default function {}() {{
     except OSError:
         raise OSError("Failed to write page {}".format(page.name))
 
-    print("<- NextJS -> : 🚀 Page {} created.".format(page))
+    print("<- NextJS -> : 📜 Page {} created.".format(page))
 
 
 def create_remix_route(route: Path):
@@ -121,6 +121,11 @@ def create_remix_route(route: Path):
 
     _, routes_path, _ = find_framework(root)
 
+    # Adds .tsx exetension to route
+    route = Path(f"{route}.tsx")
+
+    # The `route` parameter is not used by the handler itself,
+    # but it is necessary for creating the handler.
     handler = PathHandler(route)
     route_name = handler.remix_find_name()
     pascal_case = handler.pascal_case(route_name)
@@ -153,4 +158,4 @@ export default function {}() {{
     except OSError as e:
         raise OSError("Error when writting route {} : {}".format(route.name, e))
 
-    print("<- RemixJS -> : 🚀 Route {} created.".format(route))
+    print("<- RemixJS -> : 📜 Route {} created.".format(route))
