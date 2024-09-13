@@ -113,7 +113,11 @@ def create_remix_route(route: Path):
     Create a Remix.js route scaffold.
 
     Args:
-        route (Path): route to be createad.
+        route (Path): The path of the route to be created.
+
+    Notes:
+        - When the route consists of multiple words, use hyphens to separate them (e.g., foo-bar).
+        - Avoid using underscores (e.g., foo_bar), as this may lead to unexpected errors or behavior.
     """
     root = get_root_directory()
     if not root:

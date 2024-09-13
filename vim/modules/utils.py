@@ -48,10 +48,11 @@ class PathHandler:
         in RemixJS.
 
         Example:
-            input: _foo.bar.baz.tsx
+            input: _foo.bar._baz.tsx
             output: baz
         """
-        return self.path.name.replace("$", "").replace(":", "").split(".")[-2]
+        name = self.path.name.replace("$", "").replace(":", "").split(".")[-2]
+        return name.replace("_", "")
 
     #
 
@@ -67,18 +68,20 @@ class PathHandler:
             paths (List[Path]): List of existing routes to compare with.
         """
 
+        # Handle the case where the created route is a layout
+        layout_pattern = r"^(_[a-z-]+)(\._[a-z-]+)*\.tsx$"
+        if re.fullmatch(layout_pattern, str(target)):
+            if target in paths:
+                raise ValueError(f"Route {target} conflicts with {target} route.")
+            else:
+                return
+
         # Pattern to remove layout-specific elements from routes.
         # Used to standardize route comparison in Remix.
         pattern = re.compile(r"_[^.]*\.")
 
         # Extract pattern from target
         clean_target = re.sub(pattern, "", str(target))
-
-        if clean_target == "tsx":
-            if target in paths:
-                raise ValueError(f"Route {target} conflicts with {target} route.")
-            else:
-                return
 
         for path in paths:
             # Clean the path by removing the pattern
