@@ -60,6 +60,7 @@ autocmd FileType typescriptreact inoremap kklo console.log()<esc>i
 autocmd FileType typescriptreact inoremap kkim <img src={} alt="" /><esc>Frf}i
 autocmd FileType typescriptreact inoremap kkc className=""<esc>i
 autocmd FileType typescriptreact inoremap kkb <button type="button" onClick={() => {}}></button><esc>F/hi
+autocmd FileType typescriptreact inoremap kkf function x() {}<esc>Fxcw
 autocmd FileType typescriptreact inoremap ' ""<Esc>i
 autocmd FileType typescriptreact inoremap " ''<Esc>i
 
@@ -80,7 +81,7 @@ autocmd FileType typescriptreact nnoremap c. 0/[^=]><cr>llct<
 
 " Adds a basic function component with
 " structure function
-autocmd FileType typescriptreact inoremap kkf function x()
+autocmd FileType typescriptreact inoremap kkq function x()
                   \ {<cr><esc>O<tab>return<space>
                   \ (<cr><div>Hello function</div><cr>)
                   \<cr>}<esc>{<down>fxcw
