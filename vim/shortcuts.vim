@@ -59,7 +59,7 @@ autocmd FileType typescriptreact inoremap kka <a href=""></a><esc>Fhf"a
 autocmd FileType typescriptreact inoremap kklo console.log()<esc>i
 autocmd FileType typescriptreact inoremap kkim <img src={} alt="" /><esc>Frf}i
 autocmd FileType typescriptreact inoremap kkc className=""<esc>i
-autocmd FileType typescriptreact inoremap kkb <button onClick={() => {}}></button><esc>F/hi
+autocmd FileType typescriptreact inoremap kkb <button type="button" onClick={() => {}}></button><esc>F/hi
 autocmd FileType typescriptreact inoremap ' ""<Esc>i
 autocmd FileType typescriptreact inoremap " ''<Esc>i
 
@@ -74,6 +74,7 @@ autocmd FileType typescriptreact nnoremap hhx :Command pnpx<space>
 autocmd FileType typescriptreact nnoremap hhs :Command shadcn<space>
 
 autocmd FileType typescriptreact nnoremap t. 0/<\/<CR>i
+autocmd FileType typescriptreact nnoremap te 0f>i<space>className=""<esc>i
 autocmd FileType typescriptreact nnoremap t, 0/[^=]><cr>li<cr><esc>OclassName=""<esc>i<cr><esc>O
 autocmd FileType typescriptreact nnoremap c. 0f>lct<
 
@@ -93,11 +94,14 @@ autocmd FileType typescriptreact inoremap kkw const x = ()
                   \<cr>}<esc>{<down>fxcw
 
 
-" Adds the sequence to import from react
+" Adds props to first component finds upwards.
+autocmd FileType typescriptreact nnoremap hp :Props<cr>
+
+" Adds the sequence to import from react.
 autocmd FileType typescriptreact nnoremap hr ms:FrameworkImport react react<cr>
 
 
-" Adds the sequence to import from framework
+" Adds the sequence to import from framework.
 autocmd FileType typescriptreact nnoremap hf ms:FrameworkImport next @remix-run/react<cr>
 
 

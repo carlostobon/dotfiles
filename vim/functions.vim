@@ -275,7 +275,6 @@ function! ReactImporter(pattern)
   " Initialize the current line number to the cursor's current line
   let l:current_line = line('.')
 
-
   let l:import_statement = 'import {  } from "' . a:pattern . '";'
 
   " Loop until the top of the file is reached
@@ -373,8 +372,6 @@ function! GeneralSearch(pattern)
 
               " Move the cursor to the matching line
               call cursor(l:line_num, 1)
-              echo "Pattern found at line " . l:line_num
-              return
 
               return
           endif
@@ -530,3 +527,36 @@ EOF
 
 endfunction
 command! -nargs=* FrameworkImport call Importer(<f-args>)
+
+
+function Props()
+  " Get the current line
+  let l:current_line = line('.')
+
+  " Loops until current line reachs zero
+  while l:current_line > 0
+    " Collects the line content
+    let l:line_content = getline(l:current_line)
+
+    " If line contains `functions` get into the if statement
+    if l:line_content =~ "function"
+      " Move the cursor to the start of the matched line
+      call cursor(l:current_line, 1)
+      " Gets the name of the function
+      let l:function_name = matchstr(l:line_content, 'function \zs\w\+')
+
+      " If function's name begins with uppercase it's a component.
+      if match(l:function_name, '^[A-Z]') != -1
+        let l:props = l:function_name . "Props"
+        execute "normal! f)i{}: " . l:props
+        execute "normal! Ointerface " . l:props "{}\<cr>\<up>"
+      endif
+
+    endif
+    " If current line does not contain the pattern, will continue
+    " to next upper line
+    let l:current_line -= 1
+  endwhile
+
+endfunction
+command! -nargs=0 Props call Props()
