@@ -18,3 +18,4 @@
 	cm = commit
 	di = diff
 	re = restore
+	ch = checkout
