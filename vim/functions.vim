@@ -488,6 +488,8 @@ command! -nargs=* AddPkg call AddPkg(<f-args>)
 
 
 
+" *** Importer ***
+" Helps to import from Next and Remix
 function! Importer(next_import, remix_import)
   python3 << EOF
 
@@ -529,6 +531,8 @@ endfunction
 command! -nargs=* FrameworkImport call Importer(<f-args>)
 
 
+" *** Props ***
+" Adds props to react components
 function Props()
   " Get the current line
   let l:current_line = line('.')
@@ -550,6 +554,7 @@ function Props()
         let l:props = l:function_name . "Props"
         execute "normal! f)i{}: " . l:props
         execute "normal! Ointerface " . l:props "{}\<cr>\<up>"
+        return
       endif
 
     endif

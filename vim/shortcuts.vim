@@ -73,10 +73,10 @@ autocmd FileType typescriptreact nnoremap hha :AddPkg<space>
 autocmd FileType typescriptreact nnoremap hhx :Command pnpx<space>
 autocmd FileType typescriptreact nnoremap hhs :Command shadcn<space>
 
-autocmd FileType typescriptreact nnoremap t. 0/<\/<CR>i
-autocmd FileType typescriptreact nnoremap te 0f>i<space>className=""<esc>i
+autocmd FileType typescriptreact nnoremap t. 0/<\/<cr>i
+autocmd FileType typescriptreact nnoremap te 0/[^=]><cr>li<space>className=""<esc>i
 autocmd FileType typescriptreact nnoremap t, 0/[^=]><cr>li<cr><esc>OclassName=""<esc>i<cr><esc>O
-autocmd FileType typescriptreact nnoremap c. 0f>lct<
+autocmd FileType typescriptreact nnoremap c. 0/[^=]><cr>llct<
 
 " Adds a basic function component with
 " structure function
