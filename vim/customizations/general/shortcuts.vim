@@ -1,4 +1,4 @@
-" keymaps.vim
+" vim/customizations/general/shorcuts.vim
 
 " ==== Custom keyboard (colemak-dh) ==== "
 vnoremap n j
