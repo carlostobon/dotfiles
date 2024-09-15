@@ -27,7 +27,6 @@ nmap ge gk
 nmap r <C-r>
 
 
-
 " ==== Scape keys ====
 nnoremap a i
 vnoremap aa <esc>
@@ -135,7 +134,9 @@ nnoremap Ty cT{
 nnoremap ,t `t
 nnoremap ,s `s
 nnoremap ,r `r
-nnoremap .t mt
+nnoremap ,,t mt
+nnoremap ,,s ms
+nnoremap ,,r mr
 
 " ==== General shorcuts ==== "
 nnoremap hht :Command<space>
