@@ -137,8 +137,66 @@ for component in vim.eval("a:000"):
 
 EOF
 endfunction
-
 command! -nargs=* ReactComp call CreateReactComp(<f-args>)
+
+
+
+" *** CreateReactPage ***
+" Creates a page in NextJS or a route in RemixJS
+function! CreateReactRoute(...)
+  python3 << EOF
+
+import os
+import sys
+import vim
+from pathlib import Path
+
+
+def create_routes_exec(route: str):
+  # Gets HOME
+  home = os.getenv("HOME")
+  if home is None:
+      print("HOME env-var is not set.")
+      return
+
+  # Makes modules available
+  sys.path.append(home + '/.vim/modules')
+  from frontend import create_next_page, create_remix_route, find_framework, get_root_directory
+
+
+  root = get_root_directory()
+
+  if not root:
+      print("Failed to get root directory.")
+      return
+
+  try:
+      # Index acquisition is guaranteed to succeed
+      framework = find_framework(root)[2]
+  except Exception as error:
+      print(error)
+      return
+
+
+  if framework == "NextJS":
+      try:
+          create_next_page(Path(route))
+      except Exception as error:
+          print("<- NextJS -> : 🧨 {}".format(error))
+
+  else:
+      try:
+          create_remix_route(Path(route))
+      except Exception as error:
+          print("<- RemixJS -> : 🧨 {}".format(error))
+
+
+# Creates all passed routes
+for route in vim.eval("a:000"):
+  create_routes_exec(route)
+EOF
+endfunction
+command! -nargs=* ReactRoute call CreateReactRoute(<f-args>)
 
 
 
@@ -225,7 +283,6 @@ endfunction
 command! -nargs=* FrameworkImport call Importer(<f-args>)
 
 
-
 " *** Props ***
 " Adds props to react components
 function Props()
@@ -260,7 +317,6 @@ function Props()
 
 endfunction
 command! -nargs=0 Props call Props()
-
 
 
 
@@ -322,5 +378,4 @@ create_react_layout(vim.eval('a:name'))
 
 EOF
 endfunction
-
 command! -nargs=1 NextLayout call CreateNextLayout(<f-args>)

@@ -8,7 +8,7 @@ autocmd FileType rust nnoremap ha ms:RustSearch<cr>f(BBiasync <esc>`s
 autocmd FileType rust nnoremap hm ms:GeneralSearch fn<cr>O#[]<esc>i
 autocmd FileType rust nnoremap hd :GeneralSearch struct<cr>O#[derive()]<esc>F)i
 autocmd FileType rust nnoremap hc lbi_<esc> " variable => _variable
-autocmd FileType rust nnoremap hb f}i<cr><esc>O
+autocmd FileType rust nnoremap hb 0f}i<cr><esc>O
 autocmd FileType rust nnoremap hhf :CreateFile<space>
 autocmd FileType rust nnoremap hha :AddPkg<space>
 autocmd FileType rust nnoremap hhr :!clear; cargo run --
