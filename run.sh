@@ -38,6 +38,7 @@ linker "vim/settings.vim" ".vim/config/settings.vim"
 linker "vim/shortcuts.vim" ".vim/config/shortcuts.vim"
 linker "vim/functions.vim" ".vim/config/functions.vim"
 linker "vim/modules" ".vim/modules"
+linker "vim/customizations" ".vim/customizations"
 
 linker "mpv/input.conf" ".config/mpv/input.conf"
 linker "mpv/mpv.conf" ".config/mpv/mpv.conf"

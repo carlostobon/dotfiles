@@ -1,5 +1,10 @@
 source ~/.vim/config/settings.vim
 source ~/.vim/config/keymaps.vim
-source ~/.vim/config/shortcuts.vim
 source ~/.vim/config/pluggins.vim
-source ~/.vim/config/functions.vim
+source ~/.vim/customizations/typescriptreact/shortcuts.vim
+source ~/.vim/customizations/typescriptreact/scripts.vim
+source ~/.vim/customizations/rust/shortcuts.vim
+source ~/.vim/customizations/rust/scripts.vim
+source ~/.vim/customizations/html-css/shortcuts.vim
+source ~/.vim/customizations/python/shortcuts.vim
+source ~/.vim/customizations/general/scripts.vim
