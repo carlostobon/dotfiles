@@ -132,6 +132,7 @@ alias \
 	cr="cargo run --" \
 	ca="cargo add" \
 	cw="cargo watch -x check -x test -x run" \
+	cr="c ./target/release" \
 
 ct(){
 	c "$ROOT/target/release"
