@@ -141,8 +141,8 @@ myStartupHook = do
  spawnOnce "xset r rate 250 80 &"
  spawnOnce "xset s 18000 &"
  spawnOnce "unclutter &"
- spawnOnce "xwallpaper --stretch .config/wallpaper/wallpaper.png &"
  spawnOnce "setxkbmap -option 'caps:super'"
+ spawn "xwallpaper --stretch .config/wallpaper/wallpaper.png &"
 
 ------------------------------------------------------------------------
 
