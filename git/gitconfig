@@ -19,4 +19,4 @@
 	di = diff
 	re = restore
 	ch = checkout
-	st = stash
+	sh = stash
