@@ -1,0 +1,10 @@
+set editing-mode vi
+"aa": "\e"
+
+set keymap vi-command
+"n": "j"
+"e": "k"
+"m": "h"
+"i": "l"
+
+set keymap vi-insert

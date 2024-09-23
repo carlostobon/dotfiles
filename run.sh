@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/env bash
 
 echo "Making folders..."
 folders=(
@@ -30,6 +30,7 @@ linker "shell/aliasrc" ".aliasrc"
 linker "shell/bash_profile" ".bash_profile"
 linker "shell/bashrc" ".bashrc"
 linker "shell/keyboard" ".keyboard"
+linker "shell/inputrc" ".inputrc"
 
 linker "vim/vimrc" ".vimrc"
 linker "vim/keymaps.vim" ".vim/config/keymaps.vim"
