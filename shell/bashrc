@@ -1,46 +1,48 @@
-# _               _
-#| |__   __ _ ___| |__  _ __ ___
-#| '_ \ / _` / __| '_ \| '__/ __|
-#| |_) | (_| \__ \ | | | | | (__
-#|_.__/ \__,_|___/_| |_|_|  \___|
-#
-#
+# bashrc
 
-# Allows you to cd into directory merely by typing the directory name
+# Enables changing to a directory by simply typing its name.
 shopt -s autocd
 
-# If not running interactively, don't do anything
+# Exit if the script is not running in an interactive shell to
+# prevent unwanted behavior.
 [[ $- != *i* ]] && return
 
-# Infinity
-HISTSIZE= HISTFILESIZE=
+# Set shell history to unlimited for both current session and history file
+HISTSIZE=     # Unlimited history in current session
+HISTFILESIZE= # Unlimited history in history file
 
-# Avoid duplicates
+# Prevent duplicate commands in history:
+# ignore consecutive duplicates and remove previous entries
 HISTCONTROL=ignoredups:erasedups
 
-# Set vim as default editor
+# Set Vim as the default text editor
 export EDITOR=vim
 
-# When the shell exits, append to the history file instead of overwriting it
+# Set Qutebroweser as the default browser
+export BROWSER=qutebrowser
+
+# Enable appending to the history file on shell exit,
+# preserving previous sessions' history
 shopt -s histappend
 
-# After each command, append to the history file and reread it
+# Update command history after each command: append to
+# the history file, clear the current history, and reload from the file
 PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
 
-# Disable screen saver
+# Prevent entering power-saving mode
 xset dpms 0 0 0
 
-# Makes kitty use vim maps
+# Enable Vim key bindings for command line editing in the terminal
 set -o vi
 
-# Loads the keyboard remaps and all aliases
+# Load custom keyboard remappings and shell aliases for the current session
 source ~/.aliasrc
 source ~/.keyboard
 
 # Bash prompt name
 PS1='🦀🚀🛸\w\[$(tput sgr0)\]> '
 
-# binaries from the env
+# Add custom binary directories to the PATH for easy execution
 export PATH="$PATH:$HOME/.binaries"
 export PATH="$PATH:$HOME/.cargo/bin"
 export PATH="$PATH:$HOME/.local/bin"
