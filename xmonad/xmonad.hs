@@ -11,8 +11,6 @@ import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 import XMonad.Layout.Gaps
 
-
-
 myTerminal      = "kitty"
 
 -- Whether focus follows the mouse pointer.
@@ -28,7 +26,7 @@ myBorderWidth   = 0
 
 myModMask       = mod4Mask
 
-myWorkspaces=["1","2","3","4","5","6","7","8","9","10","11","12"]
+myWorkspaces=["1","2","3","4","5","6","7","8","9","10","11","12","13","14"]
 
 -- Border colors for unfocused and focused windows, respectively.
 myNormalBorderColor  = "#d4ccb9"
@@ -37,7 +35,7 @@ myFocusedBorderColor = "#ffffff"
 
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
---
+
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- Launch a terminal
@@ -94,65 +92,21 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_e     ), windows W.focusDown)
 
 
-    -- Start recording video
+    -- Record video
     --, ((modm .|. shiftMask, xK_y ), spawn "toolbox record-screen")
 
-    -- Start recording audio
+    -- Record audio
     , ((modm .|. shiftMask, xK_a ), spawn "toolbox record-audio")
 
-    -- Kill all recordings
+    -- Kill all current recordings
     , ((modm .|. shiftMask, xK_l ), spawn "killall ffmpeg")
 
-    -- Screen capture
+    -- Capture screen
     , ((modm .|. shiftMask, xK_p ), spawn "toolbox capture-screen")
 
     -- Swap the focused window and the master window
     , ((modm,               xK_comma ), windows W.swapMaster)
 
-
-    -- Reset the layouts on the current workspace to default
-    --, ((modm .|. shiftMask, xK_space ), setLayout $ XMonad.layoutHook conf)
-
-    -- Resize viewed windows to the correct size
-    --, ((modm,             xK_n     ), refresh)
-
-    -- Move focus to the master window
-    --, ((modm,             xK_m     ), windows W.focusMaster  )
-
-    -- Swap the focused window with the next window
-    --, ((modm .|. shiftMask, xK_j     ), windows W.swapDown  )
-
-    -- Push window back into tiling
-    --, ((modm,             xK_t     ), withFocused $ windows . W.sink)
-
-    -- Increment the number of windows in the master area
-    --, ((modm,             xK_comma ), sendMessage (IncMasterN 1))
-
-    -- Deincrement the number of windows in the master area
-    --, ((modm,               xK_period), sendMessage (IncMasterN (-1)))
-
-    -- Toggle the status bar gap
-    -- Use this binding with avoidStruts from Hooks.ManageDocks.
-    -- See also the statusBar function from Hooks.DynamicLog.
-    --, ((modm,               xK_b     ), sendMessage ToggleStruts)
-
-    ]
-
------------------------------------------------------------------------
--- Mouse bindings: default actions bound to mouse events
---
-myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
-
-    -- mod-button1, Set the window to floating mode and move by dragging
-    [ ((modm, button1), (\w -> focus w >> mouseMoveWindow w
-                                       >> windows W.shiftMaster))
-
-    -- mod-button2, Raise the window to the top of the stack
-    , ((modm, button2), (\w -> focus w >> windows W.shiftMaster))
-
-    -- mod-button3, Set the window to floating mode and resize by dragging
-    , ((modm, button3), (\w -> focus w >> mouseResizeWindow w
-                                       >> windows W.shiftMaster))
     ]
 
 ------------------------------------------------------------------------
@@ -174,28 +128,6 @@ myLayout = spacing 10 $ gaps [(U, 10), (R, 30), (D, 10), (L, 30)]
      -- Percent of screen to increment by when resizing panes
      delta   = 3/100
 
-
-------------------------------------------------------------------------
-
--- Event handling
-
--- * EwmhDesktops users should change this to ewmhDesktopsEventHook
---
--- Defines a custom handler function for X Events. The function should
--- return (All True) if the default handler is to be run afterwards. To
--- combine event hooks use mappend or mconcat from Data.Monoid.
---
--- myEventHook = mempty
-
-------------------------------------------------------------------------
-
--- Status bars and logging
-
--- Perform an arbitrary action on each internal state change or X event.
--- See the 'XMonad.Hooks.DynamicLog' extension for examples.
---
-myLogHook = return ()
-
 ------------------------------------------------------------------------
 
 -- Startup hook
@@ -206,21 +138,17 @@ myStartupHook = do
  --spawnOnce "xrandr --output HDMI-A-0 --off"
  --spawnOnce "xrandr --output HDMI-A-0 --mode 1920x1080"
  spawnOnce "picom --config .config/picom/picom.conf"
- spawn "xset r rate 250 80 &"
- spawn "xset s 18000 &"
- spawn "unclutter &"
- spawn "xwallpaper --stretch .config/wallpaper/wallpaper.png &"
- spawn "setxkbmap -option 'caps:super'"
+ spawnOnce "xset r rate 250 80 &"
+ spawnOnce "xset s 18000 &"
+ spawnOnce "unclutter &"
+ spawnOnce "xwallpaper --stretch .config/wallpaper/wallpaper.png &"
+ spawnOnce "setxkbmap -option 'caps:super'"
 
 ------------------------------------------------------------------------
 
 -- Now run xmonad with all the defaults we set up.
 
 main = xmonad defaults
-
--- A structure containing your configuration settings, overriding
--- fields in the default config. Any you don't override, will
--- use the defaults defined in xmonad/XMonad/Config.hs
 
 myHandleEventHook = swallowEventHook (className =? "kitty") (return True)
 
@@ -237,11 +165,9 @@ defaults = def {
 
       -- key bindings
         keys               = myKeys,
-        mouseBindings      = myMouseBindings,
 
       -- hooks, layouts
         layoutHook         = myLayout,
         handleEventHook    = myHandleEventHook,
-        logHook            = myLogHook,
         startupHook        = myStartupHook
     }
