@@ -138,10 +138,10 @@ myStartupHook = do
  --spawnOnce "xrandr --output HDMI-A-0 --off"
  --spawnOnce "xrandr --output HDMI-A-0 --mode 1920x1080"
  spawnOnce "picom --config .config/picom/picom.conf"
- spawnOnce "xset r rate 250 80 &"
- spawnOnce "xset s 18000 &"
- spawnOnce "unclutter &"
- spawnOnce "setxkbmap -option 'caps:super'"
+ spawn "xset r rate 250 80 &"
+ spawn "xset s 18000 &"
+ spawn "unclutter &"
+ spawn "setxkbmap -option 'caps:super'"
  spawn "xwallpaper --stretch .config/wallpaper/wallpaper.png &"
 
 ------------------------------------------------------------------------
