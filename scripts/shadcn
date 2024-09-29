@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/env bash
 : "
 A handy script for dynamically importing components from ShadCN
 in both Next.js and Remix applications
@@ -6,64 +6,56 @@ in both Next.js and Remix applications
 
 function shadcn_importer(){
   # Ensures at leas two args are passed.
-  if [ "$#" -lt 2 ]; then
-      echo >&2 "Error: Requires at least two arguments."
-      exit 1
-  fi
+  [ "$#" -lt 2 ] &&
+    echo >&2 "At least two args are required." &&
+    exit 1
 
   # Ensures pnpm is installed.
-  if ! [ -x "$(command -v pnpm)" ]; then
-    echo >&2 "Error: pnpm is not installed."
+  ! [ -x "$(command -v pnpm)" ] &&
+    echo >&2 "pnpm binary was not found." &&
     exit 1
-  fi
 
   # Ensures fd is installed.
-  if ! [ -x "$(command -v fd)" ]; then
-    echo >&2 "Error: fd is not installed."
+  ! [ -x "$(command -v fd)" ] &&
+    echo >&2 "fd binary was not found." &&
     exit 1
-  fi
 
   # Ensures ripgrep is installed.
-  if ! [ -x "$(command -v rg)" ]; then
-    echo >&2 "Error: ripgrep is not installed."
+  ! [ -x "$(command -v rg)" ] &&
+    echo >&2 "ripgrep binary was not found." &&
     exit 1
-  fi
 
-  # Ensures root does exist.
-  if [ -z "$ROOT" ]; then
-    echo >&2 "Failed to get root directory."
+  # Ensures root path exists.
+  [ -z "$ROOT" ] &&
+    echo >&2 "Failed to get root directory." &&
     exit 1
-  fi
 
 
   package_json="$ROOT/package.json"
 
-  # Check if package.json exists
-  if [ -f "$package_json" ]; then
-      # Set components address based on whether Remix is present in
-      # package.json
-      if rg -q remix "$package_json"; then
-          components_address="$ROOT/app/components/ui"
-      else
-          components_address="$ROOT/components/ui"
-      fi
+  ! [ -f "$package_json" ] &&
+    echo >&2 "File package.json was not found." &&
+    exit 1
+
+  # Set components address based on whether Remix is present in
+  # package.json
+  if rg -q "remix" "$package_json"; then
+      components_address="$ROOT/app/components/ui"
   else
-      echo >&2 "Error: package.json not found in $ROOT."
-      exit 1
+      components_address="$ROOT/components/ui"
   fi
 
 
   # Run the specified command using pnpx shadcn@latest
   pnpx shadcn@latest "$@" || {
-      echo >&2 "Error: Failed to run shadcn@latest."
+      echo >&2 "Failed to run shadcn@latest." &&
       exit 1
   }
 
-
-  cd "$components_address" ||
-    (echo >&2 "Failed to change to directory $components_address." &&
-    exit 1)
-
+  cd "$components_address" || {
+      echo >&2 "Failed to change to directory $components_address." &&
+      exit 1
+  }
 
   index_address="$components_address/index.ts"
 
@@ -74,10 +66,7 @@ function shadcn_importer(){
 }
 
 
-if [[ "$1" == "add" ]]; then
-  # Executes only when the 'add' command is specified.
-  shadcn_importer "$@"
-else
-  # For all other commands, the default behavior is used.
-  pnpx shadcn@latest "$@"
-fi
+case "$1" in
+  add)  shadcn_importer "$@";;
+  *  )  pnpx shadcn@latest "$@"
+esac

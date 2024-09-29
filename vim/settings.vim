@@ -13,8 +13,8 @@ set pumheight=5
 " Enable true colors
 set termguicolors
 
-" Never persist buffers, useful
-" when working with encrypted files.
+" Never persist buffers, useful when working with
+" encrypted files.
 set nobackup
 set nowritebackup
 set noswapfile
