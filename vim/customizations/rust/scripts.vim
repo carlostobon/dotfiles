@@ -23,7 +23,7 @@ function RustAddPublic()
         echo "Failed to find pattern."
     endif
 endfunction
-command! -nargs=0 RustAddPublic call RustAddPublic()
+autocmd FileType rust command! -nargs=0 RustAddPublic call RustAddPublic()
 
 
 " -----------------------------------------------
@@ -46,7 +46,7 @@ function RustAddAsync()
         echo "Failed to find pattern."
     endif
 endfunction
-command! -nargs=0 RustAddAsync call RustAddAsync()
+autocmd FileType rust command! -nargs=0 RustAddAsync call RustAddAsync()
 
 
 " -----------------------------------------------
@@ -83,3 +83,26 @@ function RustToggleVar()
     endif
 endfunction
 autocmd FileType rust command! -nargs=0 RustToggleVar call RustToggleVar()
+
+
+" -----------------------------------------------
+"  Scafold of a given trait
+" -----------------------------------------------
+function Implement(trait)
+    if a:trait == "from"
+        let lines = [
+            \ '',
+            \ 'impl From<T> for V {',
+            \ 'fn from(x: T) -> Self {}',
+            \ '}',
+            \ ''
+        \ ]
+
+        execute "normal! i" . join(lines, "\n")
+        execute "normal! kkkfT"
+
+    else
+        echo "Unknown implementation"
+    endif
+endfunction
+autocmd FileType rust command! -nargs=1 Implement call Implement(<f-args>)
