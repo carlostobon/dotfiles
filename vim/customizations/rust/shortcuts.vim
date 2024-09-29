@@ -2,19 +2,15 @@
 " *              RUST SHORTCUTS                 *
 " ***********************************************
 
-autocmd FileType rust nnoremap tp msIpub<space><esc>`s
-
-autocmd FileType rust nnoremap hp ms:RustSearch<cr>Ipub <esc>`s
-autocmd FileType rust nnoremap ha ms:RustSearch<cr>f(BBiasync <esc>`s
-autocmd FileType rust nnoremap hm ms:GeneralSearch fn<cr>O#[]<esc>i
-autocmd FileType rust nnoremap hd :GeneralSearch struct<cr>O#[derive()]<esc>F)i
-autocmd FileType rust nnoremap hc ms^wi_<esc>`s
-autocmd FileType rust nnoremap hu ms^wx`s
+autocmd FileType rust nnoremap hp ms:RustAddPublic<CR>
+autocmd FileType rust nnoremap ha ms:RustAddAsync<CR>
+autocmd FileType rust nnoremap hm ms:RustAddMacro<CR>
+autocmd FileType rust nnoremap hc ms:RustToggleVar<CR>
 autocmd FileType rust nnoremap hb 0f}i<cr><esc>O
 
 autocmd FileType rust nnoremap hhf :CreateFile<space>
 autocmd FileType rust nnoremap hha :AddPkg<space>
-autocmd FileType rust nnoremap hhr :!clear; cargo run --
+autocmd FileType rust nnoremap hhr :!clear; cargo run --<space>
 autocmd FileType rust nnoremap hht :!clear; cargo test<cr>
 
 " Adds macro to disable warnings

@@ -2,43 +2,84 @@
 " *              RUST SCRIPTS                   *
 " ***********************************************
 
-" *** RustCodeSearcher ***
-" Searches upwards for patterns like fn, struct,
-" trait, enum, and type.
-function! RustCodeSearcher()
-    " Save the original position
-    let l:original_pos = getpos('.')
 
-    " Start from the current line
-    let l:line_num = line('.')
+" -----------------------------------------------
+"  Makes an expression public
+" -----------------------------------------------
+function RustAddPublic()
+    let l:result = SearchPattern("fn", "struct", "trait", "enum", "type")
+    let l:line_content = getline('.')
 
-    " Loop to search each line upwards
-    while l:line_num > 0
-        " Get the content of the current line
-        let l:line_content = getline(l:line_num)
+    " pub was found in current line
+    if match(l:line_content, 'pub\s') != -1
+        echo "Expression is already public."
+        execute "normal! `s"
+        return
+    endif
 
-        " Patterns
-        let l:patterns = ['fn', 'struct', 'trait', 'enum', 'type']
-
-        " Check if the pattern is in the line
-        for pattern in patterns
-          if l:line_content =~ pattern
-              " Move the cursor to the matching line
-              call cursor(l:line_num, 1)
-              echo "Pattern found at line " . l:line_num
-              return
-          endif
-        endfor
-
-
-        " Move to the previous line
-        let l:line_num -= 1
-    endwhile
-
-    " If pattern is not found, move back to the original position
-    call setpos('.', l:original_pos)
-    echo "Pattern not found"
+    if l:result == 0
+        execute "normal! Ipub \<esc>`s"
+    else
+        echo "Failed to find pattern."
+    endif
 endfunction
+command! -nargs=0 RustAddPublic call RustAddPublic()
 
-" Map the function to a command for easier usage
-command! -nargs=0 RustSearch call RustCodeSearcher()
+
+" -----------------------------------------------
+"  Add async to a given function
+" -----------------------------------------------
+function RustAddAsync()
+    let l:result = SearchPattern("fn")
+    let l:line_content = getline('.')
+
+    " async was found in current line
+    if match(l:line_content, 'async\s') != -1
+        echo "Function is already asynchronous."
+        execute "normal! `s"
+        return
+    endif
+
+    if l:result == 0
+        execute "normal! ^f(BBiasync \<esc>`s"
+    else
+        echo "Failed to find pattern."
+    endif
+endfunction
+command! -nargs=0 RustAddAsync call RustAddAsync()
+
+
+" -----------------------------------------------
+"  Add a macro to a function or structure
+" -----------------------------------------------
+function RustAddMacro()
+    let l:result = SearchPattern("fn", "struct")
+    let l:line_content = getline('.')
+
+    if l:result == 0
+        execute "normal! O#[]"
+        startinsert
+    else
+        echo "Failed to find pattern."
+    endif
+endfunction
+autocmd FileType rust command! -nargs=0 RustAddMacro call RustAddMacro()
+
+
+" -----------------------------------------------
+"  Toggle variable usage
+" -----------------------------------------------
+function RustToggleVar()
+    let l:line_content = getline('.')
+
+    if match(l:line_content, 'let\s[^_][a-z_]\+') != -1
+        execute "normal! ^wi_\<esc>`s"
+
+    elseif match(l:line_content, 'let\s_[a-z_]\+') != -1
+        execute "normal! ^wx`s"
+
+    else
+        echo "Failed to find pattern."
+    endif
+endfunction
+autocmd FileType rust command! -nargs=0 RustToggleVar call RustToggleVar()

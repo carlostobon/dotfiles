@@ -2,42 +2,29 @@
 " *              GENERAL SCRIPTS                *
 " ***********************************************
 
-
-" *** GeneralSeach ***
+" -----------------------------------------------
 " Searches for a given pattern upwards
-function! GeneralSearch(pattern)
-    " Save the original position
+" -----------------------------------------------
+function SearchPattern(...)
     let l:original_pos = getpos('.')
-
-    " Start from the current line
     let l:line_num = line('.')
 
-    " Loop to search each line upwards
     while l:line_num > 0
-        " Get the content of the current line
         let l:line_content = getline(l:line_num)
+        let l:patterns = a:000
 
-        " Check if the pattern is in the line
-          if l:line_content =~ a:pattern
-
-              " Move the cursor to the matching line
-              call cursor(l:line_num, 1)
-
-              return
-          endif
-
-        " Move to the previous line
+        for l:pattern in l:patterns
+            if l:line_content =~ l:pattern
+                call cursor(l:line_num, 1)
+                return 0
+            endif
+        endfor
         let l:line_num -= 1
     endwhile
 
-    " If pattern is not found, move back to the original position
-    call setpos('.', l:original_pos)
-    echo "Pattern not found."
+    return -1
 endfunction
-
-" Map the function to a command for easier usage
-command! -nargs=1 GeneralSearch call GeneralSearch(<f-args>)
-
+command! -nargs=* SearchPattern call SearchPattern(<f-args>)
 
 
 " *** CreateFile ***
@@ -127,6 +114,8 @@ function AddPkg(...)
     if filereadable(base . "/pnpm-lock.yaml")
         call Executer('pnpm', 'add ' . s:command)
     elseif filereadable(base . "/Cargo.toml")
+        call Executer('cargo', 'add ' . s:command)
+    elseif filereadable("./Cargo.toml")
         call Executer('cargo', 'add ' . s:command)
     else
         echo "Nothing to do here."
