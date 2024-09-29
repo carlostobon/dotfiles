@@ -10,10 +10,10 @@ set autoread
 set background=light
 set pumheight=5
 
-"Activates true colors
+" Enable true colors
 set termguicolors
 
-" never persist buffers, useful
+" Never persist buffers, useful
 " when working with encrypted files.
 set nobackup
 set nowritebackup
@@ -56,11 +56,6 @@ function! SintaxOnSave()
       w
       syntax on
 endfunction
-
-
-autocmd FileType svelte syntax on
-autocmd FileType svelte nnoremap fw :call SintaxOn()<cr>
-autocmd FileType svelte nnoremap vv :call SintaxOnSave()<cr>
 
 autocmd FileType css syntax on
 autocmd FileType css nnoremap fw :call SintaxOn()<cr>
