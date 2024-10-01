@@ -72,11 +72,11 @@ autocmd FileType rust command! -nargs=0 RustAddMacro call RustAddMacro()
 function RustToggleVar()
     let l:line_content = getline('.')
 
-    if match(l:line_content, 'let\s[^_][a-z_]\+') != -1
-        execute "normal! ^wi_\<esc>`s"
+    if match(l:line_content, 'let.*\s[^_][a-z_]\+\s=') != -1
+        execute "normal! ^f=Bi_\<esc>`s\<right>"
 
-    elseif match(l:line_content, 'let\s_[a-z_]\+') != -1
-        execute "normal! ^wx`s"
+    elseif match(l:line_content, 'let\(\smut\)\?\s_') != -1
+        execute "normal! ^f=Bx`s\<left>"
 
     else
         echo "Failed to find pattern."
@@ -84,6 +84,24 @@ function RustToggleVar()
 endfunction
 autocmd FileType rust command! -nargs=0 RustToggleVar call RustToggleVar()
 
+
+" -----------------------------------------------
+"  Toggle variable mutability
+" -----------------------------------------------
+function RustToggleMutability()
+    let l:line_content = getline('.')
+
+    if match(l:line_content, 'let\smut') != -1
+        execute "normal! ^wdiwx`s4\<left>"
+
+    elseif match(l:line_content, 'let') != -1
+        execute "normal! ^wimut\<space>\<esc>`s4\<right>"
+
+    else
+        echo "Failed to find pattern."
+    endif
+endfunction
+autocmd FileType rust command! -nargs=0 RustToggleMutability call RustToggleMutability()
 
 " -----------------------------------------------
 "  Scafold of a given trait
