@@ -4,7 +4,7 @@
 
 
 " -----------------------------------------------
-"  Makes an expression public
+" Toggle visibility state for the expression
 " -----------------------------------------------
 function RustAddPublic()
     let l:result = SearchPattern("fn", "struct", "trait", "enum", "type")
@@ -12,8 +12,7 @@ function RustAddPublic()
 
     " pub was found in current line
     if match(l:line_content, 'pub\s') != -1
-        echo "Expression is already public."
-        execute "normal! `s"
+        execute "normal! ^dw`s"
         return
     endif
 
@@ -27,7 +26,7 @@ autocmd FileType rust command! -nargs=0 RustAddPublic call RustAddPublic()
 
 
 " -----------------------------------------------
-"  Add async to a given function
+"  Toggle async state for the function
 " -----------------------------------------------
 function RustAddAsync()
     let l:result = SearchPattern("fn")
@@ -35,8 +34,7 @@ function RustAddAsync()
 
     " async was found in current line
     if match(l:line_content, 'async\s') != -1
-        echo "Function is already asynchronous."
-        execute "normal! `s"
+        execute "normal! :s/async\<space>//\<cr>`s"
         return
     endif
 
