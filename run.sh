@@ -58,7 +58,7 @@ linker "wallpaper/wallpaper.png" ".config/wallpaper/wallpaper.png"
 
 linker "git/gitconfig" ".gitconfig"
 
-linker "xmonad/xmonad.hs" ".xmonad/xmonad.hs"
+linker "xmonad/xmonad.hs" ".config/xmonad/xmonad.hs"
 
 linker "picom/picom.conf" ".config/picom/picom.conf"
 
