@@ -78,6 +78,7 @@ settings:
       cb: https://codeberg.org/{}
       p3: http://localhost:3000/{}
       p5: http://localhost:5173/{}
+      p4: http://localhost:4173/{}
       p8: http://localhost:8080/{}
       rs: https://docs.rs/{}
       yt: https://www.youtube.com/results?search_query={}
