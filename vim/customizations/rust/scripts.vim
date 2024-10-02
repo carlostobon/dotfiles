@@ -2,10 +2,8 @@
 " *              RUST SCRIPTS                   *
 " ***********************************************
 
-
-" -----------------------------------------------
 " Toggle visibility state for the expression
-" -----------------------------------------------
+" ==========================================
 function RustAddPublic()
     let l:result = SearchPattern("fn", "struct", "trait", "enum", "type")
     let l:line_content = getline('.')
@@ -25,9 +23,8 @@ endfunction
 autocmd FileType rust command! -nargs=0 RustAddPublic call RustAddPublic()
 
 
-" -----------------------------------------------
-"  Toggle async state for the function
-" -----------------------------------------------
+" Toggle async state for the function
+" ====================================
 function RustAddAsync()
     let l:result = SearchPattern("fn")
     let l:line_content = getline('.')
@@ -47,9 +44,8 @@ endfunction
 autocmd FileType rust command! -nargs=0 RustAddAsync call RustAddAsync()
 
 
-" -----------------------------------------------
-"  Add a macro to a function or structure
-" -----------------------------------------------
+" Add a macro to a function or structure
+" ======================================
 function RustAddMacro()
     let l:result = SearchPattern("fn", "struct")
     let l:line_content = getline('.')
@@ -64,9 +60,8 @@ endfunction
 autocmd FileType rust command! -nargs=0 RustAddMacro call RustAddMacro()
 
 
-" -----------------------------------------------
-"  Toggle variable usage
-" -----------------------------------------------
+" Toggle variable usage
+" =====================
 function RustToggleVar()
     let l:line_content = getline('.')
 
@@ -83,9 +78,8 @@ endfunction
 autocmd FileType rust command! -nargs=0 RustToggleVar call RustToggleVar()
 
 
-" -----------------------------------------------
-"  Toggle variable mutability
-" -----------------------------------------------
+" Toggle variable mutability
+" ==========================
 function RustToggleMutability()
     let l:line_content = getline('.')
 
@@ -101,9 +95,8 @@ function RustToggleMutability()
 endfunction
 autocmd FileType rust command! -nargs=0 RustToggleMutability call RustToggleMutability()
 
-" -----------------------------------------------
-"  Scafold of a given trait
-" -----------------------------------------------
+" Scaffold for implementing the given trait
+" =========================================
 function Implement(trait)
     if a:trait == "from"
         let lines = [

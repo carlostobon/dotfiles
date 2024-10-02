@@ -1,6 +1,6 @@
 " vim/customizations/general/shorcuts.vim
 
-" ==== Custom keyboard (colemak-dh) ==== "
+" ==> Custom keyboard (colemak-dh) <== "
 vnoremap n j
 vnoremap m h
 vnoremap e k
@@ -27,41 +27,41 @@ nmap ge gk
 nmap r <C-r>
 
 
-" ==== Scape keys ====
+" ==> Scape keys <==
 nnoremap a i
 vnoremap aa <esc>
 inoremap aa <esc>
 
 
-" ==== Capitalize and de-capitalize ====
+" ==> Capitalize and de-capitalize <==
 nnoremap fu <right>bvU
 nnoremap fl <right>bvu
 
 
-" ==== Comments ====
+" ==> Comments <==
 nmap tt \cc
 nmap tg \cu
 vmap tt \cc
 vmap tg \cu
 
-"" Switch alternative commenters
+" Toggle between alternate comment modes
 nmap ta \ca
 
-" ==== Jump from word to word ====
+" ==> Jump from word to word <==
 nnoremap w W
 nnoremap b B
 
 
-" ==== Copy and paste ====
+" ==> Copy and paste <==
 vmap <S-y> "+y
 nmap <S-p> "+p
 
 
-" ==== Save current buffer ====
+" ==> Save current buffer <==
 nmap vv :w<cr>
 
 
-" ==== Missc ====
+" ==> Missc <==
 nnoremap ft :NERDTree<cr>
 nnoremap ff :FZF $ROOT<cr>
 nnoremap XX ZZ
@@ -73,14 +73,13 @@ nnoremap > >>
 nnoremap < <<
 
 
-
-" ==== Switch tabs and buffers ====
+" ==> Toggle tabs and buffers <==
 nnoremap fw :tabprevious<cr>
 nnoremap fp :tabnext<cr>
 nnoremap gt <C-6>
 
 
-" ==== Custom remaps ====
+" ==> Custom remaps <==
 inoremap ' ""<Esc>i
 inoremap " ''<Esc>i
 inoremap ( ()<Esc>i
@@ -110,7 +109,7 @@ nnoremap dp {<down>V}d
 nnoremap vp {<down>V}
 nnoremap gg msgg
 
-" ==== Custom selectors ==== "
+" ==> Custom selectors <== "
 nnoremap cn c^
 nnoremap co C
 nnoremap ce cb
@@ -130,7 +129,7 @@ nnoremap Tl cT[
 nnoremap Tu cT(
 nnoremap Ty cT{
 
-" ==== Markers ==== "
+" ==> Markers <== "
 nnoremap ,t `t
 nnoremap ,s `s
 nnoremap ,r `r
@@ -138,7 +137,7 @@ nnoremap ,,t mt
 nnoremap ,,s ms
 nnoremap ,,r mr
 
-" ==== General shorcuts ==== "
+" ==> General shorcuts <== "
 nnoremap hht :Command<space>
 nnoremap ht :G
 nnoremap hd :ALEDetail<cr>
