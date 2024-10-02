@@ -33,21 +33,22 @@ vnoremap aa <esc>
 inoremap aa <esc>
 
 
-" ==> Capitalize and de-capitalize <==
+" ==> Toggle capitalization: Capitalize and decapitalize <==
 nnoremap fu <right>bvU
 nnoremap fl <right>bvu
 
 
-" ==> Comments <==
+" ==> Commenter <==
 nmap tt \cc
 nmap tg \cu
 vmap tt \cc
 vmap tg \cu
 
-" Toggle between alternate comment modes
+" -> Toggle between alternate comment modes <-
 nmap ta \ca
 
-" ==> Jump from word to word <==
+
+" ==> Move from word to word <==
 nnoremap w W
 nnoremap b B
 
@@ -61,7 +62,7 @@ nmap <S-p> "+p
 nmap vv :w<cr>
 
 
-" ==> Missc <==
+" ==> Miscellaneous <==
 nnoremap ft :NERDTree<cr>
 nnoremap ff :FZF $ROOT<cr>
 nnoremap XX ZZ
@@ -109,6 +110,7 @@ nnoremap dp {<down>V}d
 nnoremap vp {<down>V}
 nnoremap gg msgg
 
+
 " ==> Custom selectors <== "
 nnoremap cn c^
 nnoremap co C
@@ -129,6 +131,7 @@ nnoremap Tl cT[
 nnoremap Tu cT(
 nnoremap Ty cT{
 
+
 " ==> Markers <== "
 nnoremap ,t `t
 nnoremap ,s `s
@@ -137,7 +140,7 @@ nnoremap ,,t mt
 nnoremap ,,s ms
 nnoremap ,,r mr
 
-" ==> General shorcuts <== "
+" ==> General shortcuts <== "
 nnoremap hht :Command<space>
 nnoremap ht :G
 nnoremap hd :ALEDetail<cr>
