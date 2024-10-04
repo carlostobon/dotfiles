@@ -133,7 +133,7 @@ function! ToggleGoyo()
             return
         endif
 
-        execute "normal! :Goyo 75%+90%x100%\<cr>"
+        execute "normal! :Goyo\<cr>"
         let g:goyo_state = 1
     else
         execute "normal! :Goyo\<cr>"
@@ -145,9 +145,12 @@ command! -nargs=0 ToggleGoyo call ToggleGoyo()
 
 let g:nerd_tree_state = 0
 function! ToggleNerdTree()
-    if g:goyo_state == 0
-        execute "normal! :NERDTreeToggle\<cr>"
-        let g:nerd_tree_state = !g:nerd_tree_state
+    if g:goyo_state == 0 && g:nerd_tree_state == 0
+        execute "normal! :NERDTree\<cr>"
+        let g:nerd_tree_state = 1
+    elseif g:goyo_state == 0 && g:nerd_tree_state == 1
+        execute "normal! :NERDTreeClose\<cr>"
+        let g:nerd_tree_state = 0
     else
         echo "Goyo is currently opened."
     endif

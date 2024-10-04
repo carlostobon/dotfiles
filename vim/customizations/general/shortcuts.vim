@@ -39,10 +39,10 @@ nnoremap fl <right>bvu
 
 
 " ==> Commenter <==
-nmap tt \cc
-nmap tg \cu
-vmap tt \cc
-vmap tg \cu
+nmap te \cc
+nmap ti \cu
+vmap te \cc
+vmap ti \cu
 
 " -> Toggle between alternate comment modes <-
 nmap ta \ca
@@ -76,7 +76,7 @@ nnoremap < <<
 " ==> Toggle tabs and buffers <==
 nnoremap fw :tabprevious<cr>
 nnoremap fp :tabnext<cr>
-nnoremap gt <C-6>
+nnoremap tt <C-6>
 
 
 " ==> Custom remaps <==
