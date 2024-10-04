@@ -123,3 +123,33 @@ function AddPkg(...)
 
 endfunction
 command! -nargs=* AddPkg call AddPkg(<f-args>)
+
+
+let g:goyo_state = 0
+function! ToggleGoyo()
+    if g:goyo_state == 0
+        if g:nerd_tree_state == 1
+            echo "NerdTree is currently opened."
+            return
+        endif
+
+        execute "normal! :Goyo 75%+90%x100%\<cr>"
+        let g:goyo_state = 1
+    else
+        execute "normal! :Goyo\<cr>"
+        let g:goyo_state = 0
+    endif
+endfunction
+command! -nargs=0 ToggleGoyo call ToggleGoyo()
+
+
+let g:nerd_tree_state = 0
+function! ToggleNerdTree()
+    if g:goyo_state == 0
+        execute "normal! :NERDTreeToggle\<cr>"
+        let g:nerd_tree_state = !g:nerd_tree_state
+    else
+        echo "Goyo is currently opened."
+    endif
+endfunction
+command! -nargs=0 ToggleNerdTree call ToggleNerdTree()

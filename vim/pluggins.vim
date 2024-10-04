@@ -43,7 +43,7 @@ let g:ale_fixers = {
 
 
 let g:lightline = {
-      \ 'colorscheme': 'ayu_light',
+      \ 'colorscheme': 'gruvbox',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
@@ -72,7 +72,12 @@ endfunction
 " Makes Goyo keep syntax colors
 autocmd! ColorScheme default call s:tweak_colors()
 
+" Goyo defaults
+let g:goyo_width = "75%"
+let g:goyo_height = "90%"
+let g:goyo_linenr = "0"
 
+" Colors
 let g:rainbow_active = 1
 
 let g:ale_set_highlights = 0

@@ -63,13 +63,12 @@ nmap vv :w<cr>
 
 
 " ==> Miscellaneous <==
-nnoremap ft :NERDTree<cr>
+nnoremap Q :ToggleNerdTree<cr>
+nnoremap W :ToggleGoyo<cr>
 nnoremap ff :FZF $ROOT<cr>
 nnoremap XX ZZ
 nnoremap XQ ZQ
-nnoremap ,h :Goyo 75%+90%x100%<cr>
 nnoremap yp mt{v}y`t
-nnoremap Q <esc>
 nnoremap > >>
 nnoremap < <<
 
@@ -112,16 +111,18 @@ nnoremap gg msgg
 
 
 " ==> Custom selectors <== "
-nnoremap cn c^
-nnoremap co C
-nnoremap ce cb
-nnoremap ci ce
+nnoremap ci C
+nnoremap cm c^
+nnoremap cn cb
 
-nnoremap vn v^
-nnoremap vo v$
+nnoremap vi v$
+nnoremap vm v^
 
-nnoremap M ^
 nnoremap E $
+nnoremap I ^
+
+nnoremap R A
+nnoremap A I
 
 nnoremap tl ct]
 nnoremap tu ct)
