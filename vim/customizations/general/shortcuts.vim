@@ -142,7 +142,7 @@ nnoremap ,,s ms
 nnoremap ,,r mr
 
 " ==> General shortcuts <== "
-nnoremap hht :Command<space>
+nnoremap hhx :Command<space>
 nnoremap ht :GG
 nnoremap hd :ALEDetail<cr>
 
