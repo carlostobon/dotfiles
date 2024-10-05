@@ -74,9 +74,9 @@ nnoremap < <<
 
 
 " ==> Toggle tabs and buffers <==
-nnoremap fw :tabprevious<cr>
-nnoremap fp :tabnext<cr>
+nnoremap <space> :tabnext<cr>
 nnoremap tt <C-6>
+nnoremap B <C-w>w
 
 
 " ==> Custom remaps <==
@@ -143,5 +143,12 @@ nnoremap ,,r mr
 
 " ==> General shortcuts <== "
 nnoremap hht :Command<space>
-nnoremap ht :G
+nnoremap ht :GG
 nnoremap hd :ALEDetail<cr>
+
+" ==> Fugitive remappings <== "
+cnoreabbrev GGedit  Gedit
+cnoreabbrev GGwrite Gwrite
+cnoreabbrev GGread  Gread
+cnoreabbrev GGdiff  Gdiff
+command!    GGpush  G push

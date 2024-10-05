@@ -156,3 +156,14 @@ function! ToggleNerdTree()
     endif
 endfunction
 command! -nargs=0 ToggleNerdTree call ToggleNerdTree()
+
+
+" Ensure G is only ran when Goyo is not active.
+function! GitHandler()
+    if g:goyo_state == 0
+        execute "normal! :G\<cr>"
+    else
+        echo "Goyo is currently opened."
+    endif
+endfunction
+command! -nargs=0 GG call GitHandler()
