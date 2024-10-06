@@ -108,6 +108,7 @@ vnoremap // :s/
 nnoremap dp {<down>V}d
 nnoremap vp {<down>V}
 nnoremap gg msgg
+nnoremap G  msG
 
 
 " ==> Custom selectors <== "
@@ -118,8 +119,8 @@ nnoremap cn cb
 nnoremap vi v$
 nnoremap vm v^
 
-nnoremap E $
-nnoremap I ^
+nnoremap I $
+nnoremap M ^
 
 nnoremap R A
 nnoremap A I
@@ -132,6 +133,8 @@ nnoremap Tl cT[
 nnoremap Tu cT(
 nnoremap Ty cT{
 
+nnoremap N n
+nnoremap E N
 
 " ==> Markers <== "
 nnoremap ,t `t
@@ -152,3 +155,6 @@ cnoreabbrev GGwrite Gwrite
 cnoreabbrev GGread  Gread
 cnoreabbrev GGdiff  Gdiff
 command!    GGpush  G push
+
+" ==> Source vimrc <== "
+cnoreabbrev SS source $MYVIMRC
