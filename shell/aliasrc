@@ -39,13 +39,14 @@ alias \
 	ga="git add" \
 	gc="git commit -m" \
 	gl="git log --stat" \
-	gps="git push" \
-	gpu="git pull" \
+	gh="git push" \
+	gp="git pull" \
 	gb="git branch" \
 	gs="git status" \
-	gsw="git switch -c" \
+	gw="git switch -c" \
 	gm="git merge" \
 	gr="git remote" \
+	gt="git restore" \
 	gd="git diff" \
 	xmr="xmonad --restart" \
 	p="paru" \
@@ -132,7 +133,7 @@ alias \
 	cr="cargo run --" \
 	ca="cargo add" \
 	cw="cargo watch -x check -x test -x run" \
-	cr="c ./target/release" \
+	ctr="c ./target/release" \
 
 ct(){
 	c "$ROOT/target/release"
@@ -282,19 +283,23 @@ tarit(){
 
 
 untarit(){
-	if ! [ -x "$(command -v tar)" ]; then
-		echo >&2 "Error: tar is not installed."
-		return 1
-	fi
-
-	if ! [ -x "$(command -v pigz)" ]; then
-		echo >&2 "Error: pigz is not installed."
-		return 1
-	fi
+	{ [ -n "$1" ] && [ -e "$1" ]; } ||
+		{ echo "Target is either not provided or does not exist." >&2; return 1; }
 
 
-	target=$1
-	sudo tar -I pigz -xf "$target"
+	# Check if the 'tar' command is available
+	command -v tar >/dev/null 2>&1 || {
+			echo >&2 "Error: tar is not installed."
+			return 1
+	}
+
+	# Check if the 'pigz' command is available
+	command -v pigz >/dev/null 2>&1 || {
+			echo >&2 "Error: pigz is not installed."
+			return 1
+	}
+
+	sudo tar -I pigz -xf "$1"
 }
 
 # Lists files using Duer
