@@ -50,82 +50,78 @@ alias \
 	gd="git diff" \
 	xmr="xmonad --restart" \
 	p="paru" \
-	podman="sudo podman"
+	podman="sudo podman" \
+	b="c \$ROOT" \
+	k="c \$OLDPWD" \
 
 
-# Changes directory & sets $ROOT
+# Changes the directory and sets the ROOT variable.
 c(){
 
-	if ! [ -x "$(command -v fd)" ]; then
-		echo >&2 "Error: fd is not installed."
-		return 1
-	fi
+	# In case argument is not provided
+	[ -z "$1" ] &&
+		{ cd "$HOME" && export ROOT="$HOME" && return 0; }
 
-	# Checks if $1 is empty or not provided
-	if [ -z "$1" ]; then
-		cd "$HOME" && export ROOT="$HOME"
-		return 0
-	fi
+	# Checks if 'fd' command is available and can
+	# be executed
+	command -v fd >/dev/null 2>&1 || {
+			echo >&2 "Error: fd is not installed."
+			return 1
+	}
 
-	# Checks if $1 exists,
-	# key for other commands that use it
-	if [ -e "$1" ]; then
-		cd "$1" || return 1
-	else
-		echo "cd $1: No such file or directory" >&2
-		return 1
-	fi
+	# Checks if the argument exists and is a directory.
+	# If successful, changes to the directory; otherwise,
+	# return an error.
+	[ -d "$1" ] ||
+		{ echo "Error: '$1' is not a valid directory." &&
+		return 1; }
 
-	current_dir=$(pwd)
+	cd "$1" ||
+		{ echo "Error: Failed to change directory to $1." &&
+			return 1; }
 
-	# Checks if current dir includes HOME
-	if [[ "$current_dir" != "$HOME"* ]]; then
-		export ROOT="$current_dir"
-		return 0
-	fi
+	# If the directory is not a subdirectory of HOME,
+	# set ROOT as PWD and return early, since the
+	# subsequent logic relies on HOME subdirectories.
+	[[ "$PWD" != "$HOME"* ]] &&
+		export ROOT="$PWD" && return 0
 
-	current_dir_holder="$current_dir"
+	# This variable will be mutated on each iteration
+	# of the while loop.
+	holder="$PWD"
 
-	while [[ "$current_dir_holder" != "$HOME" ]]
+	while [[ "$holder" != "$HOME" ]]
 	do
-		# Try to finds .git in path current_dir
+		# Attempt to find the .git folder in the current
+		# directory.
 		result=$(fd \
 				--hidden \
 				--type d \
 				--max-depth 1 \
 				--glob .git \
-				"$current_dir_holder")
+				"$holder")
 
-		if [ -z "$result" ]; then
-			current_dir_holder="${current_dir_holder%/*}"
-		else
-			export ROOT="$current_dir_holder"
+		# When .git folder is found
+		[ -n "$result" ] &&
+			export ROOT="$holder" &&
 			return 0
-		fi
+
+		# If not found, $result has a non-zero length.
+		# One level will be removed in reverse until the
+		# while loop completes.
+		[ -z "$result" ] && holder="${holder%/*}"
 
 	done
 
+# If .git is not found in the current directory or any
+# parent directories, set ROOT to PWD.
+export ROOT="$PWD"
 
-	export ROOT="$current_dir"
-	return 0
-
-}
-
-b(){
-	c "$ROOT"
 }
 
 mkd(){
 	mkdir -p "$1" && c "$1"
 }
-
-k(){
-	c "$OLDPWD"
-}
-
-# Python terminal shortcuts
-alias \
-	pye="source ~/Documents/venvs/maths/bin/activate" \
 
 # Rust terminal shortcuts
 alias \
@@ -133,68 +129,9 @@ alias \
 	cr="cargo run --" \
 	ca="cargo add" \
 	cw="cargo watch -x check -x test -x run" \
-	ctr="c ./target/release" \
+	ct="c \$ROOT/target/release" \
 
-ct(){
-	c "$ROOT/target/release"
-}
-
-# Docker terminal shortcuts
-alias \
-	dre="docker system prune -a" \
-	dco="docker-compose" \
-	dcb="docker-compose up --build -d" \
-	dvp="docker volume prune" \
-
-d(){
-	if [ $# -eq 0 ]; then
-		docker ps -a
-	else
-		docker "$@"
-	fi
-}
-
-dlc(){
-	docker ps -a | awk '{printf "%s ", $1}'
-}
-
-di(){
-	if [ $# -eq 0 ]; then
-		docker images -a
-	else
-		docker image "$@"
-	fi
-}
-
-dli(){
-	docker images -a | awk '{printf "%s ", $3}'
-}
-
-de(){
-	if ! [ $# -eq 1 ]; then
-		echo >&2 "Number of arguments is wrong."
-	else
-		docker exec -it "$1" /bin/bash
-	fi
-}
-
-drc(){
-	if [ $# -eq 0 ]; then
-		docker container prune -f
-	fi
-
-	if [ "$1" == "force" ]; then
-		docker rm -f "$(docker ps -aq)"
-	fi
-}
-
-dri(){
-	docker image prune "$@"
-	echo "To remove images with not container running use \`-a\` flag."
-}
-
-
-# NextJS terminal shortcuts
+# pnpm terminal shortcuts
 alias \
 	dev="pnpm run dev" \
 	build="pnpm run build" \
@@ -204,34 +141,32 @@ co(){
 	c "$ROOT/components" >/dev/null 2>&1 || \
 	c "$ROOT/src/components" >/dev/null 2>&1 || \
 	c "$ROOT/app/components" >/dev/null 2>&1 || \
-	echo "Error while cd components | src/components | app/components."
+	{ echo "Error while changing to components directory." >&2 && return 1; }
 }
 
 li(){
 	c "$ROOT/lib" >/dev/null 2>&1 || \
 	c "$ROOT/src/lib" >/dev/null 2>&1 || \
 	c "$ROOT/app/lib" >/dev/null 2>&1 || \
-	echo "Error while cd lib | src/lib | app/lib."
+	{ echo "Error while changing to library directory." >&2 && return 1; }
 }
 
 s() {
     c "$ROOT/src" >/dev/null 2>&1 || \
     c "$ROOT/app" >/dev/null 2>&1 || \
-    exa || \
-    echo "Error while cd src | app."
+		{ echo "Error while changing to src | app directory." >&2 && return 1; }
 }
 
 ro() {
 	c "$ROOT/app/routes" >/dev/null 2>&1 || \
-    echo "Error while cd app/routes."
+		{ echo "Error while changing to routes directory." >&2 && return 1; }
 }
 
 pk() {
-	if [ -e "$ROOT/package.json" ]; then
-		c "$ROOT" && v package.json
-	else
-			echo "Failed to find package.json"
-	fi
+	{ [ -e "$ROOT/package.json" ] &&
+		v "$ROOT/package.json"; } ||
+	{ echo "Failed to find package.json file." >&2 &&
+		return 1; }
 }
 
 # Video editing shortcuts
@@ -262,12 +197,12 @@ um(){
 # Compress and decompress archives
 tarit(){
 	if ! [ -x "$(command -v tar)" ]; then
-		echo >&2 "Error: tar is not installed."
+		echo "Error: tar is not installed." >&2
 		return 1
 	fi
 
 	if ! [ -x "$(command -v pigz)" ]; then
-		echo >&2 "Error: pigz is not installed."
+		echo "Error: pigz is not installed." >&2
 		return 1
 	fi
 
@@ -284,22 +219,22 @@ tarit(){
 
 untarit(){
 	{ [ -n "$1" ] && [ -e "$1" ]; } ||
-		{ echo "Target is either not provided or does not exist." >&2; return 1; }
+		{ echo "Target is either not provided or does not exist." >&2 && return 1; }
 
 
 	# Check if the 'tar' command is available
 	command -v tar >/dev/null 2>&1 || {
-			echo >&2 "Error: tar is not installed."
+			echo "Error: tar is not installed." >&2 &&
 			return 1
 	}
 
 	# Check if the 'pigz' command is available
 	command -v pigz >/dev/null 2>&1 || {
-			echo >&2 "Error: pigz is not installed."
+			echo "Error: pigz is not installed." >&2 &&
 			return 1
 	}
 
-	sudo tar -I pigz -xf "$1"
+	tar -I pigz -xf "$1"
 }
 
 # Lists files using Duer
@@ -313,25 +248,9 @@ vm(){
 	targets=("src/main.rs" "main.rs" "main.py")
 
 	for target in "${targets[@]}"; do
-		if [ -e "$target" ]; then
-			vim "$target"
-			return 0
-		fi
+		[ -e "$target" ] && vim "$target" && return 0
 	done
 
-	echo "Neither src/main.rs, main.rs, nor main.py were found." >&2
-}
-
-
-vl(){
-	targets=("src/lib.rs" "layout.tsx")
-
-	for target in "${targets[@]}"; do
-		if [ -e "$target" ]; then
-			vim "$target"
-			return 0
-		fi
-	done
-
-	echo "Neither src/lib.rs nor layout.tsx found." >&2
+	echo "Neither src/main.rs, main.rs, nor main.py were found." >&2 &&
+		return 1
 }
