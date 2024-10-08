@@ -45,8 +45,8 @@ alias \
 	gs="git status" \
 	gw="git switch -c" \
 	gm="git merge" \
-	gr="git remote" \
-	gt="git restore" \
+	gr="git restore" \
+	gt="git remote" \
 	gd="git diff" \
 	xmr="xmonad --restart" \
 	p="paru" \
@@ -162,10 +162,7 @@ li(){
 s() {
 	c "$ROOT/src" >/dev/null 2>&1 || \
 	c "$ROOT/app" >/dev/null 2>&1 || \
-	{
-		echo "Error while changing to src | app directory." >&2
-		return 1
-	}
+	exa
 }
 
 ro() {
