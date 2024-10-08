@@ -72,13 +72,15 @@ c(){
 	# Checks if the argument exists and is a directory.
 	# If successful, changes to the directory; otherwise,
 	# return an error.
-	[ -d "$1" ] ||
-		{ echo "Error: '$1' is not a valid directory." &&
-		return 1; }
+	[ -d "$1" ] || {
+		echo "Error: '$1' is not a valid directory." >&2
+		return 1
+	}
 
-	cd "$1" ||
-		{ echo "Error: Failed to change directory to $1." &&
-			return 1; }
+	cd "$1" || {
+		echo "Error: Failed to change directory to $1." >&2
+		return 1
+	}
 
 	# If the directory is not a subdirectory of HOME,
 	# set ROOT as PWD and return early, since the
@@ -141,32 +143,46 @@ co(){
 	c "$ROOT/components" >/dev/null 2>&1 || \
 	c "$ROOT/src/components" >/dev/null 2>&1 || \
 	c "$ROOT/app/components" >/dev/null 2>&1 || \
-	{ echo "Error while changing to components directory." >&2 && return 1; }
+	{
+		echo "Error while changing to components directory." >&2
+		return 1
+	}
 }
 
 li(){
 	c "$ROOT/lib" >/dev/null 2>&1 || \
 	c "$ROOT/src/lib" >/dev/null 2>&1 || \
 	c "$ROOT/app/lib" >/dev/null 2>&1 || \
-	{ echo "Error while changing to library directory." >&2 && return 1; }
+	{
+		echo "Error while changing to library directory." >&2
+		return 1
+	}
 }
 
 s() {
-    c "$ROOT/src" >/dev/null 2>&1 || \
-    c "$ROOT/app" >/dev/null 2>&1 || \
-		{ echo "Error while changing to src | app directory." >&2 && return 1; }
+	c "$ROOT/src" >/dev/null 2>&1 || \
+	c "$ROOT/app" >/dev/null 2>&1 || \
+	{
+		echo "Error while changing to src | app directory." >&2
+		return 1
+	}
 }
 
 ro() {
 	c "$ROOT/app/routes" >/dev/null 2>&1 || \
-		{ echo "Error while changing to routes directory." >&2 && return 1; }
+	{
+		echo "Error while changing to routes directory." >&2
+		return 1
+	}
 }
 
 pk() {
 	{ [ -e "$ROOT/package.json" ] &&
 		v "$ROOT/package.json"; } ||
-	{ echo "Failed to find package.json file." >&2 &&
-		return 1; }
+	{
+		echo "Failed to find package.json file." >&2
+		return 1
+	}
 }
 
 # Video editing shortcuts
@@ -218,19 +234,21 @@ tarit(){
 
 
 untarit(){
-	{ [ -n "$1" ] && [ -e "$1" ]; } ||
-		{ echo "Target is either not provided or does not exist." >&2 && return 1; }
+	{ [ -n "$1" ] && [ -e "$1" ]; } || {
+		echo "Target is either not provided or does not exist." >&2
+		return 1
+	}
 
 
 	# Check if the 'tar' command is available
 	command -v tar >/dev/null 2>&1 || {
-			echo "Error: tar is not installed." >&2 &&
+			echo "Error: tar is not installed." >&2
 			return 1
 	}
 
 	# Check if the 'pigz' command is available
 	command -v pigz >/dev/null 2>&1 || {
-			echo "Error: pigz is not installed." >&2 &&
+			echo "Error: pigz is not installed." >&2
 			return 1
 	}
 
@@ -251,6 +269,6 @@ vm(){
 		[ -e "$target" ] && vim "$target" && return 0
 	done
 
-	echo "Neither src/main.rs, main.rs, nor main.py were found." >&2 &&
-		return 1
+	echo "Neither src/main.rs, main.rs, nor main.py were found." >&2
+	return 1
 }
