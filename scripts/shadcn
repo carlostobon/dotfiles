@@ -8,34 +8,34 @@ function shadcn_importer(){
   # Ensures at leas two args are passed.
   [ "$#" -lt 2 ] &&
     echo >&2 "At least two args are required." &&
-    exit 1
+    return 1
 
   # Ensures pnpm is installed.
   ! [ -x "$(command -v pnpm)" ] &&
     echo >&2 "pnpm binary was not found." &&
-    exit 1
+    return 1
 
   # Ensures fd is installed.
   ! [ -x "$(command -v fd)" ] &&
     echo >&2 "fd binary was not found." &&
-    exit 1
+    return 1
 
   # Ensures ripgrep is installed.
   ! [ -x "$(command -v rg)" ] &&
     echo >&2 "ripgrep binary was not found." &&
-    exit 1
+    return 1
 
   # Ensures root path exists.
   [ -z "$ROOT" ] &&
     echo >&2 "Failed to get root directory." &&
-    exit 1
+    return 1
 
 
   package_json="$ROOT/package.json"
 
   ! [ -f "$package_json" ] &&
     echo >&2 "File package.json was not found." &&
-    exit 1
+    return 1
 
   # Set components address based on whether Remix is present in
   # package.json
@@ -49,12 +49,12 @@ function shadcn_importer(){
   # Run the specified command using pnpx shadcn@latest
   pnpx shadcn@latest "$@" || {
       echo >&2 "Failed to run shadcn@latest." &&
-      exit 1
+      return 1
   }
 
   cd "$components_address" || {
       echo >&2 "Failed to change to directory $components_address." &&
-      exit 1
+      return 1
   }
 
   index_address="$components_address/index.ts"
