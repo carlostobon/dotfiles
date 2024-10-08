@@ -30,7 +30,7 @@ nmap r <C-r>
 " ==> Scape keys <==
 nnoremap a i
 vnoremap aa <esc>
-inoremap aa <esc>
+inoremap aa <esc><right>
 
 
 " ==> Toggle capitalization: Capitalize and decapitalize <==
@@ -116,8 +116,8 @@ nnoremap ci C
 nnoremap cm c^
 nnoremap cn cb
 
-nnoremap vi v$
-nnoremap vm v^
+nnoremap vI v$
+nnoremap vM v^
 
 nnoremap I $
 nnoremap M ^
