@@ -60,20 +60,20 @@ autocmd FileType typescriptreact inoremap kkw const x = ()
 autocmd FileType typescriptreact nnoremap hp :Props<cr>
 
 " Adds the sequence to import from react.
-autocmd FileType typescriptreact nnoremap hr ms:FrameworkImport react react<cr>
+autocmd FileType typescriptreact nnoremap hr ms:ReactImporter react<cr>
 
 
 " Adds the sequence to import from framework.
-autocmd FileType typescriptreact nnoremap hf ms:FrameworkImport next @remix-run/react<cr>
+autocmd FileType typescriptreact nnoremap hf ms:ReactImporter next<cr>
 
 
 " Adds the sequence to import from components
-autocmd FileType typescriptreact nnoremap hc ms:FrameworkImport @/components/index \~/components/index<cr>
+autocmd FileType typescriptreact nnoremap hc ms:ReactImporter @/components/index<cr>
 
 
 " Adds the sequence to import from components/ui
 " it's specifically used to import shadcn components
-autocmd FileType typescriptreact nnoremap hs ms:FrameworkImport @/components/ui/index \~/components/ui/index<cr>
+autocmd FileType typescriptreact nnoremap hs ms:ReactImporter @/components/ui/index<cr>
 
 
 " Adds regulas import statement
