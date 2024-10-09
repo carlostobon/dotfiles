@@ -66,5 +66,5 @@ autocmd FileType html nnoremap fw :call SintaxOn()<cr>
 autocmd FileType html nnoremap vv :call SintaxOnSave()<cr>
 
 "sets color scheme gruvbox or ayu
-"autocmd vimenter * ++nested colorscheme gruvbox
-colorscheme ayu
+autocmd vimenter * ++nested colorscheme gruvbox
+"colorscheme ayu
