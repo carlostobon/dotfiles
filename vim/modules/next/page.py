@@ -1,5 +1,9 @@
 # page.py
-from utils import Transformer, read_env_var
+from utils import (
+    Transformer,
+    read_env_var,
+    validate_git_exists,
+)
 from pathlib import Path
 from typing import List
 
@@ -85,11 +89,14 @@ def create_page(page_str: str):
     page = Path(page_str)
     transformer = Transformer()
 
-    # Checks if component is valid
+    # Verifies that the page has a valid name
     transformer.is_valid_page(page)
 
-    # Reaches the environment variable ROOT
+    # Accesses the ROOT environment variable
     root_path = read_env_var("ROOT")
+
+    # Verifies if a Git repository has been initialized
+    validate_git_exists(root_path)
 
     pages_path = Path(root_path).joinpath("app")
 

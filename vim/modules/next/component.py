@@ -1,6 +1,10 @@
 from typing import List
 from pathlib import Path
-from utils import Transformer, read_env_var
+from utils import (
+    Transformer,
+    read_env_var,
+    validate_git_exists,
+)
 
 
 # Retrieve all existing components from the components path.
@@ -100,11 +104,14 @@ def create_component(path: str):
     component = Path(path)
     transformer = Transformer()
 
-    # Checks if component is valid
+    # Verifies that the component has a valid name
     transformer.is_valid_component(component)
 
-    # Reaches the environment variable ROOT
+    # Accesses the ROOT environment variable
     root_path = read_env_var("ROOT")
+
+    # Verifies if a Git repository has been initialized
+    validate_git_exists(root_path)
 
     components_path = Path(root_path).joinpath(
         "components"

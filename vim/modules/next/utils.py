@@ -17,6 +17,13 @@ def read_env_var(env_var) -> str:
     return var
 
 
+def validate_git_exists(root: str):
+    git_path = Path(root).joinpath(".git")
+
+    if not git_path.exists():
+        raise OSError("Git folder not found.")
+
+
 # Basic class for path manipulation
 class PathHandler:
 
