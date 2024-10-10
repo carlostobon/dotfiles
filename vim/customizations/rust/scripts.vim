@@ -36,7 +36,8 @@ function RustAddAsync()
     endif
 
     if l:result == 0
-        execute "normal! ^f(BBiasync \<esc>`s"
+        "execute "normal! ^f(BBiasync \<esc>`s"
+        execute "normal! ^fn\<left>iasync \<esc>`s"
     else
         echo "Failed to find pattern."
     endif
