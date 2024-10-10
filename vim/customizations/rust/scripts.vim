@@ -102,6 +102,11 @@ function RustToggleSignature()
     let l:result = SearchPattern("fn")
     let l:line_content = getline('.')
 
+    if l:result == -1
+        echo "Failed to find pattern."
+        return
+    endif
+
     if match (l:line_content, '\->.*{') != -1
         execute "normal! f-dt{`s"
 
