@@ -3,6 +3,7 @@
 echo "Making folders..."
 folders=(
   ".config/kitty"
+  ".config/qutebrowser"
   ".config/xmonad"
   ".vim/config"
 )
@@ -41,9 +42,6 @@ linker "vim/customizations" ".vim/customizations"
 [ -e "$HOME/.config/mpv" ] && rm "$HOME/.config/mpv"
 linker "mpv" ".config/mpv"
 
-[ -e "$HOME/.config/qutebrowser" ] && rm "$HOME/.config/qutebrowser"
-linker "qutebrowser" ".config/qutebrowser"
-
 [ -e "$HOME/.config/yazi" ] && rm "$HOME/.config/yazi"
 linker "yazi" ".config/yazi"
 
@@ -59,6 +57,9 @@ linker "picom" ".config/picom"
 linker "kitty/kitty.conf" ".config/kitty/kitty.conf"
 linker "xmonad/xmonad.hs" ".config/xmonad/xmonad.hs"
 linker "git/gitconfig" ".gitconfig"
+
+linker "qutebrowser/config.py" ".config/qutebrowser/config.py"
+linker "qutebrowser/autoconfig.yml" ".config/qutebrowser/autoconfig.yml"
 
 linker "scripts/toolbox" ".binaries/toolbox"
 linker "scripts/ship" ".binaries/ship"

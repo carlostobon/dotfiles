@@ -21,6 +21,11 @@ export EDITOR=vim
 # Set Qutebroweser as the default browser
 export BROWSER=qutebrowser
 
+# Set common variables
+export DC="$HOME/Documents"
+export DW="$HOME/Downloads"
+export CFG="$HOME/.config"
+
 # Enable appending to the history file on shell exit,
 # preserving previous sessions' history
 shopt -s histappend
