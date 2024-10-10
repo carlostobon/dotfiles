@@ -116,8 +116,8 @@ nnoremap ci C
 nnoremap cm c^
 nnoremap cn cb
 
-nnoremap vI v$
-nnoremap vM v^
+nnoremap v, v^
+nnoremap v. v$
 
 nnoremap I $
 nnoremap M ^

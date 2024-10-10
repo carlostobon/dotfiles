@@ -95,6 +95,32 @@ function RustToggleMutability()
 endfunction
 autocmd FileType rust command! -nargs=0 RustToggleMutability call RustToggleMutability()
 
+
+" Toggle variable mutability
+" ==========================
+function RustToggleSignature()
+    let l:result = SearchPattern("fn")
+    let l:line_content = getline('.')
+
+    if match (l:line_content, '\->.*{') != -1
+        execute "normal! f-dt{`s"
+
+    elseif match(l:line_content, '\->.*') != -1
+        execute "normal! f-D`s"
+
+    elseif match(l:line_content, '.*{') != -1
+        execute "normal! ^f)a\<space>->\<space>\<right>"
+        echo "first"
+        startinsert
+    else
+        execute "normal! ^f)a\<space>->\<space>\<space>"
+        echo "second"
+        startinsert
+    endif
+endfunction
+autocmd FileType rust command! -nargs=0 RustToggleSignature call RustToggleSignature()
+
+
 " Scaffold for implementing the given trait
 " =========================================
 function Implement(trait)
