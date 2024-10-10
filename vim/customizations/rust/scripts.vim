@@ -97,7 +97,7 @@ endfunction
 autocmd FileType rust command! -nargs=0 RustToggleMutability call RustToggleMutability()
 
 
-" Toggle variable mutability
+" Toggle Signature
 " ==========================
 function RustToggleSignature()
     let l:result = SearchPattern("fn")
@@ -145,3 +145,19 @@ function Implement(trait)
     endif
 endfunction
 autocmd FileType rust command! -nargs=1 Implement call Implement(<f-args>)
+
+
+" Wildcard to comment singular variables
+" =======================================
+function SingularComment()
+    let current_word = expand('<cword>')
+    let first_char = current_word[0]
+
+    if first_char == '_'
+        execute "normal! bx`s\<left>"
+    else
+        execute "normal! bi_\<esc>`s\<right>"
+    endif
+
+endfunction
+autocmd FileType rust command! -nargs=0 SingularComment call SingularComment()

@@ -10,6 +10,7 @@ autocmd FileType rust nnoremap hc ms:RustToggleVar<CR>
 autocmd FileType rust nnoremap hi :Implement<space>
 autocmd FileType rust nnoremap ti 0f}i<cr><esc>O
 autocmd FileType rust nnoremap tn ms:RustToggleSignature<CR>
+autocmd FileType rust nnoremap t, ms:SingularComment<cr>
 
 autocmd FileType rust nnoremap hhf :CreateFile<space>
 autocmd FileType rust nnoremap hha :AddPkg<space>
