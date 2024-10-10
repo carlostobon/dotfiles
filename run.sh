@@ -2,15 +2,9 @@
 
 echo "Making folders..."
 folders=(
-  ".config/mpv"
-  ".config/picom"
-  ".config/zathura"
-  ".config/yazi"
-  ".config/qutebrowser"
   ".config/kitty"
-  ".config/wallpaper"
+  ".config/xmonad"
   ".vim/config"
-  ".xmonad"
 )
 
 for folder in "${folders[@]}"; do
@@ -38,34 +32,35 @@ linker "vim/pluggins.vim" ".vim/config/pluggins.vim"
 linker "vim/settings.vim" ".vim/config/settings.vim"
 linker "vim/shortcuts.vim" ".vim/config/shortcuts.vim"
 linker "vim/functions.vim" ".vim/config/functions.vim"
+
+[ -e "$HOME/.vim/modules" ] && rm "$HOME/.vim/modules"
+[ -e "$HOME/.vim/customizations" ] && rm "$HOME/.vim/customizations"
 linker "vim/modules" ".vim/modules"
 linker "vim/customizations" ".vim/customizations"
 
-linker "mpv/input.conf" ".config/mpv/input.conf"
-linker "mpv/mpv.conf" ".config/mpv/mpv.conf"
+[ -e "$HOME/.config/mpv" ] && rm "$HOME/.config/mpv"
+linker "mpv" ".config/mpv"
 
-linker "qutebrowser/autoconfig.yml" ".config/qutebrowser/autoconfig.yml"
-linker "qutebrowser/config.py" ".config/qutebrowser/config.py"
-linker "qutebrowser/gruvbox.py" ".config/qutebrowser/gruvbox.py"
+[ -e "$HOME/.config/qutebrowser" ] && rm "$HOME/.config/qutebrowser"
+linker "qutebrowser" ".config/qutebrowser"
 
-linker "yazi/keymap.toml" ".config/yazi/keymap.toml"
-linker "yazi/theme.toml" ".config/yazi/theme.toml"
-linker "yazi/yazi.toml" ".config/yazi/yazi.toml"
+[ -e "$HOME/.config/yazi" ] && rm "$HOME/.config/yazi"
+linker "yazi" ".config/yazi"
 
-linker "zathura/zathurarc" ".config/zathura/zathurarc"
+[ -e "$HOME/.config/zathura" ] && rm "$HOME/.config/zathura"
+linker "zathura" ".config/zathura"
 
-linker "wallpaper/wallpaper.png" ".config/wallpaper/wallpaper.png"
+[ -e "$HOME/.config/wallpaper" ] && rm "$HOME/.config/wallpaper"
+linker "wallpaper" ".config/wallpaper"
 
-linker "git/gitconfig" ".gitconfig"
-
-linker "xmonad/xmonad.hs" ".config/xmonad/xmonad.hs"
-
-linker "picom/picom.conf" ".config/picom/picom.conf"
+[ -e "$HOME/.config/picom" ] && rm "$HOME/.config/picom"
+linker "picom" ".config/picom"
 
 linker "kitty/kitty.conf" ".config/kitty/kitty.conf"
+linker "xmonad/xmonad.hs" ".config/xmonad/xmonad.hs"
+linker "git/gitconfig" ".gitconfig"
 
 linker "scripts/toolbox" ".binaries/toolbox"
 linker "scripts/ship" ".binaries/ship"
 linker "scripts/video" ".binaries/video"
-linker "scripts/shadcn" ".binaries/shadcn"
 linker "scripts/shadcn" ".binaries/shadcn"
