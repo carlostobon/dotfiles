@@ -48,7 +48,7 @@ class Transformer:
     def is_valid_component(self, component: Path):
         component_as_str = str(component)
         expression = re.compile(
-            r"^([a-z]+(-[a-z]+)?\/)*[a-z]+(-[a-z]+)?$"
+            r"^(?:\((?:[a-z]+(?:-[a-z]+)?)\)\/|[a-z]+(?:-[a-z]+)?\/)*[a-z]+(?:-[a-z]+)?$"
         )
 
         if not expression.match(component_as_str):

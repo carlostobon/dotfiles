@@ -27,11 +27,10 @@ for component in vim.eval("a:000"):
   try:
       create_component(component)
   except Exception as e:
-      print(" 🧨 {}".format(e))
+      print("<- NextJS -> 🧨 {}".format(e))
 EOF
 endfunction
 autocmd FileType typescriptreact command! -nargs=* ReactComp call CreateReactComponent(<f-args>)
-
 
 
 " -----------------------------------------------
@@ -44,7 +43,7 @@ for page in vim.eval("a:000"):
   try:
       create_page(page)
   except Exception as e:
-      print(" 🧨 {}".format(e))
+      print("<- NextJS -> 🧨 {}".format(e))
 EOF
 endfunction
 autocmd FileType typescriptreact command! -nargs=* ReactRoute call CreateReactRoute(<f-args>)

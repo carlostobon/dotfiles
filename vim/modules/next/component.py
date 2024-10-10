@@ -4,33 +4,45 @@ from utils import Transformer, read_env_var
 
 
 # Retrieve all existing components from the components path.
-def get_components_list(components_path: Path) -> List[Path]:
-    current_components: List[Path] = []
+def get_components_list(
+    components_path: Path,
+) -> List[Path]:
 
-    for item in components_path.rglob("*.tsx"):
-        if item.is_file():
-            current_components.append(item)
+    current_components = [
+        component.relative_to(components_path)
+        for component in components_path.rglob("*.tsx")
+    ]
 
     return current_components
 
 
 # Check if the component conflicts with any other in the component list.
-def check_component_conflicts(components_list: List[Path], component: Path):
+def check_component_conflicts(
+    components_list: List[Path], component: Path
+):
 
     for component_item in components_list:
         if component_item.stem == component.stem:
             raise ValueError(
-                "Component {} conflicts with {}.".format(component, component_item)
+                "Component {} conflicts with {}.".format(
+                    component, component_item
+                )
             )
 
 
 # Create the parent directories and the component file
-def create_parent_directories_and_component(component_path: Path, pascal_case: str):
+def create_parent_directories_and_component(
+    component_path: Path, pascal_case: str
+):
     try:
-        component_path.parent.mkdir(parents=True, exist_ok=True)
+        component_path.parent.mkdir(
+            parents=True, exist_ok=True
+        )
     except Exception:
         raise OSError(
-            "Failed to create parent directories for {}.".format(component_path.name)
+            "Failed to create parent directories for {}.".format(
+                component_path.name
+            )
         )
 
     try:
@@ -53,13 +65,19 @@ export default function {}({{}}: {}Props) {{
         )
 
     except Exception:
-        raise OSError("Failed to write component {}.".format(component_path.name))
+        raise OSError(
+            "Failed to write component {}.".format(
+                component_path.name
+            )
+        )
 
 
 # Automatically append the component to the 'index.tsx'
 # file for export management
 def append_component_to_index_file(
-    components_path: Path, component_path: Path, pascal_case: str
+    components_path: Path,
+    component_path: Path,
+    pascal_case: str,
 ):
 
     statement = 'export {{ default as {} }} from "./{}";\n'.format(
@@ -71,7 +89,11 @@ def append_component_to_index_file(
         with open(index_path, "a") as file:
             file.write(statement)
     except Exception:
-        raise ValueError("Failed to write {} in index.ts".format(component_path))
+        raise ValueError(
+            "Failed to write {} in index.ts".format(
+                component_path
+            )
+        )
 
 
 def create_component(path: str):
@@ -84,33 +106,52 @@ def create_component(path: str):
     # Reaches the environment variable ROOT
     root_path = read_env_var("ROOT")
 
-    components_path = Path(root_path).joinpath("components")
+    components_path = Path(root_path).joinpath(
+        "components"
+    )
 
     # Retrieve a list of all components in components_path,
     # excluding the components_path prefix
-    current_components = [
-        component.relative_to(components_path)
-        for component in components_path.rglob("*.tsx")
-    ]
+    current_components = get_components_list(
+        components_path
+    )
 
-    # Check if component conflicts with current components
-    check_component_conflicts(current_components, component)
+    # Verify if the component conflicts with any existing components.
+    check_component_conflicts(
+        current_components, component
+    )
 
     # Append the component directory and suffix
-    # corge/grault -> corge/grault/grault.tsx
-    component_path = transformer.append_directory_and_suffix(component)
+    # Example: corge/grault -> corge/grault/grault.tsx
+    component_path = (
+        transformer.append_directory_and_suffix(
+            component
+        )
+    )
 
     # Completed path of component to be created.
-    component_path_completed = components_path.joinpath(component_path)
+    component_path_completed = (
+        components_path.joinpath(component_path)
+    )
 
     # Generates pascal case name for the component
-    pascal_case = transformer.generate_pascal_case(component.name)
+    pascal_case = transformer.generate_pascal_case(
+        component.name
+    )
 
     # Create parent directory and write the component.
-    create_parent_directories_and_component(component_path_completed, pascal_case)
+    create_parent_directories_and_component(
+        component_path_completed, pascal_case
+    )
 
     # Appends the component to index.ts
-    append_component_to_index_file(components_path, component_path, pascal_case)
+    append_component_to_index_file(
+        components_path, component_path, pascal_case
+    )
 
     # Print the component if the operation was successful
-    print(" 🚀 Component {} created.".format(pascal_case))
+    print(
+        "<- NextJS -> 🚀 Component {} created.".format(
+            pascal_case
+        )
+    )
