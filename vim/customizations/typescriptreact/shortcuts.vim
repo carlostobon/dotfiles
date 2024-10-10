@@ -87,4 +87,4 @@ autocmd FileType typescriptreact nnoremap hu msgg<down>i
 
 
 " Breaks {} statement
-autocmd FileType typescriptreact nnoremap hb 0f}i<cr><esc>O
+autocmd FileType typescriptreact nnoremap ti 0f}i<cr><esc>O

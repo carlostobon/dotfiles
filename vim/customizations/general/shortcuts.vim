@@ -39,11 +39,7 @@ nnoremap fl <right>bvu
 
 
 " ==> Commenter <==
-nmap te \cc
-nmap ti \cu
-vmap te \cc
-vmap ti \cu
-
+nmap te \c<space>
 " -> Toggle between alternate comment modes <-
 nmap ta \ca
 
