@@ -110,11 +110,9 @@ function RustToggleSignature()
 
     elseif match(l:line_content, '.*{') != -1
         execute "normal! ^f)a\<space>->\<space>\<right>"
-        echo "first"
         startinsert
     else
         execute "normal! ^f)a\<space>->\<space>\<space>"
-        echo "second"
         startinsert
     endif
 endfunction
