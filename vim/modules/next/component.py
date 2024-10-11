@@ -36,22 +36,24 @@ def check_component_conflicts(
 
 # Create the parent directories and the component file
 def create_parent_directories_and_component(
-    component_path: Path, pascal_case: str
+    component_path: Path,
+    component_complete_path: Path,
+    pascal_case: str,
 ):
     try:
-        component_path.parent.mkdir(
+        component_complete_path.parent.mkdir(
             parents=True, exist_ok=True
         )
     except Exception:
         raise OSError(
             "Failed to create parent directories for {}.".format(
-                component_path.name
+                component_complete_path.name
             )
         )
 
     try:
-        component_path.write_text(
-            """// components/{}/{}
+        component_complete_path.write_text(
+            """// components/{}
 
 interface {}Props {{}}
 
@@ -59,8 +61,7 @@ export default function {}({{}}: {}Props) {{
   return <div>Hello, {}!</div>;
 }}
 """.format(
-                component_path.stem,
-                component_path.name,
+                component_path,
                 pascal_case,
                 pascal_case,
                 pascal_case,
@@ -137,8 +138,8 @@ def create_component(path: str):
     )
 
     # Completed path of component to be created.
-    component_path_completed = (
-        components_path.joinpath(component_path)
+    component_complete_path = components_path.joinpath(
+        component_path
     )
 
     # Generates pascal case name for the component
@@ -148,7 +149,9 @@ def create_component(path: str):
 
     # Create parent directory and write the component.
     create_parent_directories_and_component(
-        component_path_completed, pascal_case
+        component_path,
+        component_complete_path,
+        pascal_case,
     )
 
     # Appends the component to index.ts
