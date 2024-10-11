@@ -27,24 +27,24 @@ autocmd FileType html inoremap kkb <button></button><esc>F{a
 
 
 " ============ CSS ============
-autocmd FileType css inoremap gcs grid-column-start:<space>
-autocmd FileType css inoremap gce grid-column-end:<space>
+autocmd FileType css inoremap kkgcs grid-column-start:<space>
+autocmd FileType css inoremap kkgce grid-column-end:<space>
 
 " Adds display class and its corresponded aligns with Flex
-autocmd FileType css inoremap df display:<space>flex;<CR>
+autocmd FileType css inoremap kkdf display:<space>flex;<CR>
                   \justify-content:<space>center;<CR>
                   \align-items:<space>center;
 
 " Adds display class and its corresponded aligns with Grid
-autocmd FileType css inoremap dg display:<space>grid;<CR>
+autocmd FileType css inoremap kkdg display:<space>grid;<CR>
                   \grid-template-columns: repeat(, 1fr);<CR>
                   \grid-template-rows: repeat(, 1fr);<CR>
                   \align-items:<space>center;<esc>kkf,i
 
-autocmd FileType css inoremap bg background-color:<space>
-autocmd FileType css inoremap ff font-family:<space>
-autocmd FileType css inoremap fs font-size:<space>
-autocmd FileType css inoremap fw font-weight:<space>
-autocmd FileType css inoremap cc color:<space>
-autocmd FileType css inoremap mg margin:<space>
-autocmd FileType css inoremap pd padding:<space>
+autocmd FileType css inoremap kkbg background-color:<space>
+autocmd FileType css inoremap kkff font-family:<space>
+autocmd FileType css inoremap kkfs font-size:<space>
+autocmd FileType css inoremap kkfw font-weight:<space>
+autocmd FileType css inoremap kkcc color:<space>
+autocmd FileType css inoremap kkmg margin:<space>
+autocmd FileType css inoremap kkpd padding:<space>
