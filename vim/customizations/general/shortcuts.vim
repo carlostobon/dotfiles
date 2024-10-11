@@ -48,6 +48,7 @@ nmap ta \ca
 " ==> Move from word to word <==
 nnoremap w W
 nnoremap b B
+nnoremap l b
 
 
 " ==> Copy and paste <==
