@@ -12,7 +12,7 @@ autocmd FileType rust nnoremap ti 0f}i<cr><esc>O
 autocmd FileType rust nnoremap tn ms:RustToggleSignature<CR>
 autocmd FileType rust nnoremap t, ms:SingularComment<cr>
 
-autocmd FileType rust nnoremap hhf :CreateFile<space>
+autocmd FileType rust nnoremap hhf :CreateEntry<space>
 autocmd FileType rust nnoremap hha :AddPkg<space>
 autocmd FileType rust nnoremap hhr :!clear; cargo run --<space>
 autocmd FileType rust nnoremap hht :!clear; cargo test<cr>

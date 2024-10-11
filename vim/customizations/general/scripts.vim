@@ -29,45 +29,20 @@ command! -nargs=* SearchPattern call SearchPattern(<f-args>)
 
 " *** CreateFile ***
 " Creates a file from current ROOT directory.
-function! CreateFile(path)
+function! CreateEntry(...)
+  call ImportPythonModules(".vim/modules/general")
   python3 << EOF
+from file_manager import entry_creator
 
-from pathlib import Path
-import os
-
-def create_file(path: str):
-  path = Path(path)
-
-  # Gets environment var ROOT
-  project_dir = os.getenv("ROOT")
-
-  target_path = Path(project_dir).joinpath(path)
-
-  if target_path.exists():
-    print("File already exists.")
-    return
-
+for entry in vim.eval("a:000"):
   try:
-    target_path.parent.mkdir(parents=True, exist_ok=True)
+      entry_creator(entry)
   except Exception as e:
-    print("Error while making parents: {}".format(e))
-
-  try:
-    with open(target_path, "w") as file:
-      file.write("// {}".format(path))
-
-  except OSError as e:
-    print("Something when wrong: {}".format(e))
-    return
-
-  print("File {} created.".format(path))
-
-
-create_file(vim.eval('a:path'))
+      print("{e}")
 EOF
 endfunction
 
-command! -nargs=1 CreateFile call CreateFile(<f-args>)
+command! -nargs=1 CreateEntry call CreateEntry(<f-args>)
 
 
 " *** Command ***
