@@ -119,3 +119,22 @@ function AddProps()
 
 endfunction
 autocmd FileType typescriptreact command! -nargs=0 Props call AddProps()
+
+
+" -----------------------------------------------
+function AddClassName()
+  let l:line_content = getline('.')
+
+  if l:line_content =~ "className"
+    echo "first"
+    execute "normal! $F\"i\<space>\<right>"
+    startinsert
+  else
+    echo "second"
+    execute "normal! ^/[^=]>\<CR>"
+    execute "normal! a\<space>className=\"\""
+    startinsert
+  endif
+
+endfunction
+autocmd FileType typescriptreact command! -nargs=0 AddClassName call AddClassName()

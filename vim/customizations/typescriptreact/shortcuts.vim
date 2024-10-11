@@ -36,7 +36,8 @@ autocmd FileType typescriptreact nnoremap hhx :Command pnpx<space>
 autocmd FileType typescriptreact nnoremap hhs :Command shadcn<space>
 
 autocmd FileType typescriptreact nnoremap t. 0/<\/<cr>i
-autocmd FileType typescriptreact nnoremap tn 0/[^=]><cr>li<space>className=""<esc>i
+"autocmd FileType typescriptreact nnoremap tn 0/[^=]><cr>li<space>className=""<esc>i
+autocmd FileType typescriptreact nnoremap tn :AddClassName<cr>
 autocmd FileType typescriptreact nnoremap t, 0/[^=]><cr>li<cr><esc>OclassName=""<esc>i<cr><esc>O
 autocmd FileType typescriptreact nnoremap c. 0/[^=]><cr>llct<
 
@@ -64,7 +65,7 @@ autocmd FileType typescriptreact nnoremap hr ms:ReactImporter react<cr>
 
 
 " Adds the sequence to import from framework.
-autocmd FileType typescriptreact nnoremap hf ms:ReactImporter next<cr>
+autocmd FileType typescriptreact nnoremap hf ms:ReactImporter next<cr><esc>fta/
 
 
 " Adds the sequence to import from components
