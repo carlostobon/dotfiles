@@ -78,7 +78,7 @@ autocmd FileType typescriptreact nnoremap hs ms:ReactImporter @/components/ui/in
 
 " Adds regular import statement
 autocmd FileType typescriptreact nnoremap hi msgg}o
-                  \import {  } from "";<esc>i
+                  \import {  } from "";<esc>hi
 
 
 " Adds use client declaration
