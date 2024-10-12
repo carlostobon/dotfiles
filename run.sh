@@ -60,6 +60,7 @@ linker "git/gitconfig" ".gitconfig"
 
 linker "qutebrowser/config.py" ".config/qutebrowser/config.py"
 linker "qutebrowser/autoconfig.yml" ".config/qutebrowser/autoconfig.yml"
+linker "qutebrowser/gruvbox.py" ".config/qutebrowser/gruvbox.py"
 
 linker "scripts/toolbox" ".binaries/toolbox"
 linker "scripts/ship" ".binaries/ship"
