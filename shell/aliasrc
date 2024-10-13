@@ -92,21 +92,22 @@ c(){
 	# of the while loop.
 	holder="$PWD"
 
+
+	# List with all possible required targets.
+	target_entries=(".git" "package.json" "Cargo.toml" "main.py")
 	while [[ "$holder" != "$HOME" ]]
 	do
-		# Attempt to find the .git folder in the current
+		# Attempt to find any target entry in the current
 		# directory.
-		result=$(fd \
-				--hidden \
-				--type d \
-				--max-depth 1 \
-				--glob .git \
-				"$holder")
+		for entry in "${target_entries[@]}"
+		do
+			result=$(fd --hidden --max-depth 1 --glob "$entry" "$holder")
 
-		# When .git folder is found
-		[ -n "$result" ] &&
-			export ROOT="$holder" &&
-			return 0
+			# When a target entry is found
+			[ -n "$result" ] &&
+				export ROOT="$holder" &&
+				return 0
+		done
 
 		# If not found, $result has a non-zero length.
 		# One level will be removed in reverse until the
@@ -115,7 +116,7 @@ c(){
 
 	done
 
-# If .git is not found in the current directory or any
+# If not target entry found in the current directory or any
 # parent directories, set ROOT to PWD.
 export ROOT="$PWD"
 

@@ -2,7 +2,6 @@
 " *              GENERAL SCRIPTS                *
 " ***********************************************
 
-" -----------------------------------------------
 " Searches for a given pattern upwards
 " -----------------------------------------------
 function SearchPattern(...)
@@ -27,8 +26,8 @@ endfunction
 command! -nargs=* SearchPattern call SearchPattern(<f-args>)
 
 
-" *** CreateFile ***
 " Creates a file from current ROOT directory.
+" -----------------------------------------------
 function! CreateEntry(...)
   call ImportPythonModules(".vim/modules/general")
   python3 << EOF
@@ -45,9 +44,9 @@ endfunction
 command! -nargs=1 CreateEntry call CreateEntry(<f-args>)
 
 
-" *** Command ***
 " Run a specified command in the terminal within
 " the ROOT directory.
+" -----------------------------------------------
 function RootCommand(...)
   " Clear the buffer and cd ROOT env-var
   let s:command = "clear && cd " . expand('$ROOT') . " &&"
@@ -63,9 +62,8 @@ endfunction
 command! -nargs=* Command call RootCommand(<f-args>)
 
 
-
-" *** AddPkg ***
 " Adds pkg based on the current project.
+" -----------------------------------------------
 function AddPkg(...)
     let base = $ROOT
 
@@ -134,6 +132,7 @@ command! -nargs=0 ToggleNerdTree call ToggleNerdTree()
 
 
 " Ensure G is only ran when Goyo is not active.
+" -----------------------------------------------
 function! GitHandler()
     if g:goyo_state == 0
         execute "normal! :G\<cr>"
