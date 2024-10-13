@@ -19,9 +19,6 @@ def read_env_var(name: str) -> Path:
 
 def set_root_directory():
     """Try to set the env var PROJECT_ROOT"""
-    project_root = os.getenv("PROJECT_ROOT")
-    if project_root is not None:
-        return
 
     home_path = read_env_var("HOME")
     current_path = read_env_var("PWD")
