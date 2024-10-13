@@ -6,22 +6,39 @@ from pathlib import Path
 
 
 # Read an environmental variables
-def read_env_var(env_var) -> str:
-    var = os.getenv(env_var)
-    if not var:
-        raise ValueError(
-            "Failed to read {} environment var.".format(
-                var
-            )
+def read_env_var(name: str) -> Path:
+    env_var = os.getenv(name)
+
+    if env_var is None:
+        raise OSError(
+            f"Failed to read {env_var} env var."
         )
-    return var
+
+    return Path(env_var)
 
 
-def validate_git_exists(root: str):
-    git_path = Path(root).joinpath(".git")
+def set_root_directory():
+    """Try to set the env var PROJECT_ROOT"""
+    project_root = os.getenv("PROJECT_ROOT")
+    if project_root is not None:
+        return
 
-    if not git_path.exists():
-        raise OSError("Git folder not found.")
+    home_path = read_env_var("HOME")
+    current_path = read_env_var("PWD")
+
+    while current_path != home_path:
+        for entry in current_path.iterdir():
+            if entry.name == "package.json":
+                os.environ["PROJECT_ROOT"] = str(
+                    entry.parent
+                )
+                return
+
+        current_path = current_path.parent
+
+    raise OSError(
+        "Failed to set PROJECT_ROOT, it seems a JSON file was not found."
+    )
 
 
 # Basic class for path manipulation

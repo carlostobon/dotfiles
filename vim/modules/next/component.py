@@ -3,7 +3,7 @@ from pathlib import Path
 from utils import (
     Transformer,
     read_env_var,
-    validate_git_exists,
+    set_root_directory,
 )
 
 
@@ -108,15 +108,14 @@ def create_component(path: str):
     # Verifies that the component has a valid name
     transformer.is_valid_component(component)
 
-    # Accesses the ROOT environment variable
-    root_path = read_env_var("ROOT")
+    # Try to set PROJECT_ROOT env-var, otherwise
+    # it will panic.
+    set_root_directory()
 
-    # Verifies if a Git repository has been initialized
-    validate_git_exists(root_path)
+    # Accesses the PROJECT_ROOT environment variable
+    root_path = read_env_var("PROJECT_ROOT")
 
-    components_path = Path(root_path).joinpath(
-        "components"
-    )
+    components_path = root_path.joinpath("components")
 
     # Retrieve a list of all components in components_path,
     # excluding the components_path prefix

@@ -2,7 +2,7 @@
 from utils import (
     Transformer,
     read_env_var,
-    validate_git_exists,
+    set_root_directory,
 )
 from pathlib import Path
 from typing import List
@@ -65,7 +65,7 @@ def write_page(page: Path, pages_path: Path):
 
     try:
         page_path.write_text(
-            """// {}
+            """// {}/page.tsx
 
 export default function {}() {{
   return <div>Hello, {}!</div>;
@@ -92,13 +92,14 @@ def create_page(page_str: str):
     # Verifies that the page has a valid name
     transformer.is_valid_page(page)
 
-    # Accesses the ROOT environment variable
-    root_path = read_env_var("ROOT")
+    # Try to set PROJECT_ROOT env-var, otherwise
+    # it will panic.
+    set_root_directory()
 
-    # Verifies if a Git repository has been initialized
-    validate_git_exists(root_path)
+    # Accesses the PROJECT_ROOT environment variable
+    root_path = read_env_var("PROJECT_ROOT")
 
-    pages_path = Path(root_path).joinpath("app")
+    pages_path = root_path.joinpath("app")
 
     check_page_conflicts(page, pages_path)
 
