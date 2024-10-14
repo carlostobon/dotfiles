@@ -53,6 +53,7 @@ alias \
 	podman="sudo podman" \
 	b="c \$ROOT" \
 	k="c \$OLDPWD" \
+	tb="toolbox" \
 
 
 # Changes the directory and sets the ROOT variable.
