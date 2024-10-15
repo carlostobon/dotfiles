@@ -55,14 +55,13 @@ def create_parent_directories_and_component(
         component_complete_path.write_text(
             """// components/{}
 
-interface {}Props {{}}
-
-export default function {}({{}}: {}Props) {{
+function {}() {{
   return <div>Hello, {}!</div>;
 }}
+
+export default {};
 """.format(
                 component_path,
-                pascal_case,
                 pascal_case,
                 pascal_case,
                 pascal_case,
