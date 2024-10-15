@@ -32,7 +32,7 @@ autocmd FileType typescriptreact nnoremap hhf :CreateEntry<space>
 
 autocmd FileType typescriptreact nnoremap hhr :Command pnpm run dev
 autocmd FileType typescriptreact nnoremap hha :AddPkg<space>
-autocmd FileType typescriptreact nnoremap hhx :Command pnpx<space>
+autocmd FileType typescriptreact nnoremap hhx :Command react<space>
 autocmd FileType typescriptreact nnoremap hhs :Command shadcn<space>
 
 autocmd FileType typescriptreact nnoremap t. 0/<\/<cr>i

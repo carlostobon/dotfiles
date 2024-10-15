@@ -67,33 +67,51 @@ create_next() {
 }
 
 
+biome_config() {
+  echo "{
+  \"formatter\": {
+    \"lineWidth\": 60
+  }
+}" > biome.json
+
+  echo "File biome.json created."
+}
+
+
 # This script is in construction, handling possible
 # errors and other things.
 # Lot of work still required
 
 case $1 in
-  next       )  create_next "$@" ;;
   init       )  create_vite "$@" ;;
-  path-alias )  add_path_alias ;;
+  next       )  create_next "$@" ;;
+  add        )  bun add "$@" ;;
   dev        )  bun run dev ;;
   build      )  bun run build ;;
   preview    )  bun run preview ;;
   start      )  bun run start ;;
   install    )  bun install ;;
   i          )  bun install ;;
+
+  path-alias )  add_path_alias ;;
+  biome      )  biome_config ;;
   *          )  cat << EOF
 rx: react, A streamlined utility for quickly setting up web projects,
 specifically with the React library:
 
-Allowed options:
-  init           Creates a new Vite app using Bun.
-  next           Initiates a new Next.js app using Bun.
-  path-alias     Sets "@" alias for the project's root directory.
-  dev            Initiates development server using Bun.
-  build          Build current project using Bun.
-  start          Initiates production server using Bun.
-  preview        Initiates production server preview using Bun.
-  install (i)    Install dependencies using Bun.
+  BUN COMMANDS:
+    init           Creates a new Vite app.
+    next           Initiates a new NextJS.
+    add            Adds a package.
+    dev            Initiates development server.
+    build          Build current project.
+    start          Initiates production server - NextJS.
+    preview        Initiates production server - React.
+    install(i)     Install dependencies.
+
+  SCRIPTS:
+    path-alias     Sets "@" alias for the project's root directory.
+    biome          Adds a biome file configuration.
 
 NOTE: This cli-tool still requires a lot of work.
 EOF

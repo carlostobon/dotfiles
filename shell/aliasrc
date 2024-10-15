@@ -55,6 +55,7 @@ alias \
 	k="c \$OLDPWD" \
 	tb="toolbox" \
 	rx="react" \
+	va="vim App.tsx" \
 
 
 # Changes the directory and sets the ROOT variable.
