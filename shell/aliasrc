@@ -54,6 +54,7 @@ alias \
 	b="c \$ROOT" \
 	k="c \$OLDPWD" \
 	tb="toolbox" \
+	rx="react" \
 
 
 # Changes the directory and sets the ROOT variable.
