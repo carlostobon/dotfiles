@@ -54,7 +54,6 @@ alias \
 	b="c \$ROOT" \
 	k="c \$OLDPWD" \
 	tb="toolbox" \
-	rx="react" \
 	va="vim App.tsx" \
 
 
@@ -134,11 +133,6 @@ alias \
 	cw="cargo watch -x check -x test -x run" \
 	ct="c \$ROOT/target/release" \
 
-# pnpm terminal shortcuts
-alias \
-	dev="pnpm run dev" \
-	build="pnpm run build" \
-	start="pnpm run start" \
 
 co(){
 	c "$ROOT/components" >/dev/null 2>&1 || \

@@ -141,3 +141,16 @@ function! GitHandler()
     endif
 endfunction
 command! -nargs=0 GG call GitHandler()
+
+
+" Add empty lines to the end of file
+" -----------------------------------------------
+function! Spaces()
+    execute "normal! G"
+    for i in range(1, 11)
+      call append(line("."), "")
+    endfor
+    execute "normal! G`s"
+endfunction
+
+command! -nargs=0 Spaces call Spaces()

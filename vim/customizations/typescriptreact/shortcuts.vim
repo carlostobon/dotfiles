@@ -32,11 +32,10 @@ autocmd FileType typescriptreact nnoremap hhf :CreateEntry<space>
 
 autocmd FileType typescriptreact nnoremap hhr :Command pnpm run dev
 autocmd FileType typescriptreact nnoremap hha :AddPkg<space>
-autocmd FileType typescriptreact nnoremap hhx :Command react<space>
+autocmd FileType typescriptreact nnoremap hhx :Command<space>
 autocmd FileType typescriptreact nnoremap hhs :Command shadcn<space>
 
 autocmd FileType typescriptreact nnoremap t. 0/<\/<cr>i
-"autocmd FileType typescriptreact nnoremap tn 0/[^=]><cr>li<space>className=""<esc>i
 autocmd FileType typescriptreact nnoremap tn :AddClassName<cr>
 autocmd FileType typescriptreact nnoremap t, 0/[^=]><cr>li<cr><esc>OclassName=""<esc>i<cr><esc>O
 autocmd FileType typescriptreact nnoremap c. 0/[^=]><cr>llct<
@@ -86,6 +85,8 @@ autocmd FileType typescriptreact nnoremap hi msgg}o
 autocmd FileType typescriptreact nnoremap hu msgg<down>i
                   \"use client"<cr><esc>`s
 
+" Adds empty lines to the end of file
+autocmd FileType typescriptreact nnoremap hw ms:Spaces<cr>
 
 " Breaks {} statement
 autocmd FileType typescriptreact nnoremap ti 0f}i<cr><esc>O
