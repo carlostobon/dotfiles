@@ -86,12 +86,12 @@ function AddPkg(...)
     " Check for pnpm or Cargo
     if filereadable(base . "/pnpm-lock.yaml")
         call Executer('pnpm', 'add ' . s:command)
+    elseif filereadable(base . "/bun.lockb")
+        call Executer('rx', 'add ' . s:command)
     elseif filereadable(base . "/Cargo.toml")
         call Executer('cargo', 'add ' . s:command)
-    elseif filereadable("./Cargo.toml")
-        call Executer('cargo', 'add ' . s:command)
     else
-        echo "Nothing to do here."
+        echo "Failed to find package maanager."
     endif
 
 endfunction
