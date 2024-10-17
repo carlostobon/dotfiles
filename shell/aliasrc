@@ -90,13 +90,40 @@ c(){
 	[[ "$PWD" != "$HOME"* ]] &&
 		export ROOT="$PWD" && return 0
 
+
 	# This variable will be mutated on each iteration
 	# of the while loop.
 	holder="$PWD"
 
 
+	# First try to find .git folder at current or
+	# any parent directory.
+	while [[ "$holder" != "$HOME" ]]
+	do
+		# Attempt to find .git in the current directory.
+		result=$(fd --hidden --max-depth 1 "^.git$" "$holder")
+
+		# When .git is found
+		[ -n "$result" ] &&
+			export ROOT="$holder" &&
+			return 0
+
+		# If not found, $result has a non-zero length.
+		# One level will be removed in reverse until the
+		# while loop completes.
+		[ -z "$result" ] && holder="${holder%/*}"
+
+	done
+
+
+	# If .git was not found then it will try with any
+	# of the entries as they may represent a project.
+
+	# Shadowing holder
+	holder="$PWD"
+
 	# Regex expression for optional entries
-	entries_expression="^(.git|Cargo.toml|package.json|main.py)$"
+	entries_expression="^(Cargo.toml|package.json|main.py)$"
 	while [[ "$holder" != "$HOME" ]]
 	do
 		# Attempt to find any target entry in the current
@@ -108,9 +135,6 @@ c(){
 			export ROOT="$holder" &&
 			return 0
 
-		# If not found, $result has a non-zero length.
-		# One level will be removed in reverse until the
-		# while loop completes.
 		[ -z "$result" ] && holder="${holder%/*}"
 
 	done
