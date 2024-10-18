@@ -2,14 +2,25 @@ from pathlib import Path
 import os
 
 
-def create_file(path: Path):
+# Set the type of comment required depending
+# on the file suffix
+def set_comment_type(path: Path) -> str:
+    match path.suffix:
+        case ".py" | ".sh":
+            return "#"
+
+    return "//"
+
+
+def create_file(path: Path, entry_name: str):
     try:
         path.parent.mkdir(parents=True, exist_ok=True)
     except Exception:
         raise OSError(f"Error while making {path.name} parent directories.")
 
+    comment_type = set_comment_type(path)
     try:
-        path.touch()
+        path.write_text(f"{comment_type} {entry_name}")
     except Exception:
         raise OSError(f"Error while creating file {path.name}.")
 
@@ -70,6 +81,6 @@ def entry_creator(entry_name: str):
     if full_path.suffix == str():
         create_folder(full_path)
     else:
-        create_file(full_path)
+        create_file(full_path, entry_name)
 
     print(f"Entry {entry_name} created.")

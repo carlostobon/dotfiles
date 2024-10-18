@@ -71,7 +71,7 @@ autocmd FileType typescriptreact nnoremap hc ms:ReactImporter @/components/index
 
 " Adds the sequence to import from components/ui
 " it's specifically used to import shadcn components
-autocmd FileType typescriptreact nnoremap hs ms:ReactImporter @/components/ui/index<cr>
+autocmd FileType typescriptreact nnoremap ha ms:ReactImporter @/components/ui/index<cr>
 
 
 " Adds regular import statement
@@ -84,7 +84,7 @@ autocmd FileType typescriptreact nnoremap hu msgg<down>i
                   \"use client"<cr><esc>`s
 
 " Adds empty lines to the end of file
-autocmd FileType typescriptreact nnoremap hw ms:Spaces<cr>
+autocmd FileType typescriptreact nnoremap hs ms:Spaces<cr>
 
 " Breaks {} statement
 autocmd FileType typescriptreact nnoremap ti 0f}i<cr><esc>O
