@@ -25,6 +25,8 @@ export BROWSER=qutebrowser
 export DC="$HOME/Documents"
 export DW="$HOME/Downloads"
 export CFG="$HOME/.config"
+export DT="$HOME/.dotfiles"
+export BN="$HOME/.binaries"
 
 # Enable appending to the history file on shell exit,
 # preserving previous sessions' history
