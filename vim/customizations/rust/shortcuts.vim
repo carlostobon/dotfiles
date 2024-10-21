@@ -17,6 +17,9 @@ autocmd FileType rust nnoremap hha :AddPkg<space>
 autocmd FileType rust nnoremap hhr :!clear; cargo run --<space>
 autocmd FileType rust nnoremap hht :!clear; cargo test<cr>
 
+" Adds empty lines to the end of file
+autocmd FileType typescriptreact nnoremap hs ms:Spaces<cr>
+
 " Adds macro to disable warnings
 autocmd FileType rust nnoremap hm msggO
       \#![allow(dead_code, unused_variables,
