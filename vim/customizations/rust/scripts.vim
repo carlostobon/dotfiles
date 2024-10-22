@@ -48,7 +48,7 @@ autocmd FileType rust command! -nargs=0 RustAddAsync call RustAddAsync()
 " Add a macro to a function or structure
 " ======================================
 function RustAddMacro()
-    let l:result = SearchPattern("fn", "struct")
+    let l:result = SearchPattern("fn", "struct", "enum")
     let l:line_content = getline('.')
 
     if l:result == 0

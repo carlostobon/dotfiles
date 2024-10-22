@@ -92,6 +92,7 @@ case $1 in
   start      )  bun run start ;;
   install    )  bun install ;;
   i          )  bun install ;;
+  degit      )  bun degit ;;
 
   path-alias )  add_path_alias ;;
   biome      )  biome_config ;;
@@ -108,6 +109,7 @@ specifically with the React library:
     start          Initiates production server - NextJS.
     preview        Initiates production server - React.
     install(i)     Install dependencies.
+    degit          Clone repo without history.
 
   SCRIPTS:
     path-alias     Sets "@" alias for the project's root directory.
