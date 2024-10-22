@@ -57,11 +57,12 @@ create_next() {
   { [ -n "$1" ] &&
     printf "\nCreaing Next.js scaffold ..." &&
     bunx create-next-app@latest "$1"\
-      --no-eslint\
       --no-src-dir\
       --no-import-alias\
+      --eslint\
       --typescript\
       --tailwind\
+      --turbo\
       --app; } ||
     bunx create-next-app@latest "$@"
 }
