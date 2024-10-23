@@ -31,9 +31,9 @@ capture_screen(){
 
 
 case $1 in
-  record-audio   )  record_audio  ;;
-  record-screen  )  record_screen ;;
-  capture-screen )  record_screen ;;
+  record-audio   )  record_audio   ;;
+  record-screen  )  record_screen  ;;
+  capture-screen )  capture_screen ;;
   *) cat << EOF
 tb: toolbox, a collection of useful utilities related
 to recording audio and video from current session.

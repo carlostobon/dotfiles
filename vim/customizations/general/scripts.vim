@@ -41,7 +41,7 @@ for entry in vim.eval("a:000"):
 EOF
 endfunction
 
-command! -nargs=1 CreateEntry call CreateEntry(<f-args>)
+command! -nargs=* CreateEntry call CreateEntry(<f-args>)
 
 
 " Run a specified command in the terminal within

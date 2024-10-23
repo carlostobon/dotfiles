@@ -27,7 +27,7 @@ for component in vim.eval("a:000"):
   try:
       create_component(component)
   except Exception as e:
-      print("<- NextJS -> 🧨 {}".format(e))
+      print("<- 🧨 -> {}".format(e))
 EOF
 endfunction
 autocmd FileType typescriptreact command! -nargs=* ReactComp call CreateReactComponent(<f-args>)

@@ -159,7 +159,7 @@ def create_component(path: str):
 
     # Print the component if the operation was successful
     print(
-        "<- NextJS -> 🚀 Component {} created.".format(
+        "<- 🚀 -> Component {} created.".format(
             pascal_case
         )
     )

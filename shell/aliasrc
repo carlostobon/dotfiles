@@ -15,7 +15,7 @@ alias \
 	g="git" \
 	gk="gpg --list-keys --keyid-format long" \
   kt="v ~/.config/kitty/theme.conf" \
-  xm="v ~/.xmonad/xmonad.hs" \
+  xm="v ~/.config/xmonad/xmonad.hs" \
 	bh="v ~/.bash_history" \
   dc="c ~/Documents" \
   dw="c ~/Downloads" \
